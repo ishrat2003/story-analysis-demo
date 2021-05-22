@@ -1,0 +1,244 @@
+Barnsley Borough Council
+Rochdale Borough Council
+Birmingham City Council 
+Rotherham Borough Council
+Bolton Borough Council
+South Tyneside Borough Council
+Bradford City Council
+Salford City Council
+Bury Borough Council
+Sandwell Borough Council
+Calderdale Borough Council
+Sefton Borough Council
+Coventry City Council
+Sheffield City Council
+Doncaster Borough Council
+Solihull Borough Council
+Dudley Borough Council
+St Helens Borough Council
+Gateshead Borough Council
+Stockport Borough Council
+Kirklees Borough Council
+Sunderland City Council
+Knowsley Borough Council
+Tameside Borough Council
+Leeds City Council
+Trafford Borough Council
+Liverpool City Council
+Wakefield City Council
+Manchester City Council
+Walsall Borough Council
+North Tyneside Borough Council
+Wigan Borough Council
+Newcastle Upon Tyne City Council
+Wirral Borough Council
+Oldham Borough Council
+Wolverhampton City Council
+Barking and Dagenham
+Hounslow
+Barnet
+Islington
+Bexley
+Kensington and Chelsea
+Brent
+Kingston upon Thames
+Bromley
+Lambeth
+Camden
+Lewisham
+Croydon
+Merton
+Ealing
+Newham
+Enfield
+Redbridge
+Greenwich
+Richmond upon Thames
+Hackney
+Southwark
+Hammersmith and Fulham
+Sutton
+Haringey
+Tower Hamlets
+Harrow
+Waltham Forest
+Havering
+Wandsworth
+Hillingdon
+Westminster
+Unitary authorities
+Bath and North East Somerset
+North Lincolnshire Council
+Bedford Borough Council
+North Somerset Council
+Blackburn with Darwen Borough
+Northumberland County Council
+Blackpool Council
+Nottingham City Council
+Bournemouth, Christchurch and Poole
+Peterborough City Council
+Bracknell Forest Borough Council
+Plymouth City Council
+Brighton and Hove City Council
+Portsmouth City Council
+Bristol City Council
+Reading Borough Council
+Central Bedfordshire Council
+Redcar and Cleveland Borough
+Cheshire East Council
+Rutland County Council
+Cheshire West and Chester Council
+Shropshire Council
+Cornwall Council
+Slough Borough Council
+Durham County Council
+Southampton City Council
+Darlington Borough Council
+Southend-on-Sea Borough Council
+Derby City Council
+South Gloucestershire Council
+Dorset Council
+Stockton-on-Tees Borough Council
+East Riding of Yorkshire Council
+Stoke-on-Trent City Council
+Halton Borough Council
+Swindon Borough Council
+Hartlepool Borough Council
+Telford and Wrekin Borough Council
+Herefordshire Council
+Thurrock Council
+Isle of Wight Council
+Torbay Council
+Hull City Council
+Warrington Borough Council
+Leicester City Council
+West Berkshire Council
+Luton Borough Council
+Wiltshire Council
+Medway Council
+Windsor and Maidenhead Borough
+Middlesbrough Borough Council
+Wokingham Borough Council
+Milton Keynes Council
+City of York Council
+North East Lincolnshire Council
+County councils 
+1. Buckinghamshire County Council 14. Lincolnshire County Council
+2. Cambridgeshire County Council 15. Norfolk County Council
+3. Cumbria County Council 16. North Yorkshire County Council
+4. Derbyshire County Council 17. Northamptonshire County Council
+5. Devon County Council 18. Nottinghamshire County Council
+6. East Sussex County Council 19. Oxfordshire County Council
+7. Essex County Council 20. Somerset County Council
+8. Gloucestershire County Council 21. Staffordshire County Council
+9. Hampshire County Council 22. Suffolk County Council
+10. Hertfordshire County Council 23. Surrey County Council
+11. Kent County Council 24. Warwickshire County Council
+12. Lancashire County Council 25. West Sussex County Council
+13. Leicestershire County Council 26. Worcestershire County Council
+District councils (192)
+1. Adur District Council 29. Charnwood Borough Council
+2. Allerdale District Council 30. Chelmsford City Council
+3. Amber Valley Borough Council 31. Cheltenham Borough Council
+4. Arun District Council 32. Cherwell District Council
+5. Ashfield District Council 33. Chesterfield Borough Council
+6. Ashford Borough Council 34. Chichester District Council
+7. Aylesbury Vale District Council 35. Chiltern District Council
+8. Babergh District Council 36. Chorley Borough Council
+9. Barrow-in-Furness Borough Council 37. Colchester Borough Council
+10. Basildon Borough Council 38. Copeland Borough Council
+11. Basingstoke & Deane Borough
+Council 39. Corby Borough Council
+12. Bassetlaw District Council 40. Cotswold District Council
+13. Blaby District Council 41. Craven District Council
+14. Bolsover District Council 42. Crawley Borough Council
+15. Boston Borough Council 43. Dacorum Borough Council
+16. Braintree District Council 44. Dartford Borough Council
+17. Breckland District Council 45. Daventry District Council
+18. Brentwood Borough Council 46. Derbyshire Dales District Council
+19. Broadland District Council 47. Dover District Council
+20. Bromsgrove District Council 48. East Cambridgeshire District Council
+21. Broxbourne Borough Council 49. East Devon District Council
+22. Broxtowe Borough Council 50. East Hampshire District Council
+23. Burnley Borough Council 51. East Hertfordshire District Council
+24. Cambridge City Council 52. East Lindsey District Council
+25. Cannock Chase District Council 53. East Northamptonshire District Council
+26. Canterbury City Council 54. East Staffordshire Borough Council
+27. Carlisle City Council 55. East Suffolk Council
+28. Castle Point District Council 56. Eastbourne Borough Council
+57. Eastleigh Borough Council 85. Horsham District Council
+58. Eden District Council 86. Huntingdonshire District Council
+59. Elmbridge Borough Council 87. Hyndburn Borough Council
+60. Epping Forest District Council 88. Ipswich Borough Council
+61. Epsom & Ewell Borough Council 89. Kettering Borough Council
+62. Erewash Borough Council 90. Kings Lynn & West Norfolk Borough
+Council
+63. Exeter City Council 91. Lancaster City Council
+64. Fareham Borough Council 92. Lewes District Council
+65. Fenland District Council 93. Lichfield City Council
+66. Folkestone and Hythe District Council 94. Lincoln City Council
+67. Forest of Dean District Council 95. Maidstone Borough Council
+68. Fylde Borough Council 96. Maldon District Council
+69. Gedling Borough Council 97. Malvern Hills District Council
+70. Gloucester City Council 98. Mansfield District Council
+71. Gosport Borough Council 99. Melton Borough Council
+72. Gravesham Borough Council 100. Mendip District Council
+73. Great Yarmouth Borough Council 101. Mid Devon District Council
+74. Guildford Borough Council 102. Mid Suffolk District Council
+75. Hambleton District Council 103. Mid Sussex District Council
+76. Harborough District Council 104. Mole Valley District Council
+77. Harlow District Council 105. North Devon District Council
+78. Harrogate Borough Council 106. North East Derbyshire District Council
+79. Hart District Council 107. North Hertfordshire District Council
+80. Hastings Borough Council 108. North Kesteven District Council
+81. Havant Borough Council 109. North Norfolk District Council
+82. Hertsmere Borough Council 110. North West Leicestershire District
+Council
+83. High Peak Borough Council 111. North Warwickshire Borough Council
+84. Hinckley and Bosworth Borough
+Council 112. New Forest District Council
+113. Newark & Sherwood District Council 141. South Lakeland District Council
+114. Newcastle-Under-Lyme Borough
+Council 142. South Norfolk District Council
+115. Northampton Borough Council 143. South Northamptonshire District
+Council
+116. Norwich City Council 144. South Oxfordshire District Council
+117. Nuneaton & Bedworth Borough
+Council 145. South Ribble Borough Council
+118. Oadby & Wigston Borough Council 146. South Somerset District Council
+119. Oxford City Council 147. South Staffordshire District Council
+120. Pendle Borough Council 148. Scarborough Borough Council
+121. Preston City Council 149. Sedgemoor District Council
+122. Redditch Borough Council 150. Selby District Council
+123. Reigate & Banstead Borough Council 151. Sevenoaks District Council
+124. Ribble Valley Borough Council 152. Spelthorne Borough Council
+125. Richmondshire District Council 153. St Albans City Council
+126. Rochford District Council 154. Stafford Borough Council
+127. Rossendale Borough Council 155. Staffordshire Moorlands District
+Council
+128. Rother District Council 156. Stevenage Borough Council
+129. Rugby Borough Council 157. Stratford on Avon District Council
+130. Runnymede Borough Council 158. Stroud District Council
+131. Rushcliffe Borough Council 159. Surrey Heath Borough Council
+132. Rushmoor Borough Council 160. Swale Borough Council
+133. Ryedale District Council 161. Tamworth Borough Council
+134. Somerset West and Taunton Council 162. Tandridge District Council
+135. South Buckinghamshire District
+Council 163. Teignbridge District Council
+136. South Cambridgeshire District Council 164. Tendring District Council
+137. South Derbyshire District Council 165. Test Valley Borough Council
+138. South Hams District Council 166. Tewkesbury Borough Council
+139. South Holland District Council 167. Thanet District Council
+140. South Kesteven District Council 168. Three Rivers District Council
+169. Tonbridge & Malling Borough Council 181. West Lancashire District Council
+170. Torridge District Council 182. West Lindsey District Council
+171. Tunbridge Wells Borough Council 183. West Oxfordshire District Council
+172. Uttlesford District Council 184. West Suffolk Council
+173. Vale of White Horse District Council 185. Winchester City Council
+174. Warwick District Council 186. Woking Borough Council
+175. Watford Borough Council 187. Worcester City Council
+176. Waverley Borough Council 188. Worthing Borough Council
+177. Wealden District Council 189. Wychavon District Council
+178. Wellingborough Borough Council 190. Wycombe District Council
+179. Welwyn Hatfield Borough Council 191. Wyre Borough Council
+180. West Devon District Council 192. Wyre Forest District Council

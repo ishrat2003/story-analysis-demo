@@ -1,0 +1,5 @@
+https://github.com/datasets/world-cities 
+
+https://github.com/mvila/big-companies (brands.json)
+
+https://github.com/notnami/brandnames (brands.txt)

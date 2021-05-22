@@ -1,0 +1,7 @@
+/feed-archieved/*.zip
+/feed/*.json
+/feed-temp/*.json
+/generator/.env
+/site/data/*/*.json
+*.__pycache__.*
+*.pyc
