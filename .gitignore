@@ -2,7 +2,8 @@
 /feed/*.json
 /feed-temp/*.json
 /corpus/gc/*.json
-/corpus/words/*.json
+/corpus/words/*/*.json
+/corpus/words/*/*/*.json
 /generator/.env
 /site/data/*/*.json
 *.__pycache__.*

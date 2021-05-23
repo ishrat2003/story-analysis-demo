@@ -1,13 +1,16 @@
-import os
+import os, datetime
 from writer.base import Base
 from filesystem.directory import Directory
 from file.json import Json as JsonFile
 from file.core import Core as File
+from nltk.stem.porter import PorterStemmer
 
 class Writer(Base):
     
     def __init__(self, path):
         super().__init__(path)
+        self.stemmer = PorterStemmer()
+        
         resourcePath = os.path.abspath(__file__ + "/../../../resources/")
         self.gcPath = os.path.join(path, 'gc')
         self.wordsPath = os.path.join(path, 'words')
@@ -23,11 +26,12 @@ class Writer(Base):
         for topic in topics:
             if self.__saveWordDetails(topic):
                 self.__updateGCDetails(topic)
+                self.__updateCommon()
         return
     
     def __updateGCDetails(self, topic):
         self.__addToCorpus(topic)
-        self.file.write(self.topicsFilePath, currentInfo)
+        self.file.write(self.topicsFilePath, self.topics)
         self.file.write(self.countryFilePath, self.countries)
         self.file.write(self.personFilePath, self.person)
         self.file.write(self.organizationFilePath, self.organization)
@@ -35,7 +39,7 @@ class Writer(Base):
         return
     
     def __saveWordDetails(self, word):
-        wordDirectoryPath = self.getWordDirectory(word['stemmed_word'])
+        wordDirectoryPath = self.__getWordDirectory(word['stemmed_word'])
         
         # Save word-document association
         monthPath = os.path.join(wordDirectoryPath, self.year, self.month + '.json')
@@ -56,7 +60,7 @@ class Writer(Base):
         # Save word details
         detailsPath = os.path.join(wordDirectoryPath, 'details.json')
         currentDetails = self.file.read(detailsPath)
-        if not currentInfo:
+        if not currentDetails:
           currentDetails = {
             'type': word['type'], 
             'pure_word': word['pure_word'], 
@@ -75,9 +79,9 @@ class Writer(Base):
     def __addToCorpus(self, word):
         self.__saveCategories(word['category'],  word['pure_word'])
         
+        wordKey = word['pure_word'].lower().strip().replace(' ', '_')
         if word['type'] in ['NNP', 'NNPS']:
             countryName = self.__getCountyName(word['pure_word'])
-            wordKey = word['pure_word'].lower().strip().replace(' ', '_')
             if countryName:
                 wordKey = countryName.lower()
                 self.countries[wordKey] =  self.__getTopicEntry(word, self.countries, wordKey)
@@ -105,7 +109,7 @@ class Writer(Base):
         else:
             processedWord = items[wordKey]
             
-        fullDateKey = self.year + '-' + self.getFormattedMonthOrDay(self.month) + '-' + self.getFormattedMonthOrDay(self.day)
+        fullDateKey = self.year + '-' + self.__getFormattedMonthOrDay(self.month) + '-' + self.__getFormattedMonthOrDay(self.day)
         if fullDateKey not in processedWord['count_per_day'].keys():
             processedWord['count_per_day'][fullDateKey] = 0
 
@@ -134,11 +138,10 @@ class Writer(Base):
         monthDirectory = Directory(monthDirectoryPath)
         monthDirectory.create()
         
-        self.topicsFilePath = os.path.join(monthDirectory, 'topics.json')
-        self.countryFilePath = os.path.join(monthDirectory, 'country_topics.json')
-        self.personFilePath = os.path.join(monthDirectory, 'person_topics.json')
-        self.organizationFilePath = os.path.join(monthDirectory, 'organization_topics.json')
-        self.commonDataFilePath = os.path.join(monthDirectory, 'common.json')
+        self.topicsFilePath = os.path.join(monthDirectoryPath, 'topics.json')
+        self.countryFilePath = os.path.join(monthDirectoryPath, 'country_topics.json')
+        self.personFilePath = os.path.join(monthDirectoryPath, 'person_topics.json')
+        self.organizationFilePath = os.path.join(monthDirectoryPath, 'organization_topics.json')
         return
         
     def __getWordDirectory(self, wordKey):
@@ -149,7 +152,7 @@ class Writer(Base):
         wordDirectory = Directory(wordDirectoryPath)
         wordDirectory.create()
         
-        yearDirectoryPath = os.path.join(wordDirectoryPath, wordKey, self.year)
+        yearDirectoryPath = os.path.join(wordDirectoryPath, self.year)
         yearDirectory = Directory(yearDirectoryPath)
         yearDirectory.create()
         return wordDirectoryPath
@@ -165,7 +168,7 @@ class Writer(Base):
         self.countryFilePath = None
         self.personFilePath = None
         self.organizationFilePath = None
-        self.commonDataFilePath = None
+        self.commonDataFilePath = os.path.join(self.gcPath, 'common.json')
         self.__loadCommonData()
         self.__loadShortCountryNames()
         return
@@ -175,9 +178,8 @@ class Writer(Base):
         if self.common and len(self.common.keys()):
             return
         self.common = {
-        'total': 0,
-        'max_date': '',
-        'min_date': '',
+            'max_date': '',
+            'min_date': '',
         }
         return
     
@@ -237,34 +239,32 @@ class Writer(Base):
             return self.shortCountryNames[name]
         return None
     
-    def __updateCommon(self, date):
-        self.common['total'] += 1
+    def __updateCommon(self):
+        if self.__shouldResetMaxDate():
+            self.common['max_date'] = self.date
 
-        if self.shouldResetMaxDate(date):
-            self.common['max_date'] = date.strftime("%Y-%m-%d")
-
-        if self.shouldResetMinDate(date):
-            self.common['min_date'] = date.strftime("%Y-%m-%d")
+        if self.__shouldResetMinDate():
+            self.common['min_date'] = self.date
             
         return
     
-    def __isGreaterThanMin(self, date):
-        date = self.strToDate(date)
-        minDate = self.strToDate(self.dataDates['min'])
+    def __isGreaterThanMin(self):
+        date = self.__strToDate(self.date)
+        minDate = self.__strToDate(self.dataDates['min'])
         return date > minDate
     
-    def __shouldResetMaxDate(self, date):
+    def __shouldResetMaxDate(self):
         if not self.common['max_date']:
             return True
-        date = self.strToDate(date.strftime("%Y-%m-%d"))
-        maxDate = self.strToDate(self.common['max_date'])
+        date = self.__strToDate(self.date)
+        maxDate = self.__strToDate(self.common['max_date'])
         return maxDate < date
 
-    def __shouldResetMinDate(self, date):
+    def __shouldResetMinDate(self):
         if not self.common['min_date']:
             return True
-        date = self.strToDate(date.strftime("%Y-%m-%d"))
-        minDate = self.strToDate(self.common['min_date'])
+        date = self.__strToDate(self.date)
+        minDate = self.__strToDate(self.common['min_date'])
         return minDate > date
 
     def __strToDate(self, date):
@@ -276,12 +276,13 @@ class Writer(Base):
         return number
     
     def __setItemDetails(self, link, date):
+        print(date)
         self.link = link
-        self.date = date
         self.year = date[0:4]
-        self.month = date[5:2]
-        self.day = date[8:2]
-        print(self.year, '-', self.month, '-', self.day)
+        self.month = date[5:7]
+        self.day = date[8:10]
+        self.date = date[0:10]
+        self.storyWords = {}
         self.__setGCFilePaths()
         self.__loadTopics()
         self.__loadCountries()

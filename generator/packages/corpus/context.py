@@ -28,12 +28,11 @@ class Context:
 
         return True
     
-    
     def appendToCorpus(self, item):
         details = self.loader.getDetails(item)
         if not details:
             return
-        topics = self.__getTopTopics(item)
+        topics = self.__getTopTopics(details)
         if not len(topics):
             return
         self.writer.save(topics, item['link'], details['pubDate'])
@@ -41,5 +40,7 @@ class Context:
     
     
     def __getTopTopics(self, item):
-        concepts = self.lcStoryProcessor.getConcepts(details['content'], details['pubDate'])
-        return concepts['story_words_keys'][0:self.topicsPerDocument]
+        concepts = self.lcStoryProcessor.getConcepts(item['content'], item['pubDate'])
+        if not concepts['story_words']:
+            return []
+        return concepts['story_words'][0:self.topicsPerDocument]

@@ -322,7 +322,7 @@ class LCStory():
         localWordInfo['score'] = (self.positionContributingFactor * localWordInfo['position_weight_forward']
             + self.occuranceContributingFactor * localWordInfo['count'])
         localWordInfo['tooltip'] = word
-        
+        localWordInfo['sentiment'] = ''
         
         if isProperNoun:
             details = self.__getMoreDetails(wordKey, localWordInfo['pure_word'])
