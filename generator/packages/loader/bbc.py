@@ -1,6 +1,7 @@
 import json, datetime, re
 from .core import Core
-import urllib, socket
+import urllib.request as urllib
+import socket
 from bs4 import BeautifulSoup
 import dateutil.parser as parser
 import sys
@@ -30,7 +31,7 @@ class BBC(Core):
     
     def fetchPage(self, link, item = None):
         try:
-            fp = urllib.request.urlopen(link, timeout = self.timeout)
+            fp = urllib.urlopen(link, timeout = self.timeout)
             mybytes = fp.read()
             page = mybytes.decode("utf8")
             fp.close()

@@ -12,7 +12,7 @@ load_dotenv(dotenv_path=envPath)
 
 from rss.feed import Feed
 
-logging.info("# Starting fetching rss feeds")
+logging.info("# Starting fetching RSS feeds")
 logging.info("# ================================")
 
 feedPath = os.path.join(filePath, "../resources/rss/bbc.json");
@@ -20,5 +20,5 @@ destinationPath = os.path.join(filePath, "../../feed");
 feedProcessor = Feed(feedPath, destinationPath)
 feedProcessor.process()
 
-logging.info('Finished fetching rss feeds')
+logging.info('Finished fetching RSS feeds')
 logging.info("# ================================")
