@@ -138,7 +138,7 @@ class Writer(Base):
         else:
             processedWord = items[wordKey]
             
-        fullDateKey = self.year + '-' + self.__getFormattedMonthOrDay(self.month) + '-' + self.__getFormattedMonthOrDay(self.day)
+        fullDateKey = self.year + '-' + self._getFormattedMonthOrDay(self.month) + '-' + self._getFormattedMonthOrDay(self.day)
         if fullDateKey not in processedWord['count_per_day'].keys():
             processedWord['count_per_day'][fullDateKey] = 0
 
@@ -290,31 +290,24 @@ class Writer(Base):
         return
     
     def __isGreaterThanMin(self):
-        date = self.__strToDate(self.date)
-        minDate = self.__strToDate(self.dataDates['min'])
+        date = self._strToDate(self.date)
+        minDate = self._strToDate(self.dataDates['min'])
         return date > minDate
     
     def __shouldResetMaxDate(self):
         if not self.common['max_date']:
             return True
-        date = self.__strToDate(self.date)
-        maxDate = self.__strToDate(self.common['max_date'])
+        date = self._strToDate(self.date)
+        maxDate = self._strToDate(self.common['max_date'])
         return maxDate < date
 
     def __shouldResetMinDate(self):
         if not self.common['min_date']:
             return True
-        date = self.__strToDate(self.date)
-        minDate = self.__strToDate(self.common['min_date'])
+        date = self._strToDate(self.date)
+        minDate = self._strToDate(self.common['min_date'])
         return minDate > date
 
-    def __strToDate(self, date):
-        return datetime.datetime.strptime(date, '%Y-%m-%d')
-
-    def __getFormattedMonthOrDay(self, number):
-        if int(number) < 10:
-            return '0' + number
-        return number
 
 
 

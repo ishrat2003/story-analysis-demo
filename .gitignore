@@ -1,10 +1,12 @@
 /feed-archived/*.zip
 /feed/*.json
 /feed-temp/*.json
-/corpus/gc/*.json
-/corpus/words/*/*.json
-/corpus/words/*/*/*.json
+/corpus/gc/documents/*
+/corpus/gc/*/*/*
+/corpus/gc/*
+/corpus/words/*/*
+/corpus/words/*/*/*
 /generator/.env
-/site/data/*/*.json
+/site/data/*/*
 *.__pycache__.*
 *.pyc

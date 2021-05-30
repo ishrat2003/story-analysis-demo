@@ -3,15 +3,15 @@ import os
 import logging
 import json
 
-class Parser:
+class Params:
 
   def __init__(self):
     self.parser = argparse.ArgumentParser()
     self.parser.add_argument('--source_directory')
     self.parser.add_argument('--destination_directory')
-    self.parser.add_argument('--total_topics', default=0, help = "Total top topics to be displayed in GC")
-    self.parser.add_argument('--year', default='2021', help = "Year(YYYY) to process. Ex: 2021")
-    self.parser.add_argument('--month', default='05', help = "Month(mm) to process. Ex: 05")
+    self.parser.add_argument('--store', default='local', help = "Type of store. Ex: local")
+    self.parser.add_argument('--start', default='2021-05-24', help = "Inclusive strat day (dd). Ex: 01")
+    self.parser.add_argument('--end', default='2021-05-30', help = "Inclusive end day (dd). Ex: 31")
     return
 
   def get(self):

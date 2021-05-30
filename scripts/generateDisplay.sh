@@ -1,38 +1,41 @@
 parentDirectory="$(pwd)"
 echo $parentDirectory
 sourceDirectory="$parentDirectory/corpus"
-destinationDirectory="$parentDirectory/site/data/gc"
+destinationDirectory="$parentDirectory/site/data"
 
 totalTopics=0
-year='2021'
-month='05'
+start='2021-05-24'
+end='2021-05-30'
 
 
 helpFunction()
 {
-   echo "Usage: $0 -t 15 -y 2021 -m 05"
-   echo "Ex: ./scripts/generateGcDisplay.sh -t 10"
+   echo "Usage: $0 -s '2021-05-24' -e '2021-05-30'"
+   echo "Ex: ./scripts/generateDisplay.sh -s '2021-05-24' -e '2021-05-30'"
    exit 1 # Exit script after printing help
 }
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
-    -t ) totalTopics="$2"; shift 2 ;;
-    -y ) year="$2"; shift 2 ;;
-    -m ) month="$2"; shift 2 ;;
+    -s ) start="$2"; shift 2 ;;
+    -e ) end="$2"; shift 2 ;;
     ? ) helpFunction ;; # Print helpFunction in case parameter is non-existent
   esac
 done
 
 echo "totalTopics $totalTopics"
-echo "year $year"
-echo "month $month"
+echo "start $start"
+echo "end $end"
 
 processDisplay()
 {
     echo "Generating GC Dispay:"
-    # echo "$parentDirectory/generator/scripts/gc.py --total_items $totalItems --source_directory $sourceDirectory --destination_directory $destinationDirectory"
-    python3 "$parentDirectory/generator/scripts/display.py" --total_topics $totalTopics --year $year --month $month --source_directory $sourceDirectory --destination_directory $destinationDirectory
+    python3 "$parentDirectory/generator/scripts/generateDisplay.py"  \
+    --start $start  \
+    --end $end \
+    --source_directory $sourceDirectory  \
+    --destination_directory $destinationDirectory \
+
 }
 
 processDisplay
