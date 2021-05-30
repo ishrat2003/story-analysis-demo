@@ -1,4 +1,3 @@
-cp builds/myApp_v_*.apk artifacts/
 parentDirectory="$(pwd)"
 feedDirectory="$parentDirectory/feed-temp"
 archieveDirectory="$parentDirectory/feed-archived"

@@ -20,14 +20,42 @@ class Writer(Base):
         self.__reset()
         return
     
-    def save(self, topics, link, date):
-        self.__setItemDetails(link, date)
-        
+    def setItemDetails(self, link, date):
+        print(link)
+        self.link = link
+        self.year = date[0:4]
+        self.month = date[5:7]
+        self.day = date[8:10]
+        self.date = date[0:10]
+        self.storyWords = {}
+        self.isNew = False
+        self.__setGCFilePaths()
+        self.__loadTopics()
+        self.__loadCountries()
+        self.__loadPerson()
+        self.__loadOrganization()
+        return
+    
+    def save(self, topics):
+        if not self.isNew:
+            return
+
         for topic in topics:
             if self.__saveWordDetails(topic):
                 self.__updateGCDetails(topic)
                 self.__updateCommon()
         return
+    
+    def isNewDocument(self, link):
+        filePath = self.gcPath + '/documents/' + self.year + '_' + self.month + '.json'
+        documents = self.file.read(filePath)
+        if not documents:
+            documents = []
+        if link not in documents:
+            documents.append(link)
+            self.isNew = True
+            self.file.write(filePath, documents)
+        return self.isNew
     
     def __updateGCDetails(self, topic):
         self.__addToCorpus(topic)
@@ -60,6 +88,7 @@ class Writer(Base):
         # Save word details
         detailsPath = os.path.join(wordDirectoryPath, 'details.json')
         currentDetails = self.file.read(detailsPath)
+        
         if not currentDetails:
           currentDetails = {
             'type': word['type'], 
@@ -129,7 +158,11 @@ class Writer(Base):
         self.file.write(specificCategoryDirectoryPath, items)
         return
     
-    def __setGCFilePaths(self):        
+    def __setGCFilePaths(self):
+        documentsDirectoryPath = os.path.join(self.gcPath, 'documents')
+        documentsDirectoryPath = Directory(documentsDirectoryPath)
+        documentsDirectoryPath.create()
+        
         yearDirectoryPath = os.path.join(self.gcPath, self.year)
         yearDirectory = Directory(yearDirectoryPath)
         yearDirectory.create()
@@ -178,6 +211,7 @@ class Writer(Base):
         if self.common and len(self.common.keys()):
             return
         self.common = {
+            'total': 0,
             'max_date': '',
             'min_date': '',
         }
@@ -240,6 +274,13 @@ class Writer(Base):
         return None
     
     def __updateCommon(self):
+        if self.isNew:
+            self.common['total'] += 1
+            if self.year not in self.common.keys():
+                self.common[self.year] = {}
+            if self.month not in self.common[self.year].keys():
+                self.common[self.year][self.month] = 0
+            self.common[self.year][self.month] += 1
         if self.__shouldResetMaxDate():
             self.common['max_date'] = self.date
 
@@ -274,20 +315,6 @@ class Writer(Base):
         if int(number) < 10:
             return '0' + number
         return number
-    
-    def __setItemDetails(self, link, date):
-        print(date)
-        self.link = link
-        self.year = date[0:4]
-        self.month = date[5:7]
-        self.day = date[8:10]
-        self.date = date[0:10]
-        self.storyWords = {}
-        self.__setGCFilePaths()
-        self.__loadTopics()
-        self.__loadCountries()
-        self.__loadPerson()
-        self.__loadOrganization()
-        return
+
 
 

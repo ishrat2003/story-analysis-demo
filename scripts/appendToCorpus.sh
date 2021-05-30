@@ -26,7 +26,7 @@ processContents()
 {
     echo "Getting Content:"
     # echo "$parentDirectory/generator/scripts/gc.py --total_items $totalItems --source_directory $sourceDirectory --destination_directory $destinationDirectory"
-    python3 "$parentDirectory/generator/scripts/gc.py" --total_items $totalItems --source_directory $sourceDirectory --destination_directory $destinationDirectory
+    python3 "$parentDirectory/generator/scripts/corpus.py" --total_items $totalItems --source_directory $sourceDirectory --destination_directory $destinationDirectory
 }
 
 processContents

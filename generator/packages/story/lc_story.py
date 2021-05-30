@@ -45,6 +45,8 @@ class LCStory():
         return self.data
     
     def getAboutHtml(self, date):
+        if not self.data['story_words_keys'] or not len(self.data['story_words_keys']):
+            return ''
         html = 'This story is about '
         divider = ''
         totalAbouts = len(self.data['story_about'])

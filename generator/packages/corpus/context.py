@@ -30,12 +30,18 @@ class Context:
     
     def appendToCorpus(self, item):
         details = self.loader.getDetails(item)
-        if not details:
+        if not details or not details['content']:
             return
+        
+        self.writer.setItemDetails(item['link'], details['pubDate'])
+        if not self.writer.isNewDocument(item['link']):
+            return
+        
         topics = self.__getTopTopics(details)
         if not len(topics):
             return
-        self.writer.save(topics, item['link'], details['pubDate'])
+        
+        self.writer.save(topics)
         return
     
     
