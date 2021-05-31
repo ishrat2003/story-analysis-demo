@@ -39,9 +39,10 @@ class Generator:
             rcStoryProcessor.calculateScores()
                 
             termsboard = rcStoryProcessor.get([wordDetails])
-            print(termsboard)
-            print('---------------- TB finished ---------------')
+            
             self.writer.save(termsboard, 'termsboard')
+            
+            print('---------------- TB stored ---------------')
             
         return data
     

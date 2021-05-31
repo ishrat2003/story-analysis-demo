@@ -41,8 +41,8 @@ class Date:
     
     """ return date to string """
     @staticmethod
-    def dateToString(date):
-        return str(date.year) + Date.getFormattedMonthOrDay(date.month) + Date.getFormattedMonthOrDay(date.day)
+    def dateToStr(date):
+        return str(date.year) + '-' + Date.getFormattedMonthOrDay(date.month) + '-' + Date.getFormattedMonthOrDay(date.day)
     
     """ return date to string """
     @staticmethod

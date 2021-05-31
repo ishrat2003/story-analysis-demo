@@ -1,4 +1,4 @@
-import os
+import os, operator
 from .scanner import Scanner
 from utility.date import Date
 from file.json import Json as JsonFile
@@ -32,6 +32,7 @@ class RCStory:
         for word in topicWords:
             self.topicNames.append(word['pure_word'])
         data = {}
+        data['main_topic'] = topicWords[0]
         data['documents'] = self.getDocuments()
         data['date_range'] = {
             'min': Date.dateToStr(self.minDate),
@@ -62,7 +63,7 @@ class RCStory:
         if not data:
             return
         
-        self.minDate, self.maxDate = Date.getMinMax(data['pubDate'], self.minDate, self.maxDate)
+        self.minDate, self.maxDate = Date.getMinMax(Date.strToDate(data['pubDate']), self.minDate, self.maxDate)
         
         self.__setWeights(data['concepts']['story_words'])
         
@@ -183,13 +184,13 @@ class RCStory:
     def __getOldToNewScore(self, dates):
         score = 0
         for date in dates.keys():
-            score += (self.totalDaysBetweenMaxMin - Date.daysBetween(Date.strToDate(date), self.minDate)) * self.dates[date]
+            score += (self.totalDaysBetweenMaxMin - Date.daysBetween(Date.strToDate(date), self.minDate)) * dates[date]
         return score
     
     def __getNewToOldScore(self, dates):
         score = 0
         for date in dates.keys():
-            score += (self.totalDaysBetweenMaxMin - Date.daysBetween(self.maxDate, Date.strToDate(date))) * self.dates[date]
+            score += (self.totalDaysBetweenMaxMin - Date.daysBetween(self.maxDate, Date.strToDate(date))) * dates[date]
         return score
     
     def __sort(self, items, attribute='block_count', reverse=True):
@@ -205,33 +206,35 @@ class RCStory:
         return sortedTopics
     
     def __getRelations(self, relations, source):
-        processedRelations = {}
+        processedRelations = []
         if not relations:
             return
-        sortedRelations = self.sort(relations, 'block_count', True) 
+        sortedRelations = self.__sort(relations, 'block_count', True) 
         sortedRelations = sortedRelations[0:self.scanRelatedTerms]
         
-        for key in sortedRelations.keys():
+        for relation in sortedRelations:
             documents = []
-            for documentKey in relations[key]['documents']:
+            for documentKey in relation['documents']:
                 documents.append(self.documents[documentKey])
                 
-            processedRelations[key] = {
+            processedRelations.append({
                 'source': source,
-                'target': relations[key]['display'],
-                'size': relations[key]['block_count'],
+                'target': relation['display'],
+                'size': relation['block_count'],
                 'documents': documents
-            }
+            })
         return processedRelations
     
     def __getBarChart(self, datedCounts):
-        bars = []
+        bars = {}
         for date in datedCounts.keys():
-            bars.append({
+            bars[date] = {
             'date': date,
             'value': datedCounts[date]
-            })
-        return bars
+            }
+            
+        sortedBars = self.__sort(bars, 'date', False) 
+        return sortedBars
 
     def __getBoard(self):
         data = {
@@ -276,12 +279,12 @@ class RCStory:
     
     def __getBoardDescription(self):
         text = 'Displaying ' + str(self.total) + ' news from ' + Date.dateToStr(self.minDate) + ' to ' + Date.dateToStr(self.maxDate) + ' about '
-        totalNames = len(self.topicNames.keys())
+        totalNames = len(self.topicNames)
         processed = 0
         divider = ''
-        for nameKey in self.topicNames.keys():
+        for name in self.topicNames:
             if processed <= totalNames - 1:
-                text += divider + '"' + self.topicNames[nameKey] + '"'
+                text += divider + '"' + name + '"'
                 processed += 1
             divider = ' and ' if processed == totalNames - 1 else ', '
             

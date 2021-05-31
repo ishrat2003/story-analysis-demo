@@ -43,6 +43,6 @@ class Writer(Base):
         if type == 'lc':
             return self.__getDocumentKey(data['link']) + '.json'
         if type == 'termsboard':
-            return data['main_topic']['key'] + '.json'
+            return data['main_topic']['stemmed_word'] + '.json'
         return ''
 
