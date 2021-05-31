@@ -53,6 +53,10 @@ class Date:
             max = date
         return min, max
     
+    """ return days between min max """
+    @staticmethod
+    def daysBetween(date1, date2):
+        return abs((date1 - date2).days)
 
 
 

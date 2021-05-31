@@ -36,12 +36,12 @@ class Generator:
                 if (('story_words' not in story['concepts'].keys()) or not len(story['concepts']['story_words_keys'])):
                     continue
                 rcStoryProcessor.addStory(story)
-                sys.exit()
-               
-                
-            termsboard = TermsBoard(wordDetails, rcStoryProcessor)
             
-            self.writer.save(termsboard.get(), 'termsboard')
+            rcStoryProcessor.calculateScores()
+                
+            termsboard = rcStoryProcessor.get([wordDetails])
+            
+            self.writer.save(termsboard, 'termsboard')
             
         return data
     

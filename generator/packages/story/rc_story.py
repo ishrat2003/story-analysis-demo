@@ -1,6 +1,6 @@
 from .scanner import Scanner
 from utility.date import Date
-import sys
+from file.json import Json as JsonFile
 
 class RCStory:
     
@@ -14,6 +14,46 @@ class RCStory:
         self.scanner = Scanner()
         self.split = 5
         self.scanRelatedTerms = 3
+        self.totalDaysBetweenMaxMin = 0
+        self.total = 0
+        self.usedTerms = []
+        self.topicNames = []
+        self.__loadSamples()
+        return
+    
+    def getDocuments(self):
+        sorted =  self.__sort(self.documents, 'date', True) 
+        return sorted
+    
+    def get(self, topicWords):
+        self.topicNames = []
+        for word in topicWords:
+            self.topicNames.append(word['pure_word'])
+        data = {}
+        data['documents'] = self.getDocuments()
+        data['date_range'] = {
+            'min': Date.dateToStr(self.minDate),
+            'max': Date.dateToStr(self.maxDate)
+        }
+        data['total'] = self.total
+        data['description'] = self.__getBoardDescription()
+        
+        wordKey = topicWords[0]['stemmed_word']
+        typeKey = 'what'
+        if wordKey in self.words['who'].keys():
+            typeKey = 'who'
+        elif wordKey in self.words['where'].keys():
+            typeKey = 'where'
+        
+        data['when'] = self.__getBarChart(self.words[typeKey][wordKey]['dated_count'])  
+        data['board'] = self.__getBoard()
+        return data
+            
+    def calculateScores(self):
+        self.totalDaysBetweenMaxMin = Date.daysBetween(self.maxDate, self.minDate)
+        typeKeys = self.words.keys()
+        for typeKey in typeKeys:
+            self.__scoreType(typeKey)
         return
     
     def addStory(self, data):
@@ -29,11 +69,23 @@ class RCStory:
         
         urlParts = data['link'].split('/')
         documentKey = urlParts.pop()
+        self.__appendDocument(data, documentKey)
+        
         for word in data['concepts']['story_words']:
             self.__appendWord(word, dateKey, data['content'], documentKey)
-            self.__appendDocument(data, documentKey)
+            
         return
 
+    def __scoreType(self, typeKey):
+        if not len(self.words[typeKey]):
+            return
+        for wordKey in self.words[typeKey].keys():
+            self.words[typeKey][wordKey]['old_to_new'] = self.__getOldToNewScore(self.words[typeKey][wordKey]['dated_count'])
+            self.words[typeKey][wordKey]['new_to_old'] = self.__getNewToOldScore(self.words[typeKey][wordKey]['dated_count'])
+            self.words[typeKey][wordKey]['consistent'] = (self.words[typeKey][wordKey]['old_to_new'] + self.words[typeKey][wordKey]['new_to_old']) / 2
+            
+        return
+    
     def __appendDocument(self, data, documentKey):
         if documentKey in self.documents.keys():
             return
@@ -44,6 +96,8 @@ class RCStory:
             'description': data['description'],
             'date': dateKey
         }
+        
+        self.total += 1
         return 
     
     def __appendWord(self, word, dateKey, text, documentKey):
@@ -81,8 +135,6 @@ class RCStory:
                     }
                 self.words[typeKey][wordKey]['relations'][relationKey]['block_count'] += 1
                 self.words[typeKey][wordKey]['relations'][relationKey]['documents'].append(documentKey)
-        print(self.words[typeKey][wordKey])
-        sys.exit()
         return
     
     def __setWeights(self, story):
@@ -93,19 +145,144 @@ class RCStory:
 
     def __getType(self, word):
         if word['category'] == 'Verb':
-            return 'actions'
+            return 'action'
+        if (word['category'] in ['Person', 'Organization']) or (word['pure_word'] in self.whoSamples):
+            return 'who'
+        if (word['category'] in ['Location']) or (word['pure_word'] in self.whereSamples):
+            return 'where'
         if word['sentiment'] == 'positive':
             return 'positive'
         if word['sentiment'] == 'negative':
             return 'negative'
-        return 'topics'
+        if word['pure_word'] in self.whoSamples:
+            return 
+        return 'what'
     
     def __reset(self):
         self.words = {
-           'topics': {},
-           'actions': {},
+           'who': {},
+           'where': {},
+           'what': {},
+           'action': {},
            'positive': {},
            'negative': {}
         }
         self.documents = {}
         return
+    
+    def __loadSamples(self):
+        file = JsonFile()
+        path = File.join(os.path.abspath(__file__ + "/../../resources/"), "samples/Where.json")
+        self.whereSamples = file.read(path)
+        path = File.join(os.path.abspath(__file__ + "/../../resources/"), "samples/Who.json")
+        self.whoSamples = file.read(path)
+        return
+    
+    def __getOldToNewScore(self, dates):
+        score = 0
+        for date in dates.keys():
+            score += (self.totalDaysBetweenMaxMin - Date.daysBetween(Date.strToDate(date), self.minDate)) * self.dates[date]
+        return score
+    
+    def __getNewToOldScore(self, dates):
+        score = 0
+        for date in dates.keys():
+            score += (self.totalDaysBetweenMaxMin - Date.daysBetween(self.maxDate, Date.strToDate(date))) * self.dates[date]
+        return score
+    
+    def __sort(self, items, attribute='block_count', reverse=True):
+        if not len(items.keys()):
+            return []
+
+        sortedTopics = []
+        contributors = items.values()
+        
+        for value in sorted(contributors, key=operator.itemgetter(attribute), reverse=reverse):
+            sortedTopics.append(value)
+
+        return sortedTopics
+    
+    def __getRelations(self, relations, source):
+        processedRelations = {}
+        if not relations:
+            return
+        sortedRelations = self.sort(relations, 'block_count', True) 
+        sortedRelations = sortedRelations[0:self.scanRelatedTerms]
+        
+        for key in sortedRelations.keys():
+            documents = []
+            for documentKey in relations[key]['documents']:
+                documents.append(self.documents[documentKey])
+                
+            processedRelations[key] = {
+                'source': source,
+                'target': relations[key]['display'],
+                'size': relations[key]['block_count'],
+                'documents': documents
+            }
+        return processedRelations
+    
+    def __getBarChart(self, datedCounts):
+        bars = []
+        for date in datedCounts.keys():
+            bars.append({
+            'date': date,
+            'value': datedCounts[date]
+            })
+        return bars
+
+    def __getBoard(self):
+        data = {
+        'who': self.__getCard('who'),
+        'where': self.__getCard('where'),
+        'what_topic': self.__getCard('what'),
+        'what_action': self.__getCard('action'),
+        'why_positive': self.__getCard('positive'),
+        'why_negative': self.__getCard('negative')
+        }
+        return data
+    
+    def __getCard(self, typeKey, limit = 3):
+        return {
+            'consistent': self.__getWordsByScoreType(typeKey, 'consistent', limit),
+            'old_to_new': self.__getWordsByScoreType(typeKey, 'old_to_new', limit),
+            'new_to_old': self.__getWordsByScoreType(typeKey, 'new_to_old', limit)
+        }
+        
+    def __getWordsByScoreType(self, type, scoreType, limit = 3):
+        sorted =  self.__sort(self.words[type], scoreType, True) 
+        items = []
+        for word in sorted:
+            if word['stemmed_word'] in self.usedTerms:
+                continue
+            name = word['pure_word'][0].upper() + word['pure_word'][1:]
+            items.append({
+                'name': name,
+                'key': word['stemmed_word'],
+                'size': word['block_count'],
+                'old_to_new': word['old_to_new'],
+                'new_to_old': word['new_to_old'],
+                'consistent': word['consistent'],
+                'tooltip': word['tooltip'],
+                'relations': self.__getRelations(word['relations'], name),
+                'dated_bars': self.__getBarChart(word['dated_count']) 
+            })
+            self.usedTerms.append(word['stemmed_word'])
+            if len(items) == limit:
+                break
+        return items
+    
+    def __getBoardDescription(self):
+        text = 'Displaying ' + str(self.total) + ' news from ' + Date.dateToStr(self.minDate) + ' to ' + Date.dateToStr(self.maxDate) + ' about '
+        totalNames = len(self.topicNames.keys())
+        processed = 0
+        divider = ''
+        for nameKey in self.topicNames.keys():
+            if processed <= totalNames - 1:
+                text += divider + '"' + self.topicNames[nameKey] + '"'
+                processed += 1
+            divider = ' and ' if processed == totalNames - 1 else ', '
+            
+        return text
+    
+    
