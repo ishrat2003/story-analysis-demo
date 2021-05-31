@@ -1,6 +1,8 @@
+import datetime
 from story.lc_story import LCStory
+from .base import Base
 
-class Context:
+class Context(Base):
     
     def __init__(self, loader, writer, totalItems = 0):
         self.loader = loader
@@ -29,18 +31,21 @@ class Context:
         return True
     
     def appendToCorpus(self, item):
+        date = datetime.datetime.strptime(item['pubDate'], "%a, %d %b %Y %H:%M:%S GMT")
+        if not self.writer.isNewDocument(item['link'], str(date.year), self._getFormattedMonthOrDay(date.month)):
+            print('Already processed')
+            return
+
         details = self.loader.getDetails(item)
         if not details or not details['content']:
             return
-        
+
         self.writer.setItemDetails(item['link'], details['pubDate'])
-        if not self.writer.isNewDocument(item['link']):
-            return
-        
+
         topics = self.__getTopTopics(details)
         if not len(topics):
             return
-        
+
         self.writer.save(topics)
         return
     

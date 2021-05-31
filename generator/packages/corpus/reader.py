@@ -1,4 +1,4 @@
-import os, datetime
+import os, datetime, re
 from writer.base import Base
 from filesystem.directory import Directory
 from file.json import Json as JsonFile
@@ -15,7 +15,8 @@ class Reader(Base):
         self.store = Local()
         self.paths = {
             'gc': os.path.join(path, 'gc'),
-            'words': os.path.join(path, 'words')
+            'words': os.path.join(path, 'words'),
+            'lc': os.path.join(params.destination_directory, 'lc')
         }
         self.gcFileNames = [
             "topics",
@@ -56,6 +57,9 @@ class Reader(Base):
         filePath = self.paths['words'] + '/' + key + '/details.json'
         return self.store.getContent(filePath)
     
+    def getStoryDetails(self, filePath):        
+        return self.store.getContent(filePath)
+    
     
     def getAllDocumentsByWords(self, key, start = None, end = None):        
         directoryPath = self.paths['words'] + '/' + key
@@ -64,10 +68,10 @@ class Reader(Base):
             return None
         
         allDocs = []
-        for year in wordDirectory.scan():                
-            yearDirectoryPath = os.path.join(directoryPath, year)
+        for year in wordDirectory.scan(1):                        
+            yearDirectoryPath = os.path.join(directoryPath, year) 
             yearDirectory = Directory(yearDirectoryPath)
-            for filename in yearDirectory.scan():
+            for filename in yearDirectory.scan():  
                 filePath = yearDirectoryPath + '/' + filename
                 fileContent = self.store.getContent(filePath)
                 if fileContent:

@@ -28,7 +28,6 @@ class Writer(Base):
         self.day = date[8:10]
         self.date = date[0:10]
         self.storyWords = {}
-        self.isNew = False
         self.__setGCFilePaths()
         self.__loadTopics()
         self.__loadCountries()
@@ -46,8 +45,10 @@ class Writer(Base):
                 self.__updateCommon()
         return
     
-    def isNewDocument(self, link):
-        filePath = self.gcPath + '/documents/' + self.year + '_' + self.month + '.json'
+    def isNewDocument(self, link, year = None, month = None):
+        year = year if year else self.year
+        month = month if month else self.month
+        filePath = self.gcPath + '/documents/' + year + '_' + month + '.json'
         documents = self.file.read(filePath)
         if not documents:
             documents = []
@@ -191,6 +192,7 @@ class Writer(Base):
         return wordDirectoryPath
     
     def __reset(self):
+        self.isNew = False
         self.date = None
         self.link = None
         self.year = None

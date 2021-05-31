@@ -23,20 +23,26 @@ class Writer(Base):
         if not data or type not in self.paths.keys():
             return
         
-        path = self.paths[type]
-        filename = self.__getFilename(type, data)
-        filePath = path + '/' + filename
+        filePath = self.getFilePath(data, type)
         self.file.remove(filePath)
         self.file.write(filePath, data)
         return
+    
+    def getFilePath(self, data, type):
+        path = self.paths[type]
+        filename = self.__getFilename(type, data)
+        return path + '/' + filename
+    
+    def __getDocumentKey(self, link):
+        urlParts = link.split('/')
+        return urlParts.pop()
     
     def __getFilename(self, type, data):
         if type == 'gc':
             return str(self.params.start) + '_' + str(self.params.end) + '.json'
         if type == 'lc':
-            urlParts = data['link'].split('/')
-            return data['date'] + urlParts[:-1]
+            return self.__getDocumentKey(data['link']) + '.json'
         if type == 'termsboard':
-            return data['main_topic']
+            return data['main_topic']['key'] + '.json'
         return ''
 

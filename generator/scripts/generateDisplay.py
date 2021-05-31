@@ -15,6 +15,7 @@ from filesystem.directory import Directory
 from display.writer import Writer
 from corpus.reader import Reader
 from display.generator import Generator
+from loader.bbc import BBC
 
 logging.info("# Starting building json files for visualization")
 logging.info("# ================================")
@@ -22,9 +23,10 @@ logging.info("# ================================")
 scriptParams = Params()
 params = scriptParams.get()
 
+loader = BBC()
 writer = Writer(params.destination_directory, params)
 reader = Reader(params)
-generatorProcessor = Generator(params, reader, writer)
+generatorProcessor = Generator(params, reader, writer, loader)
 generatorProcessor.process()
 
 logging.info('Finished building json files for visualization')

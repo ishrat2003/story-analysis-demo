@@ -50,8 +50,8 @@ class Directory():
 		return
 					
 
-	def scan(self):
-		return next(os.walk(self.path))[2]
+	def scan(self, depth = 2):
+		return next(os.walk(self.path))[depth]
 
 	def process(self, processor, totalItemsToProcess = 0):
 		totalItemsToProcess = int(totalItemsToProcess)
