@@ -1,0 +1,50 @@
+{
+    "lc_text": {
+       "description": "In this task, read the given text and then answer the given questions."
+    },
+    "lc_viz": {
+        "description": "In this task, interpret the visualization and then answer the given questions."
+    },
+    "rc_text": {
+        "description": "In this task, based on the given list of documents, answer the given questions."
+     },
+    "rc_viz": {
+        "description": "In this task, based on the given list of documents and term-board visualization, answer the given questions."
+     },
+    "lc": {
+        "case1": {
+            "title": "Covid-19: Johnson still working on 'roadmap' to ease lockdown",
+            "key": "uk-politics-56123889",
+            "date": "2021-02-19",
+            "link": "https://www.bbc.co.uk/news/uk-politics-56123889"
+        },
+        "case2": {
+            "title": "UK sees further drop in coronavirus numbers",
+            "key": "health-56123695",
+            "date": "2021-02-19",
+            "link": "https://www.bbc.co.uk/news/health-56123695"
+        }, 
+        "case3": {
+            "title": "Mars landing: Photo shows Perseverance about to touch down",
+            "key": "science-environment-56133281",
+            "date": "2021-02-19",
+            "link": "https://www.bbc.co.uk/news/science-environment-56133281"
+        },
+        "case4": {
+            "title": "Covid-19: NI vaccination programme extended to carers",
+            "key": "uk-northern-ireland-56102348",
+            "date": "2021-02-19",
+            "link": "https://www.bbc.co.uk/news/uk-northern-ireland-56102348"
+        }
+    },
+    "rc": {
+        "case1": {
+            "title": "What is the impact of Brexit in UK?",
+            "key": "brexit"
+        },
+        "case2": {
+            "title": "What is the impact of Coronavirus Vaccination in UK?",
+            "key": "vaccination"
+        }
+    }
+}

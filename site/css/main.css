@@ -1,0 +1,260 @@
+body {
+    font-family: "Lato", sans-serif
+  }
+  .dailyTopic {
+      overflow-y: scroll;
+      width: 1000px;
+      height: 500px;
+      margin: 15px;
+      background-color: #F1F3F3    
+    }
+    .bar {
+        fill: #828282;
+    }
+    .axis path, .axis line {
+      fill: none;
+      stroke: #D4D8DA;
+      stroke-width: 1px;
+      shape-rendering: crispEdges;
+    }
+    .x path {
+        display: none;
+    }
+    .toolTip {
+      position: absolute;
+      display: none;
+      min-width: 80px;
+      height: auto;
+      background: none repeat scroll 0 0 #ffffff;
+      border: 1px solid #161517;
+      padding: 14px;
+      text-align: center;
+    }
+  
+  table {
+      font-size: 1em;
+  }
+  
+  .ui-draggable, .ui-droppable {
+      background-position: top;
+  }
+  
+  .datepicker {
+    width: 255px;
+  }
+  /* packed bubble chart */
+  .node {
+    cursor: pointer;
+  }
+  
+  .node:hover {
+    stroke: #000;
+    stroke-width: 1.5px;
+  }
+  
+  .node--leaf {
+    fill: white;
+  }
+  
+  .label {
+    font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-anchor: middle;
+    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+  }
+  
+  .label,
+  .node--root,
+  .node--leaf {
+    pointer-events: none;
+  }
+  
+  /* Storyboard */
+  
+  .storyboard{
+    margin-left: -125px;
+    margin-right: -125px;
+  }
+  
+  ul {
+    list-style-type: none;
+  }
+   
+  li {
+    margin: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
+    overflow: auto;
+    background-color: whitesmoke;
+  }
+   
+  li:hover {
+    background: #eee;
+    cursor: pointer;
+  }
+  
+  .selectWrapper{
+    border-radius:36px;
+    display:inline-block;
+    overflow:hidden;
+    background:#cccccc;
+    border:1px solid #cccccc;
+  }
+  .selectBox{
+    width:140px;
+    height:40px;
+    border:0px;
+    outline:none;
+    float:center;
+  }
+  .termboardCard{
+    float:left;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 5px 5px 5px;
+    width:400px;
+    height:400px;
+  }
+  .termboardBox{
+    float:center;
+    margin: 5px 5px 5px 10px;
+  }
+  .termboardLightCard{
+    background:#e6ffb3;
+  }
+  .termboardDarkCard{
+    background:#88cc00;
+  }
+  .termBoardH2{
+    float:center;
+  }
+  .whenBox{
+    background:white;
+    margin: 5px 5px 5px 10px;
+  }
+  .taskDiv{
+    margin: 5px 5px 5px 10px;
+    border-radius: 10px;
+    background: #e7ebe0;
+    padding: 5px;
+    width: 80%;
+  }
+  .taskDescription {
+    margin: 10px 10px 10px 10px;
+  }
+  
+  #taskDescription {
+    margin: 10px 10px 10px 10px;
+    color:rgb(73, 104, 10);
+    font-weight: bold;
+  }
+  .taskDiv li{
+    background: #ffffff00;
+    text-align: left;
+    width: 100%;
+    list-style-type: square;
+  }
+  
+  .taskDiv li::before {
+    content: "✎ ";
+    color:  #1d2e02;
+    font-size: 15px;
+  }
+  
+  .allTasks{
+    float:center;
+    padding: 0 0 0 10%;
+  }
+  
+  .doneTaskDiv li::after {
+    content: "  ✔";
+    color:  #1d2e02;
+    font-size: 20px;
+  }
+  
+  .lcRawTextBlock {
+    height: 620px;
+    border: 1px solid #425c0d;
+    border-radius: 5px;
+    padding: 5px;
+  }
+  
+  .lcRawText {
+    overflow-y: scroll;
+    height: 600px;
+  }
+  
+  /* width */
+  .lcRawText::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  .lcRawText::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  .lcRawText::-webkit-scrollbar-thumb {
+    background: rgb(111, 159, 15); 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  .lcRawText::-webkit-scrollbar-thumb:hover {
+    background: #425c0d; 
+  }
+  
+  .storyWordCategory {
+    width: 22%;
+    float: left;
+    margin: 1px 1px 1px 1px;
+    text-align: left;
+    border-radius: 10px;
+    padding: 15px;
+  }
+  
+  .lcContentForm label {
+    text-align: left;
+    float: left;
+  }
+  
+  .lcRawRow {
+    height: 200px;
+  }
+  
+  #lc_text_display li, #lc_text_display ul, #lc_text_display ol {
+    all: none;
+  }
+  
+  .time{
+    color: #FFA533;
+  }
+  
+  .toolTipTermBoard{
+    position: absolute;
+    display: none;
+    min-width: auto;
+    height: auto;
+    background: none repeat scroll 0 0 #ffffff;
+    border: 1px solid #161517;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .modal{
+    max-width: 1000px;
+    width: 1000px;
+  }
+  #sankey {
+    float: left;
+  }
+  #sankeyList {
+    width: 425px;
+    float: right;
+  }
+  
+  .close{
+    content: "  X";
+    color:  #1d2e02;
+    font-size: 25px;
+    float: right;
+  }
