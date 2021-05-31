@@ -1,6 +1,8 @@
+import os
 from .scanner import Scanner
 from utility.date import Date
 from file.json import Json as JsonFile
+from file.core import Core as File
 
 class RCStory:
     
@@ -69,7 +71,7 @@ class RCStory:
         
         urlParts = data['link'].split('/')
         documentKey = urlParts.pop()
-        self.__appendDocument(data, documentKey)
+        self.__appendDocument(data, dateKey, documentKey)
         
         for word in data['concepts']['story_words']:
             self.__appendWord(word, dateKey, data['content'], documentKey)
@@ -86,7 +88,7 @@ class RCStory:
             
         return
     
-    def __appendDocument(self, data, documentKey):
+    def __appendDocument(self, data, dateKey, documentKey):
         if documentKey in self.documents.keys():
             return
             
@@ -172,9 +174,9 @@ class RCStory:
     
     def __loadSamples(self):
         file = JsonFile()
-        path = File.join(os.path.abspath(__file__ + "/../../resources/"), "samples/Where.json")
+        path = File.join(os.path.abspath(__file__ + "/../../../resources/"), "samples/Where.json")
         self.whereSamples = file.read(path)
-        path = File.join(os.path.abspath(__file__ + "/../../resources/"), "samples/Who.json")
+        path = File.join(os.path.abspath(__file__ + "/../../../resources/"), "samples/Who.json")
         self.whoSamples = file.read(path)
         return
     

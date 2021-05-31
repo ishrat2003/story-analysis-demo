@@ -1,5 +1,4 @@
 from display.gc import GC as GCDisplay
-from display.termsboard import TermsBoard
 from story.lc_story import LCStory
 from story.rc_story import RCStory
 import sys
@@ -40,7 +39,8 @@ class Generator:
             rcStoryProcessor.calculateScores()
                 
             termsboard = rcStoryProcessor.get([wordDetails])
-            
+            print(termsboard)
+            print('---------------- TB finished ---------------')
             self.writer.save(termsboard, 'termsboard')
             
         return data

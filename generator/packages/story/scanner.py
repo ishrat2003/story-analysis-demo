@@ -14,7 +14,7 @@ class Scanner:
         self.sentenceWords = {}
         self.loadRelationsMatchingSentences(text, wordKey)
         sortedWords = self.sort()
-        return sortedWords[0:limit]
+        return sortedWords[0:limit] if sortedWords else []
     
     def loadRelationsMatchingSentences(self, text, wordKey):
         items = re.finditer('[^!\?\.\n]*' + wordKey + '[^!\?\.\n]*[!\.\?\n]', text.lower())
