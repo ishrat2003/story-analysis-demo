@@ -258,3 +258,8 @@ body {
     font-size: 25px;
     float: right;
   }
+
+  .gcAnalysis {
+    float: left;
+    margin: 0 20px;
+  }

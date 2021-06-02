@@ -1,9 +1,23 @@
  <!DOCTYPE html>
 <html>
-<title>Global Context</title>
+<title>Story Analysis Demo</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/site.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/d3-tip.css">
+<link rel="stylesheet" href="/css/donut.css">
+<script src="/js/jquery-3.5.1.min.js"></script>
+<script src="/js/jquery-ui-1.12.1.js"></script>
+<script src="/js/d3.v4.js"></script>
+<script src="/js/d3js.queue.v1.min.js"></script>
+<script src="/js/d3js.topojson.v1.min.js"></script>
+<script src="/js/d3-tip.js"></script>
+<script src="/js/map.js"></script>
+<script src="/js/topics.js"></script>
+<script src="/js/donut.js"></script>
+<script src="/js/gc.js"></script>
 <style>
 body {font-family: "Times New Roman", Georgia, Serif;}
 h1, h2, h3, h4, h5, h6 {
@@ -16,7 +30,7 @@ h1, h2, h3, h4, h5, h6 {
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
-    <a href="/" class="w3-bar-item w3-button">Global Context</a>
+    <a href="/" class="w3-bar-item w3-button">Story Analysis</a>
     <!-- Right-sided navbar links. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
       <a href="/about.html" class="w3-bar-item w3-button">About</a>
@@ -28,73 +42,76 @@ h1, h2, h3, h4, h5, h6 {
 
 <!-- Header -->
 <header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
-  <img class="w3-image" src="/images/hamburger.jpeg" alt="Hamburger Catering" width="1600" height="800">
+  <img class="w3-image" src="/images/ball.png" alt="Story Analysis Demo" width="1600" style="opacity: 0.6;">
   <div class="w3-display-bottomleft w3-padding-large w3-opacity">
-    <h1 class="w3-xxlarge">Story Analysis</h1>
+    <h1 class="w3-xxlarge">Contextual Visualization</h1>
   </div>
 </header>
 
 <!-- Page content -->
 <div class="w3-content" style="max-width:1100px">
 
-  <!-- About Section -->
-  <div class="w3-row w3-padding-64" id="about">
-    <div class="w3-col m6 w3-padding-large w3-hide-small">
-     <img src="/w3images/tablesetting2.jpg" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="600" height="750">
-    </div>
-    <div class="w3-col m6 w3-padding-large">
-      <h1 class="w3-center">About Catering</h1><br>
-      <h5 class="w3-center">Tradition since 1889</h5>
-      <p class="w3-large">The Catering was founded in blabla by Mr. Smith in lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.We only use <span class="w3-tag w3-light-grey">seasonal</span> ingredients.</p>
-      <p class="w3-large w3-text-grey w3-hide-medium">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-  </div>
-  
-  <hr>
-  
-  <!-- Menu Section -->
-  <div class="w3-row w3-padding-64" id="menu">
-    <div class="w3-col l6 w3-padding-large">
-      <h1 class="w3-center">Our Menu</h1><br>
-      <h4>Bread Basket</h4>
-      <p class="w3-text-grey">Assortment of fresh baked fruit breads and muffins 5.50</p><br>
-    
-      <h4>Honey Almond Granola with Fruits</h4>
-      <p class="w3-text-grey">Natural cereal of honey toasted oats, raisins, almonds and dates 7.00</p><br>
-    
-      <h4>Belgian Waffle</h4>
-      <p class="w3-text-grey">Vanilla flavored batter with malted flour 7.50</p><br>
-    
-      <h4>Scrambled eggs</h4>
-      <p class="w3-text-grey">Scrambled eggs, roasted red pepper and garlic, with green onions 7.50</p><br>
-    
-      <h4>Blueberry Pancakes</h4>
-      <p class="w3-text-grey">With syrup, butter and lots of berries 8.50</p>    
-    </div>
-    
-    <div class="w3-col l6 w3-padding-large">
-      <img src="/w3images/tablesetting.jpg" class="w3-round w3-image w3-opacity-min" alt="Menu" style="width:100%">
-    </div>
-  </div>
 
-  <hr>
-
-  <!-- Contact Section -->
+<!-- Contact Section -->
   <div class="w3-container w3-padding-64" id="contact">
-    <h1>Contact</h1><br>
-    <p>We offer full-service catering for any event, large or small. We understand your needs and we will cater the food to satisfy the biggerst criteria of them all, both look and taste. Do not hesitate to contact us.</p>
-    <p class="w3-text-blue-grey w3-large"><b>Catering Service, 42nd Living St, 43043 New York, NY</b></p>
-    <p>You can also contact us by phone 00553123-2323 or email catering@catering.com, or you can send us a message here:</p>
-    <form action="/action_page.php" target="_blank">
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
-      <p><input class="w3-input w3-padding-16" type="number" placeholder="How many people" required name="People"></p>
-      <p><input class="w3-input w3-padding-16" type="datetime-local" placeholder="Date and time" required name="date" value="2020-11-16T20:00"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
-      <p><button class="w3-button w3-light-grey w3-section" type="submit">SEND MESSAGE</button></p>
-    </form>
-  </div>
+    <div id="whyExplanationBlock" class="w3-content w3-center w3-padding-16 explanationBlock">
+      <h3 class="w3-wide">Why?</h3>
+      <p class="w3-justify">In any news story, a journalist coveys the information by answering 5 basic questions Who, Where, What, When and Why. The Global Context (GC) view of “Story Analysis” demos descriptive analytics for a sample news corpus to identify (why) major topics/incidences (what), characters/organizations (who) and locations (where) for a given date range (when). GC time filtered view can provide cognitive guidance for selecting historical topics that can be beneficial to revisit from time to time.</p>
+      <hr>
+    </div>
+
+    <div id="rectRoundCorners" class="w3-content w3-center w3-padding-16">
+      <h3>When?</h3>
+      <p class="w3-center" id="dataAvailable"></p>
+      <p class="w3-center" id="currentRange"></p>
+      <ul id="gcAnalysisUl">
+        <li class="gcAnalysis current">
+          <a href="javascript:void(0);" data-file="/data/gc/2021-05-24_2021-05-30.json">24 May 2021 - 30 May 2021</a>
+        </li>
+        <li class="gcAnalysis">
+          <a href="javascript:void(0);" data-file="/data/gc/2021-05-24_2021-05-30.json">24/05/2021 - 30/05/2021</a>
+        </li>
+        <li class="gcAnalysis">
+          <a href="javascript:void(0);" data-file="/data/gc/2021-05-24_2021-05-30.json">24/05/2021 - 30/05/2021</a>
+        </li>
+      </ul>
+      <br class="clear">
+    </div>
+    <hr>
+    
+    <div id="whatExplanationBlock" class="w3-content w3-center w3-padding-16 explanationBlock">
+      <h3 class="w3-wide">What?</h3>
+      <p class="w3-justify">The following section provides the top 25 weighted topics identified in the specified date range. Hovering over a topic will display the number of documents the topic was highlighted per day. This descriptive information is helpful to understand whether the topic is having more / less  / consistent importance in the selected date range. Clicking on the topic will lead you to the Relative Context (RC) view of the selected topic. RC view provides a quick diagnostics analytics view for discovering sub-topics of the selected topic.</p>
+      
+      
+    </div>
+    <div id="dailyTopic" class="dailyTopic"></div>
+    <br class="clear">
+    <hr>
+    <div id="whoExplanationBlock" class="w3-content w3-center w3-padding-16 explanationBlock">
+      <h3 class="w3-wide">Who?</h3>
+      <p class="w3-justify">The following section provides the major characters and organizations that have been referred to in the news stories in the specified date range. Hovering over a topic will display the number of documents the topic was highlighted. This descriptive information is useful for identifying the importance of the character/organization in the corpus. Clicking on the topic will lead you to the Relative Context (RC) view of the selected topic. RC view provides a quick diagnostics analytics view for discovering sub-topics of the selected topic.</p>      
+    </div>
+    <div class="dualDonuts">
+      <div id="organizationsBlock" class="organizationsBlock"></div>
+      <div id="personBlock" class="personBlock"></div>
+    </div>
+    <hr>
+    
+
+    <div id="whereExplanationBlock" class="w3-content w3-center w3-padding-16 explanationBlock">
+      <h3 class="w3-wide">Where?</h3>
+      <p class="w3-justify">The following section provides the major locations in the world that have been referred to in the news stories in the specified date range. Hovering over a topic will display the number of documents the topic was highlighted per day. This descriptive information is helpful to understand whether the topic is having more / less / consistent importance in the selected date range. Clicking on the topic will lead you to the Relative Context (RC) view of the selected topic. RC view provides a quick diagnostics analytics view for discovering sub-topics of the selected topic.</p>
+      <div id="worldMap" class="w3-content w3-center"></div>
+      <hr>
+    </div>
+    
+
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+      <h2 id="summaryHeading" class="w3-wide w3-center">Summary</h2>
+      <p id="summaryContent" class="w3-opacity w3-justify"></p><br>
+    </div>
   
-<!-- End page content -->
 </div>
 
 <!-- Footer -->

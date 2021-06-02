@@ -1,0 +1,64 @@
+.ui-widget-content .ui-icon {
+    background-image: url("../images/ui-icons_222222_256x240.png")      
+    !important;
+}
+.ui-widget-header .ui-icon {
+    background-image: url("../images/ui-icons_222222_256x240.png")   
+    !important;
+}
+
+.rectRoundCorners {
+    border-radius: 25px;
+    border: 3px solid #494a47;
+    padding: 20px 20px 20px 20px; 
+    width: 600px;
+    height: 300px;  
+}
+
+.mapTooltipGraph {
+    background-color: white; 
+}
+
+.bar { fill: rgb(95, 197, 244); }
+
+.topicBar { fill: rgb(242, 209, 137); }
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+.buttonGrey {background-color: #e7e7e7; color: black;}
+
+.personShadow {
+    width: 50px;
+    height: 50px;  
+}
+
+.organizationsBlock .card{
+    background-color: #e1d7c972; 
+    color: black;
+}
+.donutBlock{
+    float: left;
+}
+
+.dualDonuts{
+    margin-left: -50px;
+    margin-right: -50px;
+}
+.organizationsBlock{
+    float: left;
+}
+
+.personBlock{
+    float: right;
+}
