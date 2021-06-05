@@ -1,9 +1,9 @@
 function drawDonut(divId, data){
     var donut = donutChart(divId)
-        .width(400)
-        .height(400)
-        .cornerRadius(3) // sets how rounded the corners are on each slice
-        .padAngle(0.015) // effectively dictates the gap between slices
+        .width(450)
+        .height(450)
+        .cornerRadius(2.5) // sets how rounded the corners are on each slice
+        .padAngle(0.025) // effectively dictates the gap between slices
         .variable('total_block_count')
         .category('display');
 
@@ -85,7 +85,7 @@ function donutChart(divId) {
             var label = svg.select('.donutLabelName' + divId).selectAll('text')
                 .data(pie)
               .enter().append('text')
-                .attr('dy', '.35em')
+                .attr('dy', '.25em')
                 .html(function(d) {
                     // add "key: value" for given category. Number inside tspan is bolded in stylesheet.
                     return d.data[category];
@@ -158,7 +158,7 @@ function donutChart(divId) {
                 });
 
                 selection.on("click", function(d){ 
-                    var url = '/termsboard.html?key=' + d.data.key;
+                    var url = '/demo/termsboard.html?key=' + d.data.key;
                     window.open(url, '_blank');
                 });
             }

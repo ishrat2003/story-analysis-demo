@@ -76,7 +76,7 @@ function displayGcTopics(data){
       })
       .on("mouseout", function(d){ tooltip.style("display", "none");})
       .on("click", function(d){ 
-        var url = '/termsboard.html?key=' + d.key;
+        var url = '/demo/termsboard.html?key=' + d.key;
         window.open(url, '_blank');
       });
   

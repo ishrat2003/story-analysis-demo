@@ -75,14 +75,14 @@ function drawMapBlocksPerDateGraph(divId, data, className, width, height){
       .attr('class', 'd3-map-tip')
       .offset([-10, 0])
       .html(function(d) {
-        var url = '/rc.html?key=' + d.key;
+        var url = '/demo/termsboard.html?key=' + d.key;
         var html = "<strong>Country: </strong><span class='details'><a href=\"" + url + "\">" 
           + d.properties.name + "</a><br></span>"
-          + "<strong>Blocks count in range: </strong><span class='details'>" 
+          + "<strong>Blocks count: </strong><span class='details'>" 
           + d.total_block_count +"</span>";
-        if (d.count_per_day) {
+        if (d.linegraph) {
           var divId = 'map' + d.id;
-          html += "<div id=\"" + divId+ "\" class=\"tooptipMap\"></div>";
+          html += "<div id=\"" + divId+ "\" class=\"tooltipMap\"></div>";
         }
         return html;
       });
@@ -121,15 +121,15 @@ function drawMapBlocksPerDateGraph(divId, data, className, width, height){
       d.total_block_count = itemsById[d.id] ? itemsById[d.id].total_block_count: 0;
       d.key = itemsById[d.id] ? itemsById[d.id].key: null;
   
-      d.count_per_day = [];
-      if (itemsById[d.id] && itemsById[d.id]["count_per_day"]) {
-        for (var key in itemsById[d.id]["count_per_day"]) {
-          d.count_per_day.push({
-            date : d3.timeParse("%Y-%m-%d")(key), 
-            value : itemsById[d.id]["count_per_day"][key]
+      d.linegraph = [];
+      if (itemsById[d.id] && itemsById[d.id]["linegraph"]) {
+        for (var index in itemsById[d.id]["linegraph"]) {
+          d.linegraph.push({
+            date : d3.timeParse("%Y-%m-%d")(itemsById[d.id]["linegraph"][index]['date']), 
+            value : itemsById[d.id]["linegraph"][index]['value']
           });
         };
-        d.count_per_day = d.count_per_day.sort(function(a,b) {
+        d.linegraph = d.linegraph.sort(function(a,b) {
           return a.date - b.date;
         });
       }
@@ -152,10 +152,8 @@ function drawMapBlocksPerDateGraph(divId, data, className, width, height){
             var divId = 'map' + d.id;
             mapTooltip.hide(d);
             mapTooltip.show(d);
-            console.log(d);
-            if(d.count_per_day && d.count_per_day.length){
-              console.log('drawing');
-              drawMapBlocksPerDateGraph(divId, d.count_per_day, "mapTooltipGraph", 300, 300);
+            if(d.linegraph && d.linegraph.length){
+              drawMapBlocksPerDateGraph(divId, d.linegraph, "mapTooltipGraph", 300, 300);
             }
             d3.select(this)
               .style("opacity", 1)
@@ -171,7 +169,7 @@ function drawMapBlocksPerDateGraph(divId, data, className, width, height){
           .on("click", function(d){ 
             mapTooltip.hide(d);
             if (!d.key) return;
-            var url = '/rc.html?key=' + d.key;
+            var url = '/demo/termsboard.html?key=' + d.key;
             window.open(url, '_blank');
           });
   

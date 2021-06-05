@@ -59,7 +59,7 @@ function displayCard(data, className, blockName){
         }
         html += '<h3>' + item['display'] + '</h3>';
         html += '<p><strong>Blocks count: </strong>' + item['total_block_count'] + '</p>';
-        html += '<p><strong>Blocks count in range: </strong>' + item['total_block_count_in_range'] + '</p>';
+        //html += '<p><strong>Blocks count in range: </strong>' + item['total_block_count_in_range'] + '</p>';
         html += '<div id="' + divId + '"></div>';
         html += '</div>';
         html += '</div>';
