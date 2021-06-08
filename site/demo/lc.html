@@ -3,7 +3,21 @@
 <title>Local Context Analysis</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 <link rel="stylesheet" href="/css/site.css">
+<link rel="stylesheet" href="/css/jquery-ui-1.12.1.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/form.css">
+<script src="/js/jquery-3.5.1.min.js"></script>
+<script src="/js/jquery-ui-1.12.1.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/d3.v4.js"></script>
+<script src="/js/d3-scale-radial.js"></script>
+<script src="/js/d3-selection-multi.v1.js"></script>
+<script src="/js/populateData.js"></script>
+<script src="/js/lc.js"></script>
 <style>
 body {font-family: "Times New Roman", Georgia, Serif;}
 h1, h2, h3, h4, h5, h6 {
@@ -36,66 +50,134 @@ h1, h2, h3, h4, h5, h6 {
 
 <!-- Page content -->
 <div class="w3-content" style="max-width:1100px">
+  <h2 class="w3-wide">Local Context Story Analysis</h2>
+  <p id="taskDescription" class="w3-center"></p>
+  <h3 id="taskTitle" class="w3-center"></h3>
+  <p id="publishedDate" class="w3-center"></p>
 
-  <!-- About Section -->
-  <div class="w3-row w3-padding-64" id="about">
-    <div class="w3-col m6 w3-padding-large w3-hide-small">
-     <img src="/w3images/tablesetting2.jpg" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="600" height="750">
+      <div id="lc_viz" class="w3-content w3-center w3-padding-16 explanationBlock" style="display:none">
+      <div id="lc_viz_display">
+        <img class="loadingImage" src="/images/loading.gif" alt="Loading">
+        <div id="lcTitle"></div>
+        <div id="lcRawTop"></div>
+        <div id="lcVizualization"></div>
+        <div id="lcVizualizationLabels">
+          <span class="noun"><b>Noun</b></span>
+          <span class="verb"><b>Action</b></span>
+          <span class="person"><b>Person</b></span>
+          <span class="location"><b>Location</b></span>
+          <span class="organization"><b>Organization</b></span>
+          <span class="time"><b>Time</b></span>
+          <span class="others"><b>Others</b></span>
+          <span class="positive"><b>Positive</b></span>
+          <span class="negative"></b>Negative</b></span>
+        </div>
+        <div id="lcRawBlock">
+            <div id="lcRaw w3-justify">
+                <div id="lcRawRow1" class="lcRawRow w3-justify"></div>
+                <div id="lcRawRow2" class="lcRawRow w3-justify"></div>
+            </div>
+        </div>
+        <br class="clear">
+        <div id="knowledgegraph" class="lcContent" style="display:none;">
+            <h2 id="knowledgegraphTitle" class="lcMainTitle">Knowledge Graph of Nouns &amp; Verbs</h2>
+            <div id="knowledgegraphVizualization"></div>
+        </div>
+      </div>
     </div>
-    <div class="w3-col m6 w3-padding-large">
-      <h1 class="w3-center">About Catering</h1><br>
-      <h5 class="w3-center">Tradition since 1889</h5>
-      <p class="w3-large">The Catering was founded in blabla by Mr. Smith in lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.We only use <span class="w3-tag w3-light-grey">seasonal</span> ingredients.</p>
-      <p class="w3-large w3-text-grey w3-hide-medium">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div id="lc_text" class="w3-content w3-center w3-padding-16 lcRawTextBlock" style="display:none">
+      <div id="lc_text_display" class="w3-justify lcRawText"><img class="loadingImage" src="/images/loading.gif" alt="Loading"></div>
     </div>
-  </div>
-  
-  <hr>
-  
-  <!-- Menu Section -->
-  <div class="w3-row w3-padding-64" id="menu">
-    <div class="w3-col l6 w3-padding-large">
-      <h1 class="w3-center">Our Menu</h1><br>
-      <h4>Bread Basket</h4>
-      <p class="w3-text-grey">Assortment of fresh baked fruit breads and muffins 5.50</p><br>
-    
-      <h4>Honey Almond Granola with Fruits</h4>
-      <p class="w3-text-grey">Natural cereal of honey toasted oats, raisins, almonds and dates 7.00</p><br>
-    
-      <h4>Belgian Waffle</h4>
-      <p class="w3-text-grey">Vanilla flavored batter with malted flour 7.50</p><br>
-    
-      <h4>Scrambled eggs</h4>
-      <p class="w3-text-grey">Scrambled eggs, roasted red pepper and garlic, with green onions 7.50</p><br>
-    
-      <h4>Blueberry Pancakes</h4>
-      <p class="w3-text-grey">With syrup, butter and lots of berries 8.50</p>    
-    </div>
-    
-    <div class="w3-col l6 w3-padding-large">
-      <img src="/w3images/tablesetting.jpg" class="w3-round w3-image w3-opacity-min" alt="Menu" style="width:100%">
-    </div>
-  </div>
 
-  <hr>
+    <br class="clear">
+    <div id="lc_text_questions" class="w3-content w3-center w3-padding-16 explanationBlock" style="display:none;">
+      <div id="surveyTitle">Please review the news.</div>
+      <div id="lcContent" class="lcContent">
+        <p id="message"></p> 
+        <p id="error"></p>
+        <form id="storySurveyForm" class="lcContentForm" action="">
+            <input type="hidden" id="survey_type" name="survey_type" value="lc">
 
-  <!-- Contact Section -->
-  <div class="w3-container w3-padding-64" id="contact">
-    <h1>Contact</h1><br>
-    <p>We offer full-service catering for any event, large or small. We understand your needs and we will cater the food to satisfy the biggerst criteria of them all, both look and taste. Do not hesitate to contact us.</p>
-    <p class="w3-text-blue-grey w3-large"><b>Catering Service, 42nd Living St, 43043 New York, NY</b></p>
-    <p>You can also contact us by phone 00553123-2323 or email catering@catering.com, or you can send us a message here:</p>
-    <form action="/action_page.php" target="_blank">
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
-      <p><input class="w3-input w3-padding-16" type="number" placeholder="How many people" required name="People"></p>
-      <p><input class="w3-input w3-padding-16" type="datetime-local" placeholder="Date and time" required name="date" value="2020-11-16T20:00"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
-      <p><button class="w3-button w3-light-grey w3-section" type="submit">SEND MESSAGE</button></p>
-    </form>
-  </div>
-  
-<!-- End page content -->
+            <input type="hidden" id="user_code" name="user_code" value="">
+            <input type="hidden" id="gender" name="gender" value="">
+            <input type="hidden" id="experiment_date_datepicker" name="experiment_date_datepicker" value="">
+            <input type="hidden" id="agreed" name="agreed" value="">
+            <input type="hidden" id="level" name="level" value="">
+            <input type="hidden" id="department" name="department" value="">
+            <input type="hidden" id="dob_datepicker" name="dob_datepicker" value="">
+            <input type="hidden" id="disability" name="disability" value="">
+
+            <input type="hidden" id="story_source" name="story_source" value="bbc">
+
+            <input type="hidden" id="open_timestamp" name="open_timestamp" value="">
+            <input type="hidden" id="open_date_time" name="open_date_time" value="">
+            <input type="hidden" id="close_timestamp" name="close_timestamp" value="">
+            <input type="hidden" id="close_date_time" name="close_date_time" value="">
+            <input type="hidden" id="time_taken_in_seconds" name="time_taken_in_seconds" value="">
+            
+            <input type="hidden" id="condition" name="condition">
+            <input type="hidden" id="story_link" name="story_link">
+            <input type="hidden" id="story_title" name="story_title">
+            <input type="hidden" id="story_date" name="story_date" value="">
+
+            <label for="when_happened"><span class="objective">When</span> did the incident take place?</label>
+            <select id="when_happened" name="when_happened">
+            <option value="">None</option>
+            <option value="today">Today</option>
+            <option value="current_week">This week</option>
+            <option value="few_weeks_ago">Few weeks ago</option>
+            <option value="current_month">This month</option>
+            <option value="few_month_ago">Few months ago</option>
+            <option value="current_month">This year</option>
+            <option value="few_years_ago">Few years ago</option>
+            </select>
+            <br class="clear">
+
+            <label for="who"><span class="objective">Who</span> are the main characters of the story?</label>
+            <input type="text" id="who" name="who" placeholder="One/Comma separated list of persons">
+            <br class="clear">
+
+            <label for="what"><span class="objective">What</span> is the story about?</label>
+            <input type="text" id="what" name="what" placeholder="One/Comma separated list of topics">
+            <br class="clear">
+
+            <label for="where_location"><span class="objective">Where</span> did the story take place?</label>
+            <input type="text" id="where_location" name="where_location" placeholder="One/Comma separated list of locations">
+            <br class="clear">
+
+            <label for="why"><span class="objective">Why</span> is the story important?</label>
+            <input type="text" id="why" name="why" placeholder="One/Comma separated list of reasons">
+            <br class="clear">
+            
+            <label for="summary">Write a <span class="objective">summary</span> of the story in a few sentences.</label>
+            <textarea id="summary" name="summary" rows="5" cols="50" placeholder="Few sentences about the story. Minimum 100 characters"></textarea>
+            <br class="clear">
+
+            <label for="rate">
+              <span class="objective">Ease of comprehension</span><br>
+              (1 = very hard, 2 = hard, 3 = ok, 4 = easy, 5 = very easy)
+            </label>
+            <br class="clear">
+            <div class="rating">
+              <input type="radio" id="star5" name="ease" value="5" /><label for="star5" title="very hard">5 stars</label>
+              <input type="radio" id="star4" name="ease" value="4" /><label for="star4" title="hard">4 stars</label>
+              <input type="radio" id="star3" name="ease" value="3" /><label for="star3" title="ok">3 stars</label>
+              <input type="radio" id="star2" name="ease" value="2" /><label for="star2" title="easy">2 stars</label>
+              <input type="radio" id="star1" name="ease" value="1" /><label for="star1" title="very easy">1 star</label>
+            </div>
+            <br class="clear" />
+            <div id="rating_error"></div>
+            
+
+            <br class="clear" />
+        </form>
+        <input type="button" id="storySurveyFormSubmit" value="Submit">
+        <div id="surveyLoading" style="display:none;"><img src="/images/loading.gif" alt="Loading"></div>
+      </div>
+    </div>
+
 </div>
+<!-- End page content -->
 
 <!-- Footer -->
 <footer class="w3-center w3-light-grey w3-padding-32">
