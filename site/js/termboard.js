@@ -7,7 +7,7 @@ function getParams(){
     var params = queryString.split("&");
     
     var topicKeys = [];
-    var from, to, key;
+    var from, to, key, task;
     if(params.length){
         params.forEach(item => {
             if(item.includes("topic_keys")){
@@ -16,12 +16,14 @@ function getParams(){
                 from = item.replace(/from\[\]=/, '');
             }else if(item.includes("to")){
                 to = item.replace(/to\[\]=/, '');
+            }else if(item.includes("task")){
+                task = item.replace(/task\[\]=/, '');
             }if(item.includes("key")){
                 key = item.replace(/key=/, '');
             }
         });
     }
-    return [topicKeys, from, to, key];
+    return [topicKeys, from, to, key, task];
 }
 
 function displayDocuments(documents){
@@ -33,7 +35,7 @@ function displayDocuments(documents){
                 + '<h4>' + item.title + '</h4>'
                 + '<span>' + item.date + '</span>'
                 + '<p>' + item.description + '</p>'
-                + '<p><a target="_blank" href="' + analysisLink + '">Local Context Analysis</a> | <a target="_blank" href="' + item.link + '">BBC Reference</a></p>'
+                + '<p><a target="_blank" href="' + analysisLink + '">Local Context Analysis</a> | <a target="_blank" href="' + item.link + '">Reference</a></p>'
                 + '</li>';
             $("#documentsItems").append(liHtml);
         });
@@ -79,8 +81,12 @@ function loadTermBoard(order, direction){
         'direction': direction,
         'from': params[1],
         'to': params[2],
-        'key': params[3]
+        'key': params[3],
+        'task': params[4]
     };
+    if (data['task']){
+        $("#storyInput").show()
+    }
     $.ajax({
         type: "GET",
         headers: {

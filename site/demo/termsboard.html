@@ -30,6 +30,15 @@
   <script src="/js/d3js.topojson.v1.min.js"></script>
   <script src="/js/d3-tip.js"></script>
 
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PFFKHW3');</script>
+  <!-- End Google Tag Manager -->
+<script src="/js/common.js"></script>
+
 <style>
 body {font-family: "Times New Roman", Georgia, Serif;}
 h1, h2, h3, h4, h5, h6 {
@@ -99,55 +108,58 @@ h1, h2, h3, h4, h5, h6 {
   </div>
 
   <div id="termsboardContent" class="termsboardContent">
-    <p id="message"></p> 
-    <p id="error"></p>
-    <form id="storySurveyForm" class="lcContentForm" action="">
-        <input type="hidden" id="survey_type" name="survey_type" value="lc">
+    <div id="storyInput" style="display:none">
+      <p id="message"></p> 
+      <p id="error"></p>
+      <form id="storySurveyForm" class="lcContentForm" action="">
+          <input type="hidden" id="survey_type" name="survey_type" value="lc">
 
-        <input type="hidden" id="user_code" name="user_code" value="">
-        <input type="hidden" id="gender" name="gender" value="">
-        <input type="hidden" id="experiment_date_datepicker" name="experiment_date_datepicker" value="">
-        <input type="hidden" id="agreed" name="agreed" value="">
-        <input type="hidden" id="level" name="level" value="">
-        <input type="hidden" id="department" name="department" value="">
-        <input type="hidden" id="dob_datepicker" name="dob_datepicker" value="">
-        <input type="hidden" id="disability" name="disability" value="">
+          <input type="hidden" id="user_code" name="user_code" value="">
+          <input type="hidden" id="gender" name="gender" value="">
+          <input type="hidden" id="experiment_date_datepicker" name="experiment_date_datepicker" value="">
+          <input type="hidden" id="agreed" name="agreed" value="">
+          <input type="hidden" id="level" name="level" value="">
+          <input type="hidden" id="department" name="department" value="">
+          <input type="hidden" id="dob_datepicker" name="dob_datepicker" value="">
+          <input type="hidden" id="disability" name="disability" value="">
 
-        <input type="hidden" id="story_source" name="story_source" value="bbc">
+          <input type="hidden" id="story_source" name="story_source" value="bbc">
 
-        <input type="hidden" id="open_timestamp" name="open_timestamp" value="">
-        <input type="hidden" id="open_date_time" name="open_date_time" value="">
-        <input type="hidden" id="close_timestamp" name="close_timestamp" value="">
-        <input type="hidden" id="close_date_time" name="close_date_time" value="">
-        <input type="hidden" id="time_taken_in_seconds" name="time_taken_in_seconds" value="">
-        
-        <input type="hidden" id="term" name="term">
-        <input type="hidden" id="story_words" name="story_words">
+          <input type="hidden" id="open_timestamp" name="open_timestamp" value="">
+          <input type="hidden" id="open_date_time" name="open_date_time" value="">
+          <input type="hidden" id="close_timestamp" name="close_timestamp" value="">
+          <input type="hidden" id="close_date_time" name="close_date_time" value="">
+          <input type="hidden" id="time_taken_in_seconds" name="time_taken_in_seconds" value="">
+          
+          <input type="hidden" id="term" name="term">
+          <input type="hidden" id="story_words" name="story_words">
 
-        <br class="clear">
-        
-        <label for="summary">Write a <span class="objective">story</span> about the given topic</label>
-        <textarea id="summary" name="summary" rows="5" cols="50" placeholder="Few sentences about the story. Minimum 500 characters"></textarea>
-        <br class="clear">
+          <br class="clear">
+          
+          <label for="summary">Write a <span class="objective">story</span> about the given topic</label>
+          <div id="charNum"></div>
+          <textarea id="summary" onkeyup="countChar(this)" name="summary" rows="5" cols="50" placeholder="Few sentences about the story. Minimum 500 characters"></textarea>
+    
+          <br class="clear">
 
-        <label for="rate">
-          <span class="objective">Ease of writing</span><br>
-          (1 = very hard, 2 = hard, 3 = ok, 4 = easy, 5 = very easy)
-        </label>
-        <br class="clear">
-        <div class="rating">
-          <input type="radio" id="star5" name="ease" value="5" /><label for="star5" title="very hard">5 stars</label>
-          <input type="radio" id="star4" name="ease" value="4" /><label for="star4" title="hard">4 stars</label>
-          <input type="radio" id="star3" name="ease" value="3" /><label for="star3" title="ok">3 stars</label>
-          <input type="radio" id="star2" name="ease" value="2" /><label for="star2" title="easy">2 stars</label>
-          <input type="radio" id="star1" name="ease" value="1" /><label for="star1" title="very easy">1 star</label>
-        </div>
-        <br class="clear" />
-        <div id="rating_error"></div>
-        
-        <br class="clear" />
-    </form>
-    <input type="button" id="storySurveyFormSubmit" value="Submit">
+          <label for="rate">
+            <span class="objective">Ease of writing</span><br>
+            (1 = very hard, 2 = hard, 3 = ok, 4 = easy, 5 = very easy)
+          </label>
+          <br class="clear">
+          <div class="rating">
+            <input type="radio" id="star5" name="ease" value="5" /><label for="star5" title="very hard">5 stars</label>
+            <input type="radio" id="star4" name="ease" value="4" /><label for="star4" title="hard">4 stars</label>
+            <input type="radio" id="star3" name="ease" value="3" /><label for="star3" title="ok">3 stars</label>
+            <input type="radio" id="star2" name="ease" value="2" /><label for="star2" title="easy">2 stars</label>
+            <input type="radio" id="star1" name="ease" value="1" /><label for="star1" title="very easy">1 star</label>
+          </div>
+          <br class="clear" />
+          <div id="rating_error"></div>
+          <br class="clear" />
+      </form>
+      <input type="button" id="storySurveyFormSubmit" value="Submit">
+    </div>
     <div id="surveyLoading" style="display:none;"><img src="/images/loading.gif" alt="Loading"></div>
   </div>
 

@@ -1,3 +1,4 @@
+const feedbackUrl = "http://127.0.0.1:3500";
 const analysisUrl = "http://127.0.0.1:3500";
 
 var lcColor = {
@@ -79,7 +80,7 @@ function displayLc(data, statFiedName){
         .append("text")
         .text(function(d){return(d.pure_word + '-' + d.count)})
         .attr("transform", function(d) { return (x(d.pure_word + '-' + d.count) + x.bandwidth() / 2 + Math.PI) % (2 * Math.PI) < Math.PI ? "rotate(180)" : "rotate(0)"; })
-        .style("font-size", "11px")
+        .style("font-size", "15px")
         .attr("alignment-baseline", "middle");
 
     //Add the second series
@@ -145,6 +146,8 @@ function showRaw(data){
     if (data['concepts']['categories']['Organization']) {
         $('#lcRawRow1').append(getCategoryWords(data['concepts']['categories']['Organization'], 'Organization'));
     }
+
+    $('#lcRawRow2').append('<br class="clear">');
 
     if (data['concepts']['categories']['Time']) {
         $('#lcRawRow2').append(getCategoryWords(data['concepts']['categories']['Time'], 'Time'));
@@ -219,17 +222,21 @@ function getCurrentDateTime(){
     var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
     return date + ' ' + time;
 }
-function loadCommonDetails(condition, taskTopic){
-    $.getJSON( "data/tasks.json", function( data ) {
-        $('#story_source').val('bbc');
-        $('#condition').val(condition);
-        $('#story_date').val(data['lc'][taskTopic]['date']);
-        $('#story_link').val(data['lc'][taskTopic]['link']);
-        $('#story_title').val(data['lc'][taskTopic]['title']);
-        $('#taskTitle').text(data['lc'][taskTopic]['title']);
-        $('#taskDescription').text(data['lc_' + condition]['description']);
-        $('#lc_' + condition).show();
-    });
+function loadCommonDetails(data, condition) {
+    var description = '';
+    if(condition == 'text'){
+        description = "In this task, read the given text and then answer the given questions."
+    } else if(condition == 'viz'){
+        description = "In this task, interpret the visualization and then answer the given questions."
+     }
+    $('#story_source').val('bbc');
+    $('#condition').val(condition);
+    $('#story_date').val(data['pubDate']);
+    $('#story_link').val(data['link']);
+    $('#story_title').val(data['title']);
+    $('#taskTitle').text(data['title']);
+    $('#taskDescription').text(description);
+    $('#lc_' + condition).show();
 }
 
 function loadLcText(data){
@@ -240,55 +247,70 @@ function loadLcText(data){
 function loadLcViz(data){
     var lcResponse = data;
     lcResponse['concepts']['story_words'][0]['pure_word'] = '← - ' + lcResponse['concepts']['story_words'][0]['pure_word'];
-    showRaw(lcResponse);
     $('#lcLoading').hide();
     $('#lcVizualization').html('');
     displayLc(lcResponse['concepts']['story_words'], 'position_weight_forward');
-    $('#lcTitle').show();
+    
     $('#storySurveyForm').show();
-    $('#reloadButton').show();
     $('.lcRawRow').show();
 
-    if (lcResponse['concepts']['graph']) {
-        displayKnowledgeGraph(lcResponse['concepts']['graph']['links'], lcResponse['concepts']['graph']['nodes']);
-        $('#knowledgegraphLoading').hide();
-    }
-    $('#lc_viz').show();
+    $('#lc_viz, .lcVizualization').show();
     $('#lc_viz_display .loadingImage').hide();
     $('#taskTitle').text(lcResponse['title']);
 }
 
-function load(condition, key){
-    var data = localStorage.getItem(key);
+function loadKnowledgeGraph(data){
+    var lcResponse = data;
+    $('#knowledgegraph').show();
+    $('#knowledgegraphLoading').show();
+    if (lcResponse['concepts']['graph']) {
+        displayKnowledgeGraph(lcResponse['concepts']['graph']['links'], lcResponse['concepts']['graph']['nodes']);
+        $('#knowledgegraphLoading').hide();
+    }
+
+    $('.loadingImage').hide();
+    $('#lc_viz, #lcTitle, .lcRawRow').show();
+}
+
+function load(condition, data){
+    $('#lc_viz, .lcVizualization, #knowledgegraph, #lc_text').hide();
+
     if (!data) {
         return;
     }
-    data = JSON.parse(data);
+    
+    showRaw(data);
     if(condition == 'viz'){
         loadLcViz(data);
+        $('#lc_text_questions').show();
     }else if(condition == 'text'){
         loadLcText(data);
-    }else{
-        loadLcViz(data);
-        loadLcText(data);
+        $('#lc_text_questions').show();
+    }else if(condition == 'graph'){
+        loadKnowledgeGraph(data);
         $('#knowledgegraph').show();
         $('#knowledgegraphLoading').show();
+    }else if(condition == 'all'){
+        loadLcViz(data);
+        loadLcText(data);  
+    }else{
+        loadLcViz(data);
+        loadKnowledgeGraph(data);
+        loadLcText(data);  
     }
-    $('#lc_text_questions, #lcVizualizationLabels').show();
-
+    
     var date = data['pubDate'].substring(0, 10);
     var dateParts = date.split("-")
     $('#publishedDate').html(dateParts[2] + '/' + dateParts[1] + '/' + dateParts[0]);
 }
 
-function fetchAndLoad(condition, key){
+function fetchAndLoad(condition){
     $.ajax("/data/lc/" + getUrlParams('key') + '.json', {
         method: "GET",
         contentType: "application/json"
     }).done(function (data) {
-        console.log(key);
-        localStorage.setItem(key, JSON.stringify(data));
-        load(condition, key);
+        loadCommonDetails(data, condition);
+        load(condition, data);
     });
 }
 
@@ -457,8 +479,8 @@ function submitContentForm(){
         method: "POST",
         contentType: "application/json"
     }).done(function (data) {
-        localStorage.setItem('content_input', JSON.stringify(data));
-        load(condition, 'content_input');
+        //localStorage.setItem('content_input', JSON.stringify(data));
+        load(condition, data);
         if (data['concepts']['graph']) {
             $('#knowledgegraph').show();
             displayKnowledgeGraph(data['concepts']['graph']['links'], data['concepts']['graph']['nodes']);
@@ -532,7 +554,7 @@ function submitSurveyForm(){
     
     $( "#error", "#message").html('');
     $.ajax({
-        url : analysisUrl + "/survey", // Url of backend (can be python, php, etc..)
+        url : feedbackUrl + "/survey", // Url of backend (can be python, php, etc..)
         type: "POST", // data type (can be get, post, put, delete)
         dataType: 'json',
         data : JSON.stringify(data), // data in json format
@@ -541,7 +563,6 @@ function submitSurveyForm(){
             'Accept': 'application/json'
         },
         success: function(response, textStatus, jqXHR) {
-            console.log(response);
             if(response.result.errors){
                 $("#error").html(response.result.errors);
                 $('#storySurveyForm, #storySurveyFormSubmit').show();
@@ -575,12 +596,7 @@ $.validator.addMethod("easeCheck", function(value, element) {
 $(function() {
     var condition = getUrlParams('condition');
     var key = getUrlParams('key');
-    var alreadyFetchedData = localStorage.getItem(key);
-
-    if (condition && key) {
-        loadCommonDetails(condition, key);
-    }
-
+    
     if($('#lcContentForm').length){
         registerContentFormValidation();
         $('#lcContentFormSubmit').on('click', function(){
@@ -593,23 +609,9 @@ $(function() {
                 $('#storySurveyForm').submit();
             });
         }
-        if (alreadyFetchedData) {
-            load(condition, key);
-        } else {
-            fetchAndLoad(condition, key);
-        }
+
+        fetchAndLoad(condition, key);
+        
     }
 });
 
-
-/*
-$('#when_happened').val('today')
-$('#who').val("test, test, test");
-$('#what').val("test, test, test");
-$('#where_location').val("test, test, test");
-$('#why').val("test, test, test");
-$('#summary').val("test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test, test");
-$('#star5').click();
-*/
-
-// https://medium.com/@vsvinchuk/track-copy-events-custom-dimensions-you-should-consider-implementing-for-more-precise-tracking-via-b658f4c4068d

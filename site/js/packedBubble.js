@@ -112,7 +112,6 @@ function displayPackedBubbles(divId, boxWidth, boxHeight, cardColor, data, displ
       })
       .on("mouseout", function(d){ tooltip.style("display", "none");});
 
-
     var text = g.selectAll("text")
         .data(nodes)
         .enter().append("text")
@@ -124,6 +123,7 @@ function displayPackedBubbles(divId, boxWidth, boxHeight, cardColor, data, displ
             return (d.children && d.children.length) ? "none" : "inline";
         })
         .style("float", "center")
+        .style("font-size", "12px")
         .html(function(d) { 
             var name = d.data.name;
             if(name.length > 10){

@@ -16,8 +16,19 @@
 <script src="/js/d3.v4.js"></script>
 <script src="/js/d3-scale-radial.js"></script>
 <script src="/js/d3-selection-multi.v1.js"></script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PFFKHW3');</script>
+<!-- End Google Tag Manager -->
+
+
 <script src="/js/populateData.js"></script>
 <script src="/js/lc.js"></script>
+<script src="/js/common.js"></script>
 <style>
 body {font-family: "Times New Roman", Georgia, Serif;}
 h1, h2, h3, h4, h5, h6 {
@@ -50,18 +61,17 @@ h1, h2, h3, h4, h5, h6 {
 
 <!-- Page content -->
 <div class="w3-content" style="max-width:1100px">
-  <h2 class="w3-wide">Local Context Story Analysis</h2>
   <p id="taskDescription" class="w3-center"></p>
   <h3 id="taskTitle" class="w3-center"></h3>
   <p id="publishedDate" class="w3-center"></p>
 
-      <div id="lc_viz" class="w3-content w3-center w3-padding-16 explanationBlock" style="display:none">
+      <div id="lc_viz" class="w3-content w3-center w3-padding-16 explanationBlock">
       <div id="lc_viz_display">
         <img class="loadingImage" src="/images/loading.gif" alt="Loading">
         <div id="lcTitle"></div>
         <div id="lcRawTop"></div>
-        <div id="lcVizualization"></div>
-        <div id="lcVizualizationLabels">
+        <div id="lcVizualization" class="lcVizualization" style="display:none"></div>
+        <div id="lcVizualizationLabels" class="lcVizualization" style="display:none">
           <span class="noun"><b>Noun</b></span>
           <span class="verb"><b>Action</b></span>
           <span class="person"><b>Person</b></span>
@@ -150,7 +160,8 @@ h1, h2, h3, h4, h5, h6 {
             <br class="clear">
             
             <label for="summary">Write a <span class="objective">summary</span> of the story in a few sentences.</label>
-            <textarea id="summary" name="summary" rows="5" cols="50" placeholder="Few sentences about the story. Minimum 100 characters"></textarea>
+            <div id="charNum"></div>
+            <textarea id="summary" onkeyup="countChar(this)" name="summary" rows="5" cols="50" placeholder="Few sentences about the story. Minimum 100 characters"></textarea>
             <br class="clear">
 
             <label for="rate">
