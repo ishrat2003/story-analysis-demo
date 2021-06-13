@@ -4,6 +4,8 @@
 /corpus/*/gc/documents/*
 /corpus/*/gc/*/*/*
 /corpus/*/gc/*
+/corpus/*/documents/*
+/corpus/*/lists/*
 /corpus/*/words/*/*
 /corpus/*/words/*/*/*
 /generator/.env
