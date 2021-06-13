@@ -7,6 +7,7 @@ class Params:
 
   def __init__(self):
     self.parser = argparse.ArgumentParser()
+    self.parser.add_argument('--source')
     self.parser.add_argument('--source_directory')
     self.parser.add_argument('--destination_directory')
     self.parser.add_argument('--store', default='local', help = "Type of store. Ex: local")

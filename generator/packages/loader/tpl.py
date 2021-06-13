@@ -38,7 +38,8 @@ class TPL(Core):
         filePath = self.path + '/' + re.sub(r'^.+\/([a-zA-Z0-9\-]+)$', r'\1', link) + '.json'
         
         data = self.file.read(filePath)
-        soup = BeautifulSoup(data['content'], features="html.parser")
+        content = data['content_html'] if 'content_html' in data.keys() else data['content']
+        soup = BeautifulSoup(content, features="html.parser")
         item = {
             'title': data['name'],
             'description': data['description'],
