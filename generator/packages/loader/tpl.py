@@ -36,7 +36,7 @@ class TPL(Core):
     
     def fetchPage(self, link, item = None):
         filePath = self.path + '/' + re.sub(r'^.+\/([a-zA-Z0-9\-]+)$', r'\1', link) + '.json'
-        print(filePath)
+        
         data = self.file.read(filePath)
         soup = BeautifulSoup(data['content'], features="html.parser")
         item = {
