@@ -62,7 +62,7 @@ class TPL(Core):
         return text
     
     def shouldIncludeItem(self, item):
-        if item.name not in ['p', 'ul', 'li', 'ol', 'div', 'h2', 'h3', 'a', 'h3']:
+        if item.name in ['img', 'iframe']:
             return False
         
         return True
@@ -75,7 +75,7 @@ class TPL(Core):
         return text
     
     def getAndAppendValue(self, item):
-        if item.name not in ['p', 'ul', 'li', 'ol', 'h2', 'h3', 'div', 'b']:
+        if item.name in ['img', 'iframe']:
             return '';
         value = ''
         if item.name in ['p', 'li']:

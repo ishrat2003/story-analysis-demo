@@ -42,11 +42,11 @@ class Writer(Base):
         for topic in topics:
             if self.__saveWordDetails(topic):
                 self.__updateGCDetails(topic)
-                self.__updateCommon()
+                if self.shouldUpdateCommon:
+                    self.__updateCommon()
         return
     
     def isNewDocument(self, link, year = None, month = None):
-        self.isNew = False
         year = year if year else self.year
         month = month if month else self.month
         filePath = self.gcPath + '/documents/' + year + '_' + month + '.json'
@@ -56,6 +56,7 @@ class Writer(Base):
         if link not in documents:
             documents.append(link)
             self.isNew = True
+            self.shouldUpdateCommon = True
             self.file.write(filePath, documents)
         return self.isNew
     
@@ -193,6 +194,7 @@ class Writer(Base):
         return wordDirectoryPath
     
     def __reset(self):
+        self.shouldUpdateCommon = False
         self.isNew = False
         self.date = None
         self.link = None
@@ -286,10 +288,13 @@ class Writer(Base):
             self.common[self.year][self.month] += 1
         if self.__shouldResetMaxDate():
             self.common['max_date'] = self.date
+            print('Max date: ', self.common['max_date'])
 
         if self.__shouldResetMinDate():
             self.common['min_date'] = self.date
+            print('Min date: ', self.common['min_date'])
             
+        self.shouldUpdateCommon = False
         return
     
     def __isGreaterThanMin(self):
@@ -300,6 +305,8 @@ class Writer(Base):
     def __shouldResetMaxDate(self):
         if not self.common['max_date']:
             return True
+        # print('in max date', self.date)
+        # print('max_date', self.common['max_date'])
         date = self._strToDate(self.date)
         maxDate = self._strToDate(self.common['max_date'])
         return maxDate < date
@@ -307,10 +314,8 @@ class Writer(Base):
     def __shouldResetMinDate(self):
         if not self.common['min_date']:
             return True
+        # print('in min date', self.date)
+        # print('min_date', self.common['min_date'])
         date = self._strToDate(self.date)
         minDate = self._strToDate(self.common['min_date'])
         return minDate > date
-
-
-
-
