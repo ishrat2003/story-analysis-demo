@@ -1,5 +1,6 @@
 const feedbackUrl = "http://127.0.0.1:3500";
 const analysisUrl = "http://127.0.0.1:3500";
+var source = 'tpl';
 
 var lcColor = {
     "proper_noun": "#2d7b30",
@@ -305,7 +306,7 @@ function load(condition, data){
 }
 
 function fetchAndLoad(condition){
-    $.ajax("/data/lc/" + getUrlParams('key') + '.json', {
+    $.ajax("/data/" + source + "/lc/" + getUrlParams('key') + '.json', {
         method: "GET",
         contentType: "application/json"
     }).done(function (data) {

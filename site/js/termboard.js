@@ -1,5 +1,6 @@
 var dateFormat = 'yyyy-mm-dd';
 var baseUrl = "http://127.0.0.1:3500";
+var source = 'tpl';
 
 function getParams(){
     var queryString = window.location.search;
@@ -92,7 +93,7 @@ function loadTermBoard(order, direction){
         headers: {
             'Content-Type': 'application/json'
         },
-        url: "/data/termsboard/" + data['key'] + '.json',
+        url: "/data/" + source + "/termsboard/" + data['key'] + '.json',
         success: function(result){
             $(".termboardBox, #documentsItems").html("");
             if(result && result['description']){

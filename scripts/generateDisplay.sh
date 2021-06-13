@@ -1,11 +1,11 @@
 parentDirectory="$(pwd)"
 echo $parentDirectory
-sourceDirectory="$parentDirectory/corpus"
-destinationDirectory="$parentDirectory/site/data"
+sourceDirectory="$parentDirectory/corpus/tpl"
+destinationDirectory="$parentDirectory/site/data/tpl"
 
 totalTopics=0
-start='2021-05-24'
-end='2021-05-30'
+start='2021-03-01'
+end='2021-03-31'
 
 
 helpFunction()
@@ -31,6 +31,7 @@ processDisplay()
 {
     echo "Generating GC Dispay:"
     python3 "$parentDirectory/generator/scripts/generateDisplay.py"  \
+    --source tpl\
     --start $start  \
     --end $end \
     --source_directory $sourceDirectory  \

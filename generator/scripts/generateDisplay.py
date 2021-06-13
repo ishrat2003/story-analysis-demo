@@ -16,6 +16,7 @@ from display.writer import Writer
 from corpus.reader import Reader
 from display.generator import Generator
 from loader.bbc import BBC
+from loader.tpl import TPL
 
 logging.info("# Starting building json files for visualization")
 logging.info("# ================================")
@@ -23,7 +24,7 @@ logging.info("# ================================")
 scriptParams = Params()
 params = scriptParams.get()
 
-loader = BBC()
+loader = BBC() if params.source == 'bbc' else TPL(params.destination_directory)
 writer = Writer(params.destination_directory, params)
 reader = Reader(params)
 generatorProcessor = Generator(params, reader, writer, loader)
