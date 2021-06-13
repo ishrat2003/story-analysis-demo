@@ -1,4 +1,4 @@
-import datetime
+import datetime, sys
 from story.lc_story import LCStory
 from .base import Base
 
@@ -31,7 +31,11 @@ class Context(Base):
         return True
     
     def appendToCorpus(self, item):
-        date = datetime.datetime.strptime(item['pubDate'], "%a, %d %b %Y %H:%M:%S GMT")
+        date = None
+        if len(item['pubDate']) > 19:
+            date = datetime.datetime.strptime(item['pubDate'], "%a, %d %b %Y %H:%M:%S GMT")
+        else:
+            date = datetime.datetime.strptime(item['pubDate'], "%Y-%m-%d %H:%M:%S")
         if not self.writer.isNewDocument(item['link'], str(date.year), self._getFormattedMonthOrDay(date.month)):
             print('Already processed')
             return

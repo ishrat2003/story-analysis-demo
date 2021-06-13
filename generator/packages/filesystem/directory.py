@@ -62,8 +62,13 @@ class Directory():
 
 			filePath = os.path.join(self.path, filename)
 			itemFile = File(filePath)
-			fileContent = itemFile.read()
-			if fileContent:
+			fileContent = itemFile.read() 
+			shouldProcess = fileContent
+			if itemFile.isCsvFile():
+				shouldProcess = len(fileContent)
+				processor.setSourceFileName(filename)
+				processor.setHeaders(itemFile.getHeaders())
+			if shouldProcess:
 				processed = processor.process(fileContent)
 				if not processed:
 					print("Failed to process ", filePath)

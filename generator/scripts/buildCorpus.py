@@ -21,7 +21,8 @@ logging.info("# ================================")
 
 scriptParams = Params()
 params = scriptParams.get()
-loader = RSS()
+loader = RSS(params.source_directory, params.source)
+
 writer = Writer(params.destination_directory)
 processor = Context(loader, writer, params.total_items)
 

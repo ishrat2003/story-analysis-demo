@@ -16,6 +16,7 @@ class Core():
 		parts = path.split('.')
 		self.extension = parts[len(parts) - 1]
 
+		self.headers = None
 		self.file = None
 		self.lines = None
 		self.lineNumber = 0
@@ -26,6 +27,9 @@ class Core():
 	def getFileName(self):
 		return self.fileName
 
+	def getHeaders(self):
+		return self.headers
+	
 
 	def exists(self):
 		return os.path.exists(self.path)
@@ -50,6 +54,7 @@ class Core():
 	def load(self, mode = 'r'):
 		if self.extension == 'csv':
 			self.file = pandas.read_csv(self.path, sep=',', encoding='latin1', quotechar='"')
+			self.headers = self.file.columns
 			self.lines = self.file.values
 			return
 

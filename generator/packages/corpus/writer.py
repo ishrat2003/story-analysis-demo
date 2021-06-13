@@ -46,6 +46,7 @@ class Writer(Base):
         return
     
     def isNewDocument(self, link, year = None, month = None):
+        self.isNew = False
         year = year if year else self.year
         month = month if month else self.month
         filePath = self.gcPath + '/documents/' + year + '_' + month + '.json'
