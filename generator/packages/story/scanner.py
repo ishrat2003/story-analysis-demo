@@ -25,7 +25,8 @@ class Scanner:
     
     def loadSecondaryLevelWords(self, sentence, currentWordKey):
         allowedPOSTypes = ['NN', 'NNS', 'NNP', 'NNPS']
-        sentence = re.sub(r'[^0-9a-z\s]+', r' ', sentence)
+        sentence = re.sub(r'\'[a-z]{1,2}\s', r' ', sentence)
+        sentence = re.sub(r'[^0-9a-zA-Z\-\s]+', r' ', sentence)
         sentence = re.sub(r'\s+', r' ', sentence)
         words = pos_tag(word_tokenize(sentence))
         
@@ -35,15 +36,14 @@ class Scanner:
             if (type not in allowedPOSTypes) or (wordKey == currentWordKey):
                 continue
             
-            if wordKey not in self.sentenceWords.keys():
+            if wordKey not in self.sentenceWords.keys() and len(wordKey) >= 2:
                 self.sentenceWords[wordKey] = {
                     'display': wordDisplay[0].upper() + wordDisplay[1:],
                     'stemmed_word': wordKey,
                     'count': 0
                 }
             self.sentenceWords[wordKey]['count'] += 1
-            
-        
+
         return
     
     def sort(self, attribute='count'):
