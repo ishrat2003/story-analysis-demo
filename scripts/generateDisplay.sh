@@ -11,7 +11,7 @@ end='2021-03-31'
 helpFunction()
 {
    echo "Usage: $0 -s '2021-05-24' -e '2021-05-30'"
-   echo "Ex: ./scripts/generateDisplay.sh -s '2021-05-24' -e '2021-05-30'"
+   echo "Ex: ./scripts/generateDisplay.sh -s '2021-03-01' -e '2021-03-31'"
    exit 1 # Exit script after printing help
 }
 

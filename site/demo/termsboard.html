@@ -19,6 +19,7 @@
   <script src="/js/jquery-ui-1.12.1.js"></script>
   <script src="/js/d3.v4.js"></script>
   <script src="/js/jquery.modal.min.js"></script>
+  <script src="/js/jquery.validate.min.js"></script>
   <script src="/js/map.js"></script>
   <script src="/js/sankey.js"></script> 
   <script src="/js/drawSankey.js"></script> 
@@ -29,6 +30,8 @@
   <script src="/js/d3js.queue.v1.min.js"></script>
   <script src="/js/d3js.topojson.v1.min.js"></script>
   <script src="/js/d3-tip.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/js/populateData.js"></script>
   <script src="/js/termboard.js"></script>
 
   <!-- Google Tag Manager -->
@@ -108,15 +111,18 @@ h1, h2, h3, h4, h5, h6 {
     </div>
   </div>
 
-  <div id="termsboardContent" class="termsboardContent">
+  <div id="termsboardContent" class="w3-content w3-center w3-padding-16 explanationBlock termsboardContent">
+    <br>
+    <br>
     <div id="storyInput" style="display:none">
       <p id="message"></p> 
       <p id="error"></p>
-      <form id="storySurveyForm" class="lcContentForm" action="">
-          <input type="hidden" id="survey_type" name="survey_type" value="lc">
+      <form id="termsboardSurveyForm" class="termsboartContentForm w3-justify" action="">
+          <input type="hidden" id="feedback_type" name="feedback_type" value="termsboard">
 
           <input type="hidden" id="user_code" name="user_code" value="">
           <input type="hidden" id="gender" name="gender" value="">
+          <input type="hidden" id="age_group" name="age_group" value="">
           <input type="hidden" id="experiment_date_datepicker" name="experiment_date_datepicker" value="">
           <input type="hidden" id="agreed" name="agreed" value="">
           <input type="hidden" id="level" name="level" value="">
@@ -124,7 +130,9 @@ h1, h2, h3, h4, h5, h6 {
           <input type="hidden" id="dob_datepicker" name="dob_datepicker" value="">
           <input type="hidden" id="disability" name="disability" value="">
 
-          <input type="hidden" id="story_source" name="story_source" value="bbc">
+          <input type="hidden" id="story_source" name="story_source" value="tpl">
+          <input type="hidden" id="condition" name="condition" value="">
+          <input type="hidden" id="key" name="key" value="">
 
           <input type="hidden" id="open_timestamp" name="open_timestamp" value="">
           <input type="hidden" id="open_date_time" name="open_date_time" value="">
@@ -132,14 +140,13 @@ h1, h2, h3, h4, h5, h6 {
           <input type="hidden" id="close_date_time" name="close_date_time" value="">
           <input type="hidden" id="time_taken_in_seconds" name="time_taken_in_seconds" value="">
           
-          <input type="hidden" id="term" name="term">
-          <input type="hidden" id="story_words" name="story_words">
+          <input type="hidden" id="story_term" name="story_term" value="">
 
           <br class="clear">
           
           <label for="summary">Write a <span class="objective">story</span> about the given topic</label>
-          <div id="charNum"></div>
-          <textarea id="summary" onkeyup="countChar(this)" name="summary" rows="5" cols="50" placeholder="Few sentences about the story. Minimum 500 characters"></textarea>
+          <div>Characters: <div id="charNum"></div></div>
+          <textarea id="summary" onkeyup="countChar(this)" name="summary" rows="15" cols="50" placeholder="Few sentences about the story. Minimum 500 characters"></textarea>
     
           <br class="clear">
 
@@ -159,7 +166,7 @@ h1, h2, h3, h4, h5, h6 {
           <div id="rating_error"></div>
           <br class="clear" />
       </form>
-      <input type="button" id="storySurveyFormSubmit" value="Submit">
+      <input type="button" id="termsboardSurveyFormSubmit" value="Submit">
     </div>
     <div id="surveyLoading" style="display:none;"><img src="/images/loading.gif" alt="Loading"></div>
   </div>

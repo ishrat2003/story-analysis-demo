@@ -42,7 +42,9 @@ class Scanner:
                     'stemmed_word': wordKey,
                     'count': 0
                 }
-            self.sentenceWords[wordKey]['count'] += 1
+                
+            if wordKey in self.sentenceWords.keys():
+                self.sentenceWords[wordKey]['count'] += 1
 
         return
     

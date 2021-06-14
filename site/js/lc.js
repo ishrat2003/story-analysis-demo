@@ -1,7 +1,3 @@
-const feedbackUrl = "http://127.0.0.1:3500";
-const analysisUrl = "http://127.0.0.1:3500";
-var source = 'tpl';
-
 var lcColor = {
     "proper_noun": "#2d7b30",
     "noun": "#259328bf",
@@ -25,11 +21,6 @@ var kgColor = {
     "others": "#5e615e",
     "default": "#259328bf"
   };
-
-function getUrlParams(key){
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(key);       
-}
   
 function displayLc(data, statFiedName){
     // set the dimensions and margins of the graph
@@ -216,21 +207,15 @@ function getCategoryWords(items, className){
     html += '</div>';
     return html;
 }
-
-function getCurrentDateTime(){
-    var now = new Date();
-    var date = now.getFullYear() + '-' + now.getMonth() + '-' + now.getDate();
-    var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
-    return date + ' ' + time;
-}
 function loadCommonDetails(data, condition) {
     var description = '';
     if(condition == 'text'){
-        description = "In this task, read the given text and then answer the given questions."
+        description = "In this task, read the given text and then answer the given questions. Spend approximately 10 mins for this task."
     } else if(condition == 'viz'){
-        description = "In this task, interpret the visualization and then answer the given questions."
+        description = "In this task, interpret the visualization and then answer the given questions. Spend approximately 10 mins for this task."
      }
-    $('#story_source').val('bbc');
+    $('#story_source').val('tpl');
+    $('#key').val(getUrlParams('key'));
     $('#condition').val(condition);
     $('#story_date').val(data['pubDate']);
     $('#story_link').val(data['link']);
@@ -241,7 +226,12 @@ function loadCommonDetails(data, condition) {
 }
 
 function loadLcText(data){
-    $('#lc_text_display').html(data['content']);
+    if(data['content_html']){
+        $('#lc_text_display').html(data['content_html']);
+    }else{
+        $('#lc_text_display').html(data['content']);
+    }
+    
     $('#lc_text').show();
 }
 
@@ -306,7 +296,7 @@ function load(condition, data){
 }
 
 function fetchAndLoad(condition){
-    console.log("/data/" + source + "/lc/" + getUrlParams('key') + '.json');
+    //console.log("/data/" + source + "/lc/" + getUrlParams('key') + '.json');
     $.ajax("/data/" + source + "/lc/" + getUrlParams('key') + '.json', {
         method: "GET",
         contentType: "application/json"
@@ -537,6 +527,7 @@ function loadLcSurveyFormValidation(){
             what: { required: true, minlength: 5 },
             where_location: { required: true, minlength: 5 },
             why: { required: true, minlength: 5, easeCheck: true },
+            ease: { required: true },
             summary: { required: true, minlength: 100 } 
         },
         submitHandler: function(form) {
@@ -556,8 +547,9 @@ function submitSurveyForm(){
     }, {});
     
     $( "#error", "#message").html('');
+    console.log(data);
     $.ajax({
-        url : feedbackUrl + "/survey", // Url of backend (can be python, php, etc..)
+        url : feedbackUrl + "/feedback", // Url of backend (can be python, php, etc..)
         type: "POST", // data type (can be get, post, put, delete)
         dataType: 'json',
         data : JSON.stringify(data), // data in json format

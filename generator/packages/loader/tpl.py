@@ -42,7 +42,7 @@ class TPL(Core):
         soup = BeautifulSoup(content, features="html.parser")
         item = {
             'title': data['name'],
-            'description': data['meta_description'],
+            'description': soup.find_all('p')[0].text,
             'pubDate': data['date'],
             'link': link,
             'content': self.getPageContent(soup),

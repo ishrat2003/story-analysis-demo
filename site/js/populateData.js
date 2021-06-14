@@ -1,6 +1,7 @@
 function populateUserData(){
     $('#user_code').val(localStorage.getItem('user_code'));
     $('#gender').val(localStorage.getItem('gender'));
+    $('#age_group').val(localStorage.getItem('age_group'));
     $('#experiment_date_datepicker').val(localStorage.getItem('experiment_date_datepicker'));
     $('#agreed').val(localStorage.getItem('agreed'));
     $('#level').val(localStorage.getItem('level'));
@@ -20,7 +21,7 @@ function populateEndTime(){
     $('#close_date_time').val(getCurrentDateTime());
 
     var start = $('#open_timestamp').val();
-    var diff = start - end;
+    var diff = end - start;
     $('#time_taken_in_seconds').val(diff);
 }
 

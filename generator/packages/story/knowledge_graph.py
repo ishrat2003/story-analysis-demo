@@ -3,6 +3,7 @@ import json
 import urllib
 import os
 from .category import Category
+import socket
 
 class KnowledgeGraph():
     
@@ -112,38 +113,7 @@ class KnowledgeGraph():
         return self.getMoreDetails(key, query)
         
     def getMoreDetails(self, key, query):
-        params = {
-            'query': query,
-            'limit': 1,
-            'indent': True,
-            'key': self.apiKey,
-        }
-
-        url = self.endPoint + '?' + urllib.parse.urlencode(params)
-        try:
-            response = urllib.request.urlopen(url, timeout = self.timeout).read()
-        except socket.timeout as e:
-            print(type(e))
-            print(url)
-            print("There was an error: %r" % e)
-            return None
-        except urllib.error.HTTPError as e:
-            print(type(e))
-            print(url)
-            print("There was an error: %r" % e)
-            return None
-        except urllib.error.URLError as e:
-            print(type(e))
-            print(url)
-            print("There was an error: %r" % e)
-            return None
-        except  http.client.HTTPException as e:
-            print(type(e))
-            print(url)
-            print("There was an error: %r" % e)
-            return None
-        
-        response = json.loads(response)
+        response = self.fetchResponse(key, query)
         
         if not response or ('itemListElement' not in response.keys()) or not response['itemListElement'] or not response['itemListElement'][0]['result']:
             if self.isPerson(query.lower()):
@@ -176,6 +146,40 @@ class KnowledgeGraph():
             "tooltip": self.objects[key]["tooltip"],
             "category": category
         }
+        
+    def fetchResponse(self, key, query):
+        params = {
+            'query': query,
+            'limit': 1,
+            'indent': True,
+            'key': self.apiKey,
+        }
+
+        url = self.endPoint + '?' + urllib.parse.urlencode(params)
+        try:
+            response = urllib.request.urlopen(url, timeout = self.timeout).read()
+        except socket.timeout as e:
+            print(type(e))
+            print(url)
+            print("There was an error: %r" % e)
+            return None
+        except urllib.error.HTTPError as e:
+            print(type(e))
+            print(url)
+            print("There was an error: %r" % e)
+            return None
+        except urllib.error.URLError as e:
+            print(type(e))
+            print(url)
+            print("There was an error: %r" % e)
+            return None
+        except  http.client.HTTPException as e:
+            print(type(e))
+            print(url)
+            print("There was an error: %r" % e)
+            return None
+        
+        return json.loads(response)
     
     def appendCategoryItem(self, category, item):
         if category not in self.categories.keys():

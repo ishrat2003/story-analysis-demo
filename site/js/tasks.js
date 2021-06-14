@@ -51,7 +51,7 @@ function loadRcTasks(taskConditions, totalCondition){
     ];
     var totalTasksPerCondition = latinSquareDistribution[0].length / totalCondition;
     var topics = getTopicsForSession(latinSquareDistribution, latinSquareDistribution[0].length);
-    return getTasks(taskConditions, topics, totalTasksPerCondition, 'rc_');
+    return getTasks(taskConditions, topics, totalTasksPerCondition, 'termsboard_');
 }
 
 function loadTasks(){
@@ -81,8 +81,8 @@ function loadTasks(){
             var ulId = '#task' + realIndex + 'Ul';
             $(pId).text(data[taskType]['description']);
             $.each(tasks[taskType], function(taskIndex, taskName ) {
-                var href = encodeURI("/" + type + ".html?condition=" + condition 
-                    + "&task_topic=" + taskName + "&key=" 
+                var href = encodeURI("/demo/" + type + ".html?condition=" + condition 
+                    + "&task=" + taskName + "&key=" 
                     + data[type][taskName]['key']);
                 $(ulId).append('<li><a target="_blank" href="' + href + '">' + data[type][taskName]['title'] + '</a></li>');
             });

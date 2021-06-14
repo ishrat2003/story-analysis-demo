@@ -76,12 +76,10 @@ function drawBubbleCard(data, cardColor, divId){
     displayPackedBubbles("#" + divId, 330, 330, cardColor, processedData, true);   
 }
 
-function loadTermBoard(order, direction){
+function loadTermBoard(){
     var params = getParams();
     var data = {
         'topic_keys': params[0],
-        'order': order,
-        'direction': direction,
         'from': params[1],
         'to': params[2],
         'key': params[3],
@@ -138,17 +136,71 @@ function loadTermBoard(order, direction){
     });
 }
 
-$( function() {
-    loadTermBoard('score', 'desc');
-
-    $('#orderDocument').on('change', function(){
-        var selectedValue = $(this).val();
-        if(selectedValue == 'date_asc'){
-            loadTermBoard('date', 'asc');
-        }else if(selectedValue == 'date_desc'){
-            loadTermBoard('date', 'desc');
-        }else{
-            loadTermBoard('score', 'desc');
+function loadFormValidation(){
+    $("form[id='termsboardSurveyForm']").validate({
+        rules: {
+            ease: { required: true },
+            summary: { required: true, minlength: 500 } 
+        },
+        submitHandler: function(form) {
+            populateEndTime();
+            submitSurveyForm();
         }
     });
+}
+
+function submitSurveyForm(){
+    $('#termsboardSurveyFormSubmit').hide();
+    $('#surveyLoading').show();
+
+    var data = $('#termsboardSurveyForm').serializeArray().reduce(function(obj, item) {
+        obj[item.name] = item.value;
+        return obj;
+    }, {});
+    
+    $( "#error", "#message").html('');
+    console.log(data);
+    $.ajax({
+        url : feedbackUrl + "/feedback", // Url of backend (can be python, php, etc..)
+        type: "POST", // data type (can be get, post, put, delete)
+        dataType: 'json',
+        data : JSON.stringify(data), // data in json format
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        success: function(response, textStatus, jqXHR) {
+            if(response.result.errors){
+                $("#error").html(response.result.errors);
+                $('#termsboardSurveyForm, #termsboardSurveyFormSubmit').show();
+                $('#surveyLoading').hide();
+            }else{
+                $( "#message" ).html('Thanks for the review.');
+                $('#termsboardSurveyForm, #surveyLoading').hide();
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            $('#termsboardSurveyForm, #termsboardSurveyFormSubmit').show();
+            $('#surveyLoading').hide();
+            $( "#error").html('Failed to save review.');
+        }
+    });
+}
+
+$( function() {
+    loadTermBoard();
+    var condition = getUrlParams('condition');
+    $('#condition').val(condition);
+    if(condition == 'text'){
+        $('.storyboard').hide();
+    }
+    $('#key').val(getUrlParams('key'));
+    $('#story_term').val(getUrlParams('key'));
+
+    if(condition != 'all'){
+        loadFormValidation();
+        $('#termsboardSurveyFormSubmit').on('click', function(){
+            $('#termsboardSurveyForm').submit();
+        });
+    }
 });

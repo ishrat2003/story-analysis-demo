@@ -25,10 +25,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-PFFKHW3');</script>
 <!-- End Google Tag Manager -->
 
-
+<script src="/js/common.js"></script>
 <script src="/js/populateData.js"></script>
 <script src="/js/lc.js"></script>
-<script src="/js/common.js"></script>
+
 <style>
 body {font-family: "Times New Roman", Georgia, Serif;}
 h1, h2, h3, h4, h5, h6 {
@@ -106,18 +106,19 @@ h1, h2, h3, h4, h5, h6 {
         <p id="message"></p> 
         <p id="error"></p>
         <form id="storySurveyForm" class="lcContentForm" action="">
-            <input type="hidden" id="survey_type" name="survey_type" value="lc">
+            <input type="hidden" id="feedback_type" name="feedback_type" value="story">
 
             <input type="hidden" id="user_code" name="user_code" value="">
             <input type="hidden" id="gender" name="gender" value="">
+            <input type="hidden" id="age_group" name="age_group" value="">
             <input type="hidden" id="experiment_date_datepicker" name="experiment_date_datepicker" value="">
             <input type="hidden" id="agreed" name="agreed" value="">
             <input type="hidden" id="level" name="level" value="">
             <input type="hidden" id="department" name="department" value="">
-            <input type="hidden" id="dob_datepicker" name="dob_datepicker" value="">
             <input type="hidden" id="disability" name="disability" value="">
 
-            <input type="hidden" id="story_source" name="story_source" value="bbc">
+            <input type="hidden" id="story_source" name="story_source" value="tpl">
+            <input type="hidden" id="key" name="key" value="">
 
             <input type="hidden" id="open_timestamp" name="open_timestamp" value="">
             <input type="hidden" id="open_date_time" name="open_date_time" value="">
@@ -160,7 +161,7 @@ h1, h2, h3, h4, h5, h6 {
             <br class="clear">
             
             <label for="summary">Write a <span class="objective">summary</span> of the story in a few sentences.</label>
-            <div id="charNum"></div>
+            <div>Characters: <div id="charNum"></div></div>
             <textarea id="summary" onkeyup="countChar(this)" name="summary" rows="5" cols="50" placeholder="Few sentences about the story. Minimum 100 characters"></textarea>
             <br class="clear">
 
