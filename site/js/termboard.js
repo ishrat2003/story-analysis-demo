@@ -1,5 +1,6 @@
 var dateFormat = 'yyyy-mm-dd';
 var baseUrl = "http://127.0.0.1:3500";
+var currentHost = "";
 var source = 'tpl';
 
 function getParams(){
@@ -31,6 +32,7 @@ function displayDocuments(documents){
     if(documents.length){
         documents.forEach(item => {
             var key = item.link.replace('https://www.bbc.co.uk/news/', '');
+            key = item.link.replace('https://www.thepharmaletter.com/article/', '');
             var analysisLink = '/demo/lc.html?condition=all&key=' + key;
             var liHtml = '<li>'
                 + '<h4>' + item.title + '</h4>'
@@ -88,13 +90,15 @@ function loadTermBoard(order, direction){
     if (data['task']){
         $("#storyInput").show()
     }
+    console.log(currentHost + "/data/" + source + "/termsboard/" + data['key'] + '.json');
     $.ajax({
         type: "GET",
         headers: {
             'Content-Type': 'application/json'
         },
-        url: "/data/" + source + "/termsboard/" + data['key'] + '.json',
+        url: currentHost + "/data/" + source + "/termsboard/" + data['key'] + '.json',
         success: function(result){
+            console.log(result);
             $(".termboardBox, #documentsItems").html("");
             if(result && result['description']){
                 $('#termBoardDescription').text(result['description']);
@@ -125,8 +129,11 @@ function loadTermBoard(order, direction){
             }
         },
         dataType: 'json',
-        error: function () {
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log("error");
+            console.log(XMLHttpRequest.responseText)
+            console.log(textStatus);
+            console.log(errorThrown );
         }
     });
 }

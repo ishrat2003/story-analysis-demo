@@ -32,7 +32,7 @@ class TPL(Core):
         return item['name']
     
     def getShortDescription(self, item):
-        return item['description']
+        return item['meta_description']
     
     def fetchPage(self, link, item = None):
         filePath = self.path + '/' + re.sub(r'^.+\/([a-zA-Z0-9\-]+)$', r'\1', link) + '.json'
@@ -42,7 +42,7 @@ class TPL(Core):
         soup = BeautifulSoup(content, features="html.parser")
         item = {
             'title': data['name'],
-            'description': data['description'],
+            'description': data['meta_description'],
             'pubDate': data['date'],
             'link': link,
             'content': self.getPageContent(soup),

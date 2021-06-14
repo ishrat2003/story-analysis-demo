@@ -47,8 +47,10 @@ class RCStory:
             typeKey = 'who'
         elif wordKey in self.words['where'].keys():
             typeKey = 'where'
-        
-        data['when'] = self.__getBarChart(self.words[typeKey][wordKey]['dated_count'])  
+        if wordKey in self.words[typeKey].keys():
+            data['when'] = self.__getBarChart(self.words[typeKey][wordKey]['dated_count'])
+        else:
+            data['when'] = []
         data['board'] = self.__getBoard()
         return data
             

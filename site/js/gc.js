@@ -118,7 +118,9 @@ $( function() {
     $(".explanationBlock").hide();
     $("#whyExplanationBlock").show();
     $("#summaryHeading").hide();
-    $('#gcAnalysis').on('click', function(){
+    $('.gcAnalysis').on('click', function(){
+        $('.gcAnalysis').removeClass('current');
+        $(this).addClass('current');
         loadGc();
     });
     loadGc();

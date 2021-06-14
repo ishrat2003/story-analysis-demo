@@ -306,10 +306,12 @@ function load(condition, data){
 }
 
 function fetchAndLoad(condition){
+    console.log("/data/" + source + "/lc/" + getUrlParams('key') + '.json');
     $.ajax("/data/" + source + "/lc/" + getUrlParams('key') + '.json', {
         method: "GET",
         contentType: "application/json"
     }).done(function (data) {
+        console.log(data);
         loadCommonDetails(data, condition);
         load(condition, data);
     });

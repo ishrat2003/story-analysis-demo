@@ -125,11 +125,12 @@ function drawSankey(divId, data){
         html += '<ul>';
         for (var link in d.documents) {
           var key = d.documents[link]['link'].replace('https://www.bbc.co.uk/news/', '');
+          key = d.documents[link]['link'].replace('https://www.thepharmaletter.com/article/', '');
           var analysisLink = '/demo/lc.html?condition=all&key=' + key;
           html += '<li>'
             + '<strong>' + d.documents[link]['title'] + '</strong><br>'
             + '<p>' + d.documents[link]['description'] + '</p>'
-            + '<p><a target="_blank" href="' + analysisLink + '">Local Context Analysis</a> | <a target="_blank" href="' + d.documents[link]['link'] + '">BBC Reference</a></p>'
+            + '<p><a target="_blank" href="' + analysisLink + '">Local Context Analysis</a> | <a target="_blank" href="' + d.documents[link]['link'] + '">Reference</a></p>'
             + '</li>';
         }    
         html += '</ul>';

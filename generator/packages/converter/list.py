@@ -3,6 +3,7 @@ import sys
 from writer.base import Base
 from filesystem.directory import Directory
 from file.json import Json as JsonFile
+import numpy as np
 
 class List(Base):
     
@@ -35,11 +36,14 @@ class List(Base):
             listItem = {
                 'filename': re.sub(r'^.+\/([a-zA-Z0-9\-]+)$', r'\1', item['url']) + '.json',
                 'title': item['name'],
-                'description': item['meta_description'],
+                'description': str(item['meta_description'])if item['meta_description'] else "",
                 'link': item['url'],
                 'pubDate': item['date']
             }
             item['pubDate'] = item['date']
+            for key in item.keys():
+                if str(item[key]) == "nan":
+                    item[key] = ""
             lists.append(listItem)
 
             filePath = self.documentPath + '/' + listItem['filename']
