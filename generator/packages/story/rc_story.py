@@ -207,11 +207,20 @@ class RCStory:
 
         return sortedTopics
     
-    def __getRelations(self, relations, source):
+    def __getRelations(self, relations, source, keys):
         processedRelations = []
         if not relations:
             return
-        sortedRelations = self.__sort(relations, 'block_count', True) 
+        
+        filteredRelation = {} if len(keys) else relations
+        
+        if keys:
+            # Blocking infinite relation 
+            for relationKey in relations:
+                if relationKey not in keys:
+                    filteredRelation[relationKey] = relations[relationKey]
+        
+        sortedRelations = self.__sort(filteredRelation, 'block_count', True) 
         sortedRelations = sortedRelations[0:self.scanRelatedTerms]
         
         for relation in sortedRelations:
@@ -259,6 +268,7 @@ class RCStory:
     def __getWordsByScoreType(self, type, scoreType, limit = 3):
         sorted =  self.__sort(self.words[type], scoreType, True) 
         items = []
+        keys = []
         for word in sorted:
             if word['stemmed_word'] in self.usedTerms:
                 continue
@@ -271,12 +281,20 @@ class RCStory:
                 'new_to_old': word['new_to_old'],
                 'consistent': word['consistent'],
                 'tooltip': word['tooltip'],
-                'relations': self.__getRelations(word['relations'], name),
+                # 'relations': self.__getRelations(word['relations'], name),
                 'dated_bars': self.__getBarChart(word['dated_count']) 
             })
+            keys.append(word['stemmed_word']);
             self.usedTerms.append(word['stemmed_word'])
             if len(items) == limit:
                 break
+        if len(items):
+            index = 0
+            for item in items:
+                items[index]['relations'] = self.__getRelations(word['relations'], name, keys)
+                index += 1
+                
+            
         return items
     
     def __getBoardDescription(self):
