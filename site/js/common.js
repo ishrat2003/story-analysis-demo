@@ -1,4 +1,4 @@
-var feedbackUrl = "http://127.0.0.1:3500";
+var feedbackUrl = "https://247dtw4y0i.execute-api.eu-west-1.amazonaws.com/Production/feedback";
 var analysisUrl = "http://127.0.0.1:3500";
 var source = 'tpl';
 

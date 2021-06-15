@@ -484,3 +484,4 @@ class LCStory():
         
         return self.knowledgeGraphProcessor.getMoreDetails(wordKey, pureWord)
 
+

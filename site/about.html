@@ -4,13 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/site.css">
-<style>
-body {font-family: "Times New Roman", Georgia, Serif;}
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display";
-  letter-spacing: 5px;
-}
-</style>
 <body>
 
 <!-- Navbar (sit on top) -->
@@ -28,9 +21,18 @@ h1, h2, h3, h4, h5, h6 {
 
 <!-- Header -->
 <header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
-  <img class="w3-image" src="/images/hamburger.jpeg" alt="Hamburger Catering" width="1600" height="800">
-  <div class="w3-display-bottomleft w3-padding-large w3-opacity">
-    <h1 class="w3-xxlarge">Story Analysis</h1>
+  <img class="w3-image" src="/images/newsstack.png" alt="News and articles" width="1600" height="800" style="opacity: 0.09;">
+  <div class="w3-display-bottomleft w3-padding-large w3-opacity" >
+    <h1 class="w3-xxlarge" style="float:left;">Story Analysis</h1>
+    <br class="clear">
+    <ul>
+      <li><strong>Unsupervised topic extraction from news or articles based on pattern recognition</strong></li>
+      <li><strong>Contextual story words retrieval based on chronology and frequency from individual article or news</strong></li>
+      <li><strong>Categorization of identified story words</strong></li>
+      <li><strong>Clockwise chronological visualization of individual story words for analyzing cognitive importance of extracted words by reading tasks</strong></li>
+      <li><strong>Comprehensive time-series (When) visualization for editorial guidance (Why) based on interrogative classification (What, Who and Where)</strong></li>
+      <li><strong>Comprehensive terms board visualization of a selected topic for idea/plan generation and analyzing cognitive importance of terms board for writing tasks</strong></li>
+    </ul>
   </div>
 </header>
 
@@ -40,31 +42,42 @@ h1, h2, h3, h4, h5, h6 {
   <!-- About Section -->
   <div class="w3-row w3-padding-64" id="about">
     <div class="w3-col m6 w3-padding-large w3-hide-small">
-      <div class="center" style="width:310px;">
-        <img style="width:150px;height:150px;float:left;" src="images/goldsmiths.jpg" alt="Goldsmiths, University of London">
+      <br class="clear"><br><br><br>
+      <div class="center" style="width:350px;">
+        <img style="width:200px;height:200px;float:left;" src="images/goldsmiths.jpg" alt="Goldsmiths, University of London">
         <img style="width:150px;height:150px;float:right;" src="images/byte9.png" alt="Byte9">
+        <br class="clear"><br>
+        <img style="width:300px;float:right;" src="images/tpl-logo.webp" alt="thepharmaletter">
       </div>
     </div>
     <div class="w3-col m6 w3-padding-large">
       <h1 class="w3-center">About</h1><br>
       <h5 class="w3-center">Story Analysis, 2021</h5>
-      <p class="w3-large w3-justify">
-        Story analysis is an academic project sponsored by <b><a href="https://www.gold.ac.uk/">Goldsmiths, University of London</a></b> and 
-        <b><a href="https://www.thebyte9.com/">Byte9, London</a></b>. 
-        Written documents not only contains topic related information for NLP tasks but also preserves the writer’s 
-        rhetoric and cognitive connectivity of the underlying concepts and actions. 
-        Inspired by <b><a href="https://en.wikipedia.org/wiki/Hero%27s_journey">Joseph Campbell’s "The Hero’s Journey"</a></b>, this project aims to extract and visualize story for 
-        the document evaluating the cognitive richness of the underlying extraction. It also uses 
+      <p class="w3-large w3-text w3-justify">
+        Story analysis is an academic project sponsored by <b><a href="https://www.gold.ac.uk/">Goldsmiths, University of London</a></b> and
+        <b><a href="https://www.thebyte9.com/">Byte9, London</a></b>.
+        Written documents not only contains topic related information for NLP tasks but also preserves the writer’s
+        rhetoric and cognitive connectivity of the underlying concepts and actions.
+        Inspired by <b><a href="https://en.wikipedia.org/wiki/Hero%27s_journey">Joseph Campbell’s "The Hero’s
+        Journey"</a></b>, this project aims to extract story words and visualize story plans from
+        the document for evaluating the cognitive richness of the underlying extraction. It also uses
         <b><a href="https://developers.google.com/knowledge-graph">Google’s Knowledge Graph API</a></b> for categorization.
+      </p>
+        <p class="w3-large w3-text w3-justify">
+        To build a collection of articles for this demo project, we have collected published 
+        articles from <a href="https://www.thepharmaletter.com/"><strong>The Pharmaletter News Publishers</strong></a>. 
+        For this demo, we have collected 730 articles published between 2021-03-01 and 2021-05-30. 
+        Among these articles, 273 articles were published in March, 232 articles were published in 
+        April and 225 articles were published in May. <a href=”/demo”>Demo</a> provides a monthly 
+        (time-series)comprehensive data visualization on the whole collection to guide on selecting a 
+        historical topic for throwback editorial reporting. On selecting a topic a Terms Board 
+        visualization is produced for intuiting creative thoughts. A list of documents scanned for 
+        producing the Terms Board is also presented. Selecting the “Local Analysis” link of an article 
+        will visualize the story words extraction in a clockwise radial bar chart.
         </p>
-        <p class="w3-large w3-text-grey w3-justify">
-            The feedback section is a comprehension section aiming to be used in a cognitive psychology experiment. 
-        The user code is used to identify a unique user. It can be any string. It automatically feels the user code 
-        with user IP. User can easily replace it. Feedback information is saved for further research.
-        </p>
-        <p class="w3-large w3-text-grey w3-justify">
-            Currently this plugin is only activated for individual <a href="https://www.bbc.co.uk/news">BBC</a> news item page. Thanks for using this extension. If you use this plugin for publication, please add relevant reference of
-        this work.
+        <p class="w3-large w3-text w3-justify">
+        The experiment section of this site is dedicated to investigating the cognitive value of the 
+        produced visualization based on reading and writing tasks. 
         </p>
         <p id="thankYou" class="center">
             <img class="center" src="images/ThankYou.svg" alt="Thank You">
