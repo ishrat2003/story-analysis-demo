@@ -12,7 +12,7 @@ class RSS(Core):
         self.contentLoader = None
         if (type == "bbc"):
             self.contentLoader = BBC()
-        if (type == "tpl"):
+        if (type == "tpl" or type == "tpl_lc"):
             self.contentLoader = TPL(path)
         return
     

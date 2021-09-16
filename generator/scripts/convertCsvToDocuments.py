@@ -26,6 +26,7 @@ loader = CSV()
 writer = Writer(params.destination_directory)
 processor = Processor(loader, writer, params.total_items)
 
+print('params.source_directory = ', params.source_directory);
 sourceDirectory = Directory(params.source_directory)
 sourceDirectory.process(processor, params.total_files)
 

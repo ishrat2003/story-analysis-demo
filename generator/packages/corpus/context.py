@@ -18,7 +18,7 @@ class Context(Base):
             return False
         
         data = self.loader.load(fileContent)
-        
+
         if not data:
             return False
         
@@ -41,6 +41,8 @@ class Context(Base):
             return
 
         details = self.loader.getDetails(item)
+        print('---------------')
+        print(details)
         if not details or not details['content']:
             return
 

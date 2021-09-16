@@ -28,6 +28,7 @@ class Directory():
 			self.create(subPath)
 
 		if not os.path.exists(path):
+			print('path: ', path)
 			os.mkdir(path)
 
 		return
@@ -57,9 +58,10 @@ class Directory():
 		totalItemsToProcess = int(totalItemsToProcess)
 		count = 0
 		for filename in self.scan():
+			print(filename)
 			if (totalItemsToProcess and (count == totalItemsToProcess)):
 				break
-
+			
 			filePath = os.path.join(self.path, filename)
 			itemFile = File(filePath)
 			fileContent = itemFile.read() 

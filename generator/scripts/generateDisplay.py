@@ -24,6 +24,8 @@ logging.info("# ================================")
 scriptParams = Params()
 params = scriptParams.get()
 
+
+print(params)
 loader = BBC() if params.source == 'bbc' else TPL(params.source_directory + '/' + params.source)
 writer = Writer(params.destination_directory, params)
 reader = Reader(params)

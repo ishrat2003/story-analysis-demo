@@ -26,6 +26,9 @@ then
 elif [[ $source == 'tpl' ]]
 then
   sourceDirectory="$commonPath/lists"
+elif [[ $source == 'tpl_lc' ]]
+then
+  sourceDirectory="$commonPath/lists"
 fi
 
 totalItems=0
