@@ -62,8 +62,8 @@ function loadTasks(){
     
     var userId = localStorage.getItem('user_id');
     if(!userId){
-        alert("Please add participant details for loading tasks.");
-        window.location.href = "/";
+        alert("Please fill in participant details for loading tasks.");
+        window.location.href = "/experiment";
         return;
     }
     var conditionIndex = userId % conditions[0].length;

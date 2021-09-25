@@ -269,22 +269,26 @@ function load(condition, data){
     if (!data) {
         return;
     }
-    
-    showRaw(data);
+
     if(condition == 'viz'){
+        $('#lcRawBlock').hide();
         loadLcViz(data);
         $('#lc_text_questions').show();
     }else if(condition == 'text'){
+        $('#lcRawBlock').hide();
         loadLcText(data);
         $('#lc_text_questions').show();
     }else if(condition == 'graph'){
+        showRaw(data);
         loadKnowledgeGraph(data);
         $('#knowledgegraph').show();
         $('#knowledgegraphLoading').show();
     }else if(condition == 'all'){
+        showRaw(data);
         loadLcViz(data);
         loadLcText(data);  
     }else{
+        showRaw(data);
         loadLcViz(data);
         loadKnowledgeGraph(data);
         loadLcText(data);  
