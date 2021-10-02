@@ -562,7 +562,7 @@ function submitSurveyForm(){
             'Accept': 'application/json'
         },
         success: function(response, textStatus, jqXHR) {
-            if(response.result.errors){
+            if(response.body.result.errors){
                 $("#error").html(response.result.errors);
                 $('#storySurveyForm, #storySurveyFormSubmit').show();
                 $('#surveyLoading').hide();
