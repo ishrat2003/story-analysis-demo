@@ -86,7 +86,7 @@ function loadTermBoard(){
         'task': params[4]
     };
     if (data['task']){
-        $("#storyInput").show()
+        $("#termsboardSurveyForm").show();
     }
     console.log(currentHost + "/data/" + source + "/termsboard/" + data['key'] + '.json');
     $.ajax({
@@ -96,7 +96,6 @@ function loadTermBoard(){
         },
         url: currentHost + "/data/" + source + "/termsboard/" + data['key'] + '.json',
         success: function(result){
-            console.log(result);
             $(".termboardBox, #documentsItems").html("");
             if(result && result['description']){
                 $('#termBoardDescription').text(result['description']);
@@ -139,8 +138,12 @@ function loadTermBoard(){
 function loadFormValidation(){
     $("form[id='termsboardSurveyForm']").validate({
         rules: {
-            ease: { required: true },
             summary: { required: true, minlength: 500 } 
+        },
+        messages: {
+            summary: {
+                required: "This field is required"
+            }
         },
         submitHandler: function(form) {
             populateEndTime();
@@ -150,6 +153,9 @@ function loadFormValidation(){
 }
 
 function submitSurveyForm(){
+    if(!checkEase()) {
+        return;
+    }
     $('#termsboardSurveyFormSubmit').hide();
     $('#surveyLoading').show();
 
@@ -170,8 +176,16 @@ function submitSurveyForm(){
             'Accept': 'application/json'
         },
         success: function(response, textStatus, jqXHR) {
-            if(response.result.errors){
-                $("#error").html(response.result.errors);
+            var errors = null;
+            if(response.body){
+                var responseDetails = JSON.parse(response.body);
+                if(responseDetails && responseDetails.result.errors){
+                    errors = responseDetails.result.errors;
+                }
+            } 
+            if(errors){
+                $("#error").html(errors);
+                $("#error").append('<p>Please make sure ypu have filled in the <a href="/experiment#participantEntry">participant details</a> before submitting the form.</p>');
                 $('#termsboardSurveyForm, #termsboardSurveyFormSubmit').show();
                 $('#surveyLoading').hide();
             }else{
@@ -185,6 +199,16 @@ function submitSurveyForm(){
             $( "#error").html('Failed to save review.');
         }
     });
+}
+
+function checkEase(){
+    $('#rating_error').html('');
+    var valueChecked = $("input[name='ease']:checked").val();
+    if(!valueChecked){
+        $('#rating_error').append('<label class="error" for="ease">This field is required.</label>');
+        return false;
+    }
+    return true;
 }
 
 $( function() {

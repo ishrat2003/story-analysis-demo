@@ -17,9 +17,9 @@
 
   <script src="/js/jquery-3.5.1.min.js"></script>
   <script src="/js/jquery-ui-1.12.1.js"></script>
-  <script src="/js/d3.v4.js"></script>
   <script src="/js/jquery.modal.min.js"></script>
   <script src="/js/jquery.validate.min.js"></script>
+   <script src="/js/d3.v4.js"></script>
   <script src="/js/map.js"></script>
   <script src="/js/sankey.js"></script> 
   <script src="/js/drawSankey.js"></script> 
@@ -106,12 +106,12 @@
   </div>
 
   <div id="termsboardContent" class="w3-content w3-center w3-padding-16 explanationBlock termsboardContent">
-    <br>
-    <br>
-    <div id="storyInput" style="display:none">
+    <br class="clear">
+    <br class="clear">
+    <div id="storyInput">
       <p id="message"></p> 
       <p id="error"></p>
-      <form id="termsboardSurveyForm" class="termsboartContentForm w3-justify" action="">
+      <form id="termsboardSurveyForm" style="display:none" class="termsboartContentForm w3-justify" action="">
           <input type="hidden" id="feedback_type" name="feedback_type" value="termsboard">
 
           <input type="hidden" id="user_code" name="user_code" value="">
@@ -140,7 +140,7 @@
           
           <label for="summary">Write a <span class="objective">story</span> about the given topic (Minimum 500 characters)</label>
           <div>Characters: <div id="charNum"></div></div>
-          <textarea id="summary" onkeyup="countChar(this)" name="summary" rows="15" cols="50" placeholder="Few sentences about the story. Minimum 500 characters"></textarea>
+          <textarea id="summary" style="color:black;" onkeyup="countChar(this)" name="summary" rows="15" cols="50" placeholder="Few sentences about the story. Minimum 500 characters"></textarea>
     
           <br class="clear">
 
@@ -156,13 +156,15 @@
             <input type="radio" id="star2" name="ease" value="2" /><label for="star2" title="easy">2 stars</label>
             <input type="radio" id="star1" name="ease" value="1" /><label for="star1" title="very easy">1 star</label>
           </div>
-          <br class="clear" />
+          <br class="clear">
+          <br class="clear">
           <div id="rating_error"></div>
-          <br class="clear" />
+          <br class="clear">
       </form>
       <input type="button" id="termsboardSurveyFormSubmit" value="Submit">
+      <div id="surveyLoading" style="display:none;"><img src="/images/loading.gif" alt="Loading"></div>
     </div>
-    <div id="surveyLoading" style="display:none;"><img src="/images/loading.gif" alt="Loading"></div>
+    
   </div>
 
     

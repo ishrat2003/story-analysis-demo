@@ -153,7 +153,7 @@ body {
   }
   
   .taskDiv li::before {
-    content: "✎ ";
+    content: "\270E  ";
     color:  #1d2e02;
     font-size: 15px;
   }

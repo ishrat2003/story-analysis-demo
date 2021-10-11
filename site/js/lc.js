@@ -297,15 +297,14 @@ function load(condition, data){
     var date = data['pubDate'].substring(0, 10);
     var dateParts = date.split("-")
     $('#publishedDate').html(dateParts[2] + '/' + dateParts[1] + '/' + dateParts[0]);
+    $('#publishedDate').show();
 }
 
 function fetchAndLoad(condition){
-    //console.log("/data/" + source + "/lc/" + getUrlParams('key') + '.json');
     $.ajax("/data/" + source + "/lc/" + getUrlParams('key') + '.json', {
         method: "GET",
         contentType: "application/json"
     }).done(function (data) {
-        console.log(data);
         loadCommonDetails(data, condition);
         load(condition, data);
     });
@@ -464,6 +463,9 @@ function displayKnowledgeGraph(links, nodes) {
 }
 
 function submitContentForm(){
+    if(!checkEase()) {
+        return;
+    }
     var condition = 'viz';
     $('#lc_' + condition).show();
     $(window).scrollTop(0);
@@ -530,8 +532,8 @@ function loadLcSurveyFormValidation(){
             who: { required: true, minlength: 5 },
             what: { required: true, minlength: 5 },
             where_location: { required: true, minlength: 5 },
-            why: { required: true, minlength: 5, easeCheck: true },
-            ease: { required: true },
+            why: { required: true, minlength: 5 },
+            ease: { easeCheck: true },
             summary: { required: true, minlength: 100 } 
         },
         submitHandler: function(form) {
@@ -551,7 +553,6 @@ function submitSurveyForm(){
     }, {});
     
     $( "#error", "#message").html('');
-    console.log(data);
     $.ajax({
         url : feedbackUrl + "/feedback", // Url of backend (can be python, php, etc..)
         type: "POST", // data type (can be get, post, put, delete)
@@ -562,15 +563,24 @@ function submitSurveyForm(){
             'Accept': 'application/json'
         },
         success: function(response, textStatus, jqXHR) {
-            if(response.body.result.errors){
-                $("#error").html(response.result.errors);
+            var errors = null;
+            if(response.body){
+                var responseDetails = JSON.parse(response.body);
+                if(responseDetails && responseDetails.result.errors){
+                    errors = responseDetails.result.errors;
+                }
+            } 
+            if(errors){
+                $("#error").html(errors);
+                $("#error").append('<p>Please make sure you have filled in the <a href="/experiment#participantEntry" target="_blank">participant details</a> before submitting the form.</p>');
                 $('#storySurveyForm, #storySurveyFormSubmit').show();
                 $('#surveyLoading').hide();
             }else{
                 $( "#message" ).html('Thanks for the review.');
                 $('#storySurveyForm, #surveyLoading').hide();
             }
-            $("html").animate({ scrollTop: $("#lc_text_questions").offset().top }, "slow");
+            $('.w3-bar').css('height')
+            $("html").animate({ scrollTop: ($("#lc_text_questions").offset().top - $(".w3-bar").height()) }, "slow");
             
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -583,14 +593,19 @@ function submitSurveyForm(){
 }
 
 $.validator.addMethod("easeCheck", function(value, element) {
+    checkEase();
+    return true;
+}, "");
+
+function checkEase(){
     $('#rating_error').html('');
     var valueChecked = $("input[name='ease']:checked").val();
     if(!valueChecked){
         $('#rating_error').append('<label class="error" for="ease">This field is required.</label>');
+        return false;
     }
     return true;
-}, "");
-
+}
 
 $(function() {
     var condition = getUrlParams('condition');
@@ -609,8 +624,7 @@ $(function() {
             });
         }
 
-        fetchAndLoad(condition, key);
-        
+        fetchAndLoad(condition, key); 
     }
 });
 
