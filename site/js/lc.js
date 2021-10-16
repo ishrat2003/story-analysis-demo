@@ -212,7 +212,7 @@ function loadCommonDetails(data, condition) {
     if(condition == 'text'){
         description = "In this task, read the given text and then answer the given questions. Spend approximately 10 mins for this task."
     } else if(condition == 'viz'){
-        description = "In this task, interpret the visualization and then answer the given questions. Spend approximately 10 mins for this task."
+        description = "In this task, interpret the visualization(CLOCKWISE) and then answer the given questions. Spend approximately 10 mins for this task."
      }
     $('#story_source').val('tpl');
     $('#key').val(getUrlParams('key'));

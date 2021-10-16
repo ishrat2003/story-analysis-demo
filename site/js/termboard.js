@@ -89,7 +89,7 @@ function loadTermBoard(){
         'task': params[4]
     };
     if (data['task']){
-        $("#termsboardSurveyForm").show();
+        $("#termsboardSurveyForm, #termsboardSurveyFormSubmit").show();
     }
     console.log(currentHost + "/data/" + source + "/termsboard/" + data['key'] + '.json');
     $.ajax({
