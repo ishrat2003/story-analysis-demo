@@ -31,14 +31,17 @@ function getParams(){
 function displayDocuments(documents){
     if(documents.length){
         documents.forEach(item => {
+            var tbCondition = getUrlParams('condition');
+            var tbKey = getUrlParams('key');
             var key = item.link.replace('https://www.bbc.co.uk/news/', '');
             key = item.link.replace('https://www.thepharmaletter.com/article/', '');
-            var analysisLink = '/demo/lc.html?condition=all&key=' + key;
+            var analysisLink = '/demo/lc.html?condition=all&key=' + key + '&tb_condition=' + tbCondition + '&tb_key=' + tbKey;
             var liHtml = '<li>'
                 + '<h4>' + item.title + '</h4>'
                 + '<span>' + item.date + '</span>'
                 + '<p>' + item.description + '</p>'
-                + '<p><a target="_blank" href="' + analysisLink + '">Local Context Analysis</a> | <a target="_blank" href="' + item.link + '">Reference</a></p>'
+                + '<p><a class="documentList" target="_blank" href="' + analysisLink + '">Local Context Analysis</a> |'
+                + '<a class="documentListReference" target="_blank" href="' + item.link + '">Reference</a></p>'
                 + '</li>';
             $("#documentsItems").append(liHtml);
         });

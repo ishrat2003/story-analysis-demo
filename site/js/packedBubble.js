@@ -78,7 +78,12 @@ function displayPackedBubbles(divId, boxWidth, boxHeight, cardColor, data, displ
             });
             // console.log(d.data.relations)
             if(relations){
-                drawSankey('sankey', relations);
+                window.dataLayer.push({
+                    'event': 'related_content_sankey_display',
+                    'related_content_card': divId,
+                    'related_content_pack': d.data.name
+                });
+                drawSankey('sankey', relations, divId, d.data.name);
             }
         }
         //if (focus !== d) zoom(d), d3.event.stopPropagation(); 
@@ -109,6 +114,12 @@ function displayPackedBubbles(divId, boxWidth, boxHeight, cardColor, data, displ
           .style("top", d3.event.pageY - 70 + "px")
           .style("display", "inline-block")
           .html(html);
+
+        window.dataLayer.push({
+            'event': 'related_terms_hover_display',
+            'related_terms_card': divId,
+            'related_terms_pack': d.data.name
+        });
       })
       .on("mouseout", function(d){ tooltip.style("display", "none");});
 

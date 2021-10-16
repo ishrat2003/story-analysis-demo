@@ -1,4 +1,4 @@
-function drawSankey(divId, data){
+function drawSankey(divId, data, card, pack){
     var units = "documents";
   
     // set the dimensions and margins of the graph
@@ -119,7 +119,7 @@ function drawSankey(divId, data){
   
     link.on("click", function(d) { 
       if(d.documents){
-        console.log(d);
+        //console.log(d);
         var html = '<h4>Top related sub-terms identified during document scanning </h4><br>'
         html += '<strong>Displaying documents representing relations between "' + d.source.name + '" and "' + d.target.name + '"</strong>';
         html += '<ul>';
@@ -130,11 +130,17 @@ function drawSankey(divId, data){
           html += '<li>'
             + '<strong>' + d.documents[link]['title'] + '</strong><br>'
             + '<p>' + d.documents[link]['description'] + '</p>'
-            + '<p><a target="_blank" href="' + analysisLink + '">Local Context Analysis</a> | <a target="_blank" href="' + d.documents[link]['link'] + '">Reference</a></p>'
+            + '<p><a target="_blank" class="documentListModalLC" href="' + analysisLink + '">Local Context Analysis</a> |'
+            + '<a class="documentListModalReference" target="_blank" href="' + d.documents[link]['link'] + '">Reference</a></p>'
             + '</li>';
         }    
         html += '</ul>';
         $('#sankeyList').html(html);
+        window.dataLayer.push({
+          'event': 'word_relation_display_in_modal',
+          'word_relation_display_in_modal_card': card,
+          'word_relation_display_in_modal_pack': pack
+        });
       } else {
         $('#sankeyList').html('<p>Failed to identify scanned results.</p>');
       }
