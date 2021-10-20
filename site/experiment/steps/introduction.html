@@ -1,0 +1,138 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Experiment</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/jquery-ui-1.12.1.css">
+    <link rel="stylesheet" href="/css/site.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/form.css">
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <script src="/js/jquery-ui-1.12.1.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/date.js"></script>
+    <script src="/js/user.js"></script>
+    <link rel="stylesheet" href="/css/cookie.css">
+    <script src="/js/cookie.js"></script>
+    <script src="/js/common.js"></script>
+</head>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+    <a href="/" class="w3-bar-item w3-button">Story Analysis</a>
+    <!-- Right-sided navbar links. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="/about.html" class="w3-bar-item w3-button">About</a>
+      <a href="/demo/index.html" class="w3-bar-item w3-button">Demo</a>
+      <a href="/experiment/recruitment.html" class="w3-bar-item w3-button">Call for Participation</a>
+      <a href="/experiment/calendar.html" class="w3-bar-item w3-button">Calendar</a>
+      <a href="/experiment" class="w3-bar-item w3-button">Experiment</a>
+    </div>
+  </div>
+</div>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:1100px">
+
+  <!-- About Section -->
+  <div class="w3-row w3-padding-64" id="experiment">
+    <div class="w3-col m6 w3-padding-large w3-hide-small">
+        <iframe class="w3-round w3-center" width="500px" height="400px" src="https://www.youtube.com/embed/9gVRwMtWedM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="w3-col m6 w3-padding-large">
+      <h1 class="w3-center">Story Analysis 2021</h1><br>
+      <h5 class="w3-center">Experiment Session</h5>
+      <p class="w3-large w3-justify"><strong><i>Story Analysis</i></strong> is a dedicated website for performing <strong><i>Cognitive Reading and Writing Experiments</i></strong>.
+      Please add the following participant details for starting a session. Data collected during the 
+      experiment will be used for academic research. Please email to storyanalysis@gmail.com for unique user code for participation.</p>
+      <p>Instructions:</p>
+      <ul>
+        <li>1. Enter the participant details in the following <strong><a href="#participantEntry">form<a></strong>.</li>
+        <li>2. After entering the participant details, each participant will be given 4 set of tasks. There are 6 tasks in total.</li>
+        <li>3. All <strong><a href="/experiment/tasks.html">tasks</a></strong> needs to be completed.</li>
+        <li>4. Please start one task at a time following the given order.</li>
+        <li>5. New task can only be started after submission of previous tasks.</li>
+        <li>6. Please don't use external resources or website for the tasks.</li>
+      </ul>
+    </div>
+  </div>
+  
+  <hr>
+
+  <!-- Contact Section -->
+  <div class="w3-row w3-padding-64" id="experiment">
+    <div id="participantEntry">
+        <h2>Participant's Entry</h2><br>
+        <div id="userDetailsBlock">
+            <form id="storyUserForm" class="surverForm" action="">        
+                <label for="user_code">User Code<br>
+                    <p>Unique user identification provided in invitation email.</p>
+                </label>
+                <input type="text" id="user_code" name="user_code" placeholder="Ex: US_101">
+                <br>
+
+                <label for="age_group">Age group</label>
+                <select id="age_group" name="dob_datepicker">
+                    <option value="">Please select</option>
+                    <option value="upto_20">Up to 20</option>
+                    <option value="21_30">21-30</option>
+                    <option value="31_40">31-40</option>
+                    <option value="41_50">41-50</option>
+                    <option value="51_plus">51+</option>
+                </select>
+                <br>
+
+                <label for="experiment_date_datepicker" name="experiment_date_datepicker">Date of experiment</label>
+                <input class="datepicker" type="text" id="experiment_date_datepicker" placeholder="Ex: 2021-04-09">
+                <br>
+
+                <label for="department">Department</label>
+                <input type="text" id="department" name="department" placeholder="Ex: Computing">
+                <br>
+
+                <label for="level">Academic level</label>
+                <select id="level" name="level">
+                    <option value="">Please select</option>
+                    <option value="under_graduate_year_1">Under graduate (year 1)</option>
+                    <option value="under_graduate_year_2">Under graduate (year 2)</option>
+                    <option value="under_graduate_year_3">Under graduate (year 3)</option>
+                    <option value="under_graduate_year_4">Under graduate (year 4)</option>
+                    <option value="post_graduate_ma_msc">Post graduate (MA, MSc, Mphil)</option>
+                    <option value="post_graduate_phd">PhD</option>
+                </select>
+                <br>
+
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender">
+                    <option value="">Please select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <br>
+
+                <input type="checkbox" id="disability" name="disability" value="disability">
+                <label for="disability">Check this box if you have any known reading, writing or color disability</label><br>
+                <br>
+
+                <input type="checkbox" id="agreed" name="agreed" value="agreed" checked="checked">
+                <label for="agreed">Data collected during the experiment will be used for academic research and can be open source</label><br>
+                <br class="clear" />
+            </form>
+            <input class="w3-button w3-light-grey w3-section" type="button" id="userFormSubmit" value="Submit">
+        </div>
+    </div>
+
+<!-- End page content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-light-grey w3-padding-32">
+  <p>This is an academic project sponsored by Goldsmiths, University of London and Byte9.</p>
+</footer>
+
+</body>
+</html>
