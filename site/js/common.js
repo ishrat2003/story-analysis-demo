@@ -17,3 +17,16 @@ function getCurrentDateTime(){
   var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
   return date + ' ' + time;
 }
+
+$(function() {
+  alert('here');
+  $.gdprcookie.init({
+      title: "Cookies & Privacy Policy",
+      message: "<p style='text-align:justify'>This site uses cookies to understand the use of terms in reading and writing." +
+      " This is an academic site. The collected user experience is used for academic analysis." +
+      " This site doesn’t preserve any user identifiable information. Collected data is anonymized." +
+      " Please accept the cookies and the privacy policy to continue.</p>"
+      
+  });
+  
+});

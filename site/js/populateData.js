@@ -46,10 +46,16 @@ $(function() {
 
     // Declare function on copy event
     document.addEventListener('copy', function(e){
+        var copiedFrom = 'Unknown';
+        if (e.target.id) copiedFrom = e.target.id;
+        else if (e.target.parentElement.id) copiedFrom = e.target.parentElement.id;
+        else if (e.target.parentElement.parentElement.parentElement.parentElement.parentElement.id) copiedFrom = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.id;
+
         dataLayer.push({
             'event': 'text_copied',
             'clipboard_text': getSelectionText(),
-            'clipboard_length': getSelectionText().length
+            'clipboard_length': getSelectionText().length,
+            'copied_from': copiedFrom
         });
         
     });
