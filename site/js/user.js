@@ -62,7 +62,7 @@ $( function() {
             localStorage.setItem('gender', $('#gender').val());
             localStorage.setItem('disability', $('#disability').prop( "checked" ));
             localStorage.setItem('agreed', $('#agreed').prop( "checked" ));
-            window.location.href = "/experiment/tasks.html";
+            window.location.href = "/experiment/steps/tasks.html";
         }
       });
     $('#userFormSubmit').on('click', function(){

@@ -84,7 +84,7 @@ function loadTasks(){
                 var href = encodeURI("/demo/" + type + ".html?condition=" + condition 
                     + "&task=" + taskName + "&key=" 
                     + data[type][taskName]['key']);
-                $(ulId).append('<li><a target="_blank" href="' + href + '">' + data[type][taskName]['title'] + '</a></li>');
+                $(ulId).append('<li><a href="' + href + '">' + data[type][taskName]['title'] + '</a></li>');
             });
         });
     });
