@@ -19,7 +19,6 @@ function getCurrentDateTime(){
 }
 
 $(function() {
-  alert('here');
   $.gdprcookie.init({
       title: "Cookies & Privacy Policy",
       message: "<p style='text-align:justify'>This site uses cookies to understand the use of terms in reading and writing." +
