@@ -102,7 +102,8 @@ function displayLc(data, statFiedName){
                 html += '<p>' + d.tooltip + '</p>';
             }
             
-            tooltip.style("display", "inline");	
+            //tooltip.style("display", "inline");
+            tooltip.style("display", "none");
             tooltip.transition()		
                 .duration(200)		
                 .style("opacity", .9);		
@@ -284,7 +285,7 @@ function load(condition, data){
         $('#knowledgegraph').show();
         $('#knowledgegraphLoading').show();
     }else if(condition == 'all'){
-        showRaw(data);
+        $('#lcRawBlock').hide();
         loadLcViz(data);
         loadLcText(data);  
     }else{

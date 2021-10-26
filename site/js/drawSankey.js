@@ -1,3 +1,21 @@
+function getTaskParams(){
+  var queryString = window.location.search;
+  queryString = decodeURIComponent(queryString.substring(1, queryString.length));
+  var params = queryString.split("&");
+  
+  var key, task;
+  if(params.length){
+      params.forEach(item => {
+          if(item.includes("key")){
+              task = item.replace(/key=/, '');
+          }else if(item.includes("condition")){
+              key = item.replace(/condition=/, '');
+          }
+      });
+  }
+  return [key, task];
+}
+
 function drawSankey(divId, data, card, pack){
     var units = "documents";
   
@@ -123,10 +141,12 @@ function drawSankey(divId, data, card, pack){
         var html = '<h4>Top related sub-terms identified during document scanning </h4><br>'
         html += '<strong>Displaying documents representing relations between "' + d.source.name + '" and "' + d.target.name + '"</strong>';
         html += '<ul>';
+        var params = getTaskParams();
+        console.log('??????????',params);
         for (var link in d.documents) {
           var key = d.documents[link]['link'].replace('https://www.bbc.co.uk/news/', '');
           key = d.documents[link]['link'].replace('https://www.thepharmaletter.com/article/', '');
-          var analysisLink = '/demo/lc.html?condition=all&key=' + key;
+          var analysisLink = '/demo/lc.html?condition=all&key=' + key + '&card=' + card + '&pack=' + pack + '&task_condition=' + params[0] + '&task_key=' + params[1];
           html += '<li>'
             + '<strong>' + d.documents[link]['title'] + '</strong><br>'
             + '<p>' + d.documents[link]['description'] + '</p>'
