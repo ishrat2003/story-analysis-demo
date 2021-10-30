@@ -91,7 +91,7 @@ function loadTermBoard(){
     if (data['task']){
         $("#termsboardSurveyForm, #termsboardSurveyFormSubmit").show();
     }
-    console.log(currentHost + "/data/" + source + "/termsboard/" + data['key'] + '.json');
+    
     $.ajax({
         type: "GET",
         headers: {
@@ -168,7 +168,7 @@ function submitSurveyForm(){
     }, {});
     
     $( "#error", "#message").html('');
-    //console.log(data);
+
     $.ajax({
         url : feedbackUrl + "/feedback", // Url of backend (can be python, php, etc..)
         type: "POST", // data type (can be get, post, put, delete)

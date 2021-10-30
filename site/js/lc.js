@@ -611,6 +611,7 @@ function checkEase(){
 $(function() {
     var condition = getUrlParams('condition');
     var key = getUrlParams('key');
+    var taskCondition = getUrlParams('task_condition');
     
     if($('#lcContentForm').length){
         registerContentFormValidation();
@@ -626,6 +627,13 @@ $(function() {
         }
 
         fetchAndLoad(condition, key); 
+    }
+
+    if((condition === 'all') && (['viz', 'text'].includes(taskCondition)) ){
+        window.dataLayer.push({
+            'event': 'start_read',
+            'start_time': getCurrentDateTime()
+        });
     }
 });
 

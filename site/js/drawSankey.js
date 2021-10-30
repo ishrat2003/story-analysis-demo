@@ -142,11 +142,11 @@ function drawSankey(divId, data, card, pack){
         html += '<strong>Displaying documents representing relations between "' + d.source.name + '" and "' + d.target.name + '"</strong>';
         html += '<ul>';
         var params = getTaskParams();
-        console.log('??????????',params);
+        
         for (var link in d.documents) {
           var key = d.documents[link]['link'].replace('https://www.bbc.co.uk/news/', '');
           key = d.documents[link]['link'].replace('https://www.thepharmaletter.com/article/', '');
-          var analysisLink = '/demo/lc.html?condition=all&key=' + key + '&card=' + card + '&pack=' + pack + '&task_condition=' + params[0] + '&task_key=' + params[1];
+          var analysisLink = '/demo/lc.html?condition=all&key=' + key + '&card=' + card.replace('#', '') + '&pack=' + pack + '&task_condition=' + params[0] + '&task_key=' + params[1];
           html += '<li>'
             + '<strong>' + d.documents[link]['title'] + '</strong><br>'
             + '<p>' + d.documents[link]['description'] + '</p>'
@@ -158,7 +158,7 @@ function drawSankey(divId, data, card, pack){
         $('#sankeyList').html(html);
         window.dataLayer.push({
           'event': 'word_relation_display_in_modal',
-          'word_relation_display_in_modal_card': card,
+          'word_relation_display_in_modal_card': card.replace('#', ''),
           'word_relation_display_in_modal_pack': pack
         });
       } else {

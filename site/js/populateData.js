@@ -55,7 +55,7 @@ $(function() {
             'event': 'text_copied',
             'clipboard_text': getSelectionText(),
             'clipboard_length': getSelectionText().length,
-            'copied_from': copiedFrom
+            'copied_from': copiedFrom.replace('#', '')
         });
         
     });
