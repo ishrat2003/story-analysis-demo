@@ -35,7 +35,7 @@ function displayDocuments(documents){
             var tbKey = getUrlParams('key');
             var key = item.link.replace('https://www.bbc.co.uk/news/', '');
             key = item.link.replace('https://www.thepharmaletter.com/article/', '');
-            var analysisLink = '/demo/lc.html?condition=all&key=' + key + '&tb_condition=' + tbCondition + '&tb_key=' + tbKey;
+            var analysisLink = '/demo/lc.html?condition=all&key=' + key + '&task_condition=' + tbCondition + '&task_key=' + tbKey;
             var liHtml = '<li>'
                 + '<h4>' + item.title + '</h4>'
                 + '<span>' + item.date + '</span>'
