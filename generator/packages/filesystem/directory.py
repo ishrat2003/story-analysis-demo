@@ -58,7 +58,7 @@ class Directory():
 		totalItemsToProcess = int(totalItemsToProcess)
 		count = 0
 		for filename in self.scan():
-			print(filename)
+			print('Filename: ', filename)
 			if (totalItemsToProcess and (count == totalItemsToProcess)):
 				break
 			

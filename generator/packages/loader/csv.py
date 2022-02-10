@@ -6,6 +6,7 @@ class CSV:
     
     def setHeaders(self, headers):
         index = 0
+        self.headers = {}
         for item in headers:
             self.headers[item] = index
             index += 1

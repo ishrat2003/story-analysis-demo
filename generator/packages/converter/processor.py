@@ -22,5 +22,6 @@ class Processor:
             return False
         
         loadedContent = loadedContent[0: self.totalItems] if self.totalItems else loadedContent
+
         self.writer.save(loadedContent)
         return True
