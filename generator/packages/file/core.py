@@ -64,6 +64,10 @@ class Core():
 		
 		return
 
+	def setWriteHeader(self, active):
+		self.writeHeader = active
+		return
+
 
 	def write(self, content, mode = None):
 		if not mode:

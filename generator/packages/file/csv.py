@@ -16,3 +16,9 @@ class Csv(Base):
             file.remove()
         file.write(data)
         return
+    
+    def append(self, filePath, data, writeHeader):
+        file = File(filePath)
+        file.setWriteHeader(writeHeader)
+        file.write(data)
+        return
