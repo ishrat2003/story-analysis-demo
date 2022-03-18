@@ -23,39 +23,25 @@ logging.info("# ================================")
 scriptParams = Params()
 params = scriptParams.get()
 
+# Clean the directory
 directory = Directory(params.destination_directory)
 if directory.exists():
     directory.remove()
         
 directory.create(params.destination_directory)
 
-
-#######
-# 5 folders: all, 1 per task_key
-# 2 colums per task_condition
-# ease, time_taken_in_seconds
-##
-#
-#######
-# lc.csv : "story_link","user_code","ease"","task_condition","task_key","task_level","time_taken_in_seconds","what","when_happened","where_location","who","why"
-# review-lc.csv ID,Start time,Completion time,Email,Name,Reviewer code,User code,Story key,When,Who,What,Where,Why,Is summary true (i.e. stated in the main story),"Summary (5 = good, 1 = poor)",
-# Story key2,When2,Who2,What2,Where2,Why2,Is summary true (i.e. stated in the main story)2,"Summary (5 = good, 1 = poor)2",
-# Story key3,When3,Who3,What3,Where3,Why3,Is summary true (i.e. stated in the main story)3,"Summary (5 = good, 1 = poor)3",
-# Story key4,When4,Who4,What4,Where4,Why4,Is summary true (i.e. stated in the main story)4,Summary (5 = good 1 = poor)
-#
-# interview.csv ID,Start time,Completion time,Email,Name,User code,
-# LC-What is the main challenge of the tasks in the task set A and B?,TB-What is the main challenge of the tasks in the task set C and D?,LC-The LC visualisation along with the text is useful (5 = strongly agree  - 1 = disagree),LC-Have you used the LC visualisation for better interpretation in the multi-document task? (5 = only used visualisation  - moderately used visualisation - 1 = didn't used visualisation),"TB-It was easier to form a story plan with only a list of documents? (5 = strongly agree, 1 = disagree)","TB-It was easier to form a story plan  with the TB visualisation (5 = strongly agree, 1 = disagree)","TB-TB visualisation was easy to use (5 = strongly agree, 1 = disagree)",LC-Notes
-#
+# Load necessary details from the lc file
 lcfilePath = os.path.join(params.source_directory, 'lc.csv')
 lcFile = File(lcfilePath)
 lcLines = lcFile.read()
 lcHeaders = lcFile.getHeaders()
 
-data = {}
+dataByUser = {}
 
 for line in lcLines:
     index = 0
     row = {}
+    taskCondition = None
     taskKey = None
     userCode = None
     for column in lcHeaders:
@@ -63,14 +49,22 @@ for line in lcLines:
             row[column] = line[index]
         if column == 'task_key':
             taskKey = line[index].strip()
+        if column == 'task_condition':
+            taskCondition = line[index].strip()
         if column == 'user_code':
             userCode = line[index].strip()
         index += 1
-    if (taskKey not in data.keys()):
-        data[taskKey] = {}
               
     if (re.search("^GOLD_", userCode) and userCode != 'GOLD_10'):
-        data[taskKey][userCode] = row
+        if (userCode not in dataByUser.keys()):
+            dataByUser[userCode] = {}
+        
+        if (taskCondition not in dataByUser[userCode].keys()):
+            dataByUser[userCode][taskCondition] = {}
+
+        dataByUser[userCode][taskCondition][taskKey] = row
+        
+# Load review file
 
 reviewfilePath = os.path.join(params.source_directory, 'review_lc.csv')
 reviewFile = File(reviewfilePath)
@@ -79,7 +73,6 @@ reviewFileHeaders = reviewFile.getHeaders()
 
 for line in reviewFileLines:
     index = 0
-    taskKey = None
     reviews = {}
     reviewerCode = None
     userCode = None
@@ -110,16 +103,22 @@ for line in reviewFileLines:
                 
             index += 1
         
-        
         if (re.search("^GOLD_", userCode) and userCode != 'GOLD_10'):
-            if 'review' not in data[storyKey][userCode].keys():
-                data[storyKey][userCode]['review'] = {}
-            data[storyKey][userCode]['review'][reviewerCode] = review
-        
-        
+            for taskCondition in dataByUser[userCode].keys():
+                for taskKeyItem in dataByUser[userCode][taskCondition].keys():
+                    if taskKeyItem == storyKey:
+                        if ('review' not in dataByUser[userCode][taskCondition][taskKeyItem].keys()):
+                            dataByUser[userCode][taskCondition][taskKeyItem]['review'] = {}
+                        dataByUser[userCode][taskCondition][taskKeyItem]['review'][reviewerCode] = review
+                        # print(userCode + '--' + taskCondition + '--' + taskKeyItem)
+                        # print(dataByUser[userCode][taskCondition][taskKeyItem]['review'])
+                        # print("----------------------------------")
+            
 rawFilePath = os.path.join(params.destination_directory, 'summary.json')
 file = JsonFile()
-file.write(rawFilePath, data)
+file.write(rawFilePath, dataByUser)
+
+# Producing files
 
 # Preparing ease
 
@@ -221,72 +220,53 @@ fields = [
 for field in fields:
     fieldName = field["fieldName"]
     directoryName = field["directoryName"]
-    
+    inReview = field["in_review"]
     all = { "text": [], "viz": []}
-    for storyKey in data.keys():
-        print('storyKey: ', storyKey)
-        print('total items: ', len(data[storyKey].keys()))
-        dataPoints = {}
-        for userCode in data[storyKey].keys():
-            taskCondition = data[storyKey][userCode]["task_condition"]
-            if taskCondition not in dataPoints.keys():
-                dataPoints[taskCondition] = []
-            
-            fieldValue = None
-            if field["in_review"]:
-                reviews = data[storyKey][userCode]["review"]
+    
+    directoryPath = os.path.join(params.destination_directory, directoryName)
+    directory = Directory(directoryPath)
+    if not directory.exists():
+        directory.create(directoryPath)
+    
+    for userCode in dataByUser.keys():
+        for taskCondition in dataByUser[userCode].keys():
+            totalScore = 0
+            for taskKey in dataByUser[userCode][taskCondition].keys():
+                if inReview:
+                    reviews = dataByUser[userCode][taskCondition][taskKey]["review"]
 
-                if field["operation"] == "most":
-                    values = {}
-                    for reviewer in reviews:
-                        review = reviews[reviewer]
-                        if review[fieldName] not in values.keys():
-                            values[review[fieldName]] = 0
-                        values[review[fieldName]] += 1
+                    if field['operation'] == "most":
+                        values = {}
+                        for reviewer in reviews:
+                            review = reviews[reviewer]
+                            if review[fieldName] not in values.keys():
+                                values[review[fieldName]] = 0
+                            values[review[fieldName]] += 1
+                        
+                        currentCount = 0
+                        for value in values.keys():
+                            if values[value] > currentCount:
+                                fieldValue = field["values"][value]
+                                currentCount = values[value]
+               
+                    elif field["operation"] == "avg":
+                        fieldValue = 0
+                        count = 0
+                        for reviewer in reviews.keys():
+                           review = reviews[reviewer]
+                           fieldValue += review[fieldName]
+                           count += 1
+
+                        if count:
+                            fieldValue = fieldValue / count
                     
-                    currentCount = 0
-                    for value in values.keys():
-                        if values[value] > currentCount:
-                            fieldValue = field["values"][value]
-                            currentCount = values[value]
-                elif field["operation"] == "avg":
-                    fieldValue = 0
-                    count = 0
-                    for reviewer in reviews.keys():
-                        review = reviews[reviewer]
-                        fieldValue += review[fieldName]
-                        count += 1
+                    totalScore += fieldValue
 
-                    if count:
-                        fieldValue = fieldValue / count
-            else:
-               fieldValue = data[storyKey][userCode][fieldName]
-            dataPoints[taskCondition].append(fieldValue)
-            all[taskCondition].append(fieldValue)
-            
-        fileItems = []
-        print('text total: ', len(dataPoints["text"]))
-        print('viz total: ', len(dataPoints["viz"]))
-        for i in range(0, 16):
-            row = {
-                "text": dataPoints["text"][i] if i < len(dataPoints["text"]) else '_',
-                "viz": dataPoints["viz"][i] if i < len(dataPoints["viz"]) else '_'
-            }
-            fileItems.append(row)
-
-        directoryPath = os.path.join(params.destination_directory, directoryName)
-        testFilePath = os.path.join(directoryPath, storyKey + '.csv');
-        directory = Directory(directoryPath)
-        if not directory.exists():
-            directory.create(directoryPath)
-        
-        writer = Csv()
-        writer.remove(testFilePath)
-
-        writeHeader = True
-        for row in fileItems:
-            writer.append(testFilePath, row, writeHeader)
-            writeHeader = False
+                else:
+                    totalScore += dataByUser[userCode][taskCondition][taskKey][fieldName]
+                
+            avgScore = totalScore / len(dataByUser[userCode][taskCondition])
+            all[taskCondition].append(avgScore)
             
     allFilePath = os.path.join(params.destination_directory, directoryName, fieldName + '_all.csv');
     allWriter = Csv()
@@ -309,4 +289,6 @@ logging.info('Finished converting participant details')
 logging.info("# ================================")
 
 
-# python3 testDetails.py --source_directory ../resources/story_analysis_experiment_2021/user_input --destination_directory ../resources/story_analysis_experiment_2021/reviewed
+
+
+# python3 testDetails3.py --source_directory ../resources/story_analysis_experiment_2021/user_input --destination_directory ../resources/story_analysis_experiment_2021/reviewed
