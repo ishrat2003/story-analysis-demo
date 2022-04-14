@@ -1,0 +1,628 @@
+{
+    "GOLD_15": {
+        "reading": {
+            "text": [],
+            "viz": []
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {}
+            },
+            "viz": {
+                "nodes": {}
+            }
+        }
+    },
+    "GOLD_31": {
+        "reading": {
+            "text": [
+                "vaccine-companies-shareholders-profits-would-pay-to-vaccinate-africa-say-campaigners",
+                "sosei-heptares-hits-milestone-in-pfizer-collaboration"
+            ],
+            "viz": [
+                "thromboembolic-events-don-t-appear-higher-in-vaccinated-population-ema-says"
+            ]
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {
+                    "pfizer": {
+                        "key": "pfizer",
+                        "children": {
+                            "vaccine-companies-shareholders-profits-would-pay-to-vaccinate-africa-say-campaigners": {
+                                "key": "vaccine-companies-shareholders-profits-would-pay-to-vaccinate-africa-say-campaigners",
+                                "size": 167
+                            },
+                            "sosei-heptares-hits-milestone-in-pfizer-collaboration": {
+                                "key": "sosei-heptares-hits-milestone-in-pfizer-collaboration",
+                                "size": 166
+                            }
+                        }
+                    }
+                }
+            },
+            "viz": {
+                "nodes": {
+                    "astrazeneca": {
+                        "key": "astrazeneca",
+                        "children": {
+                            "whyPositiveBox": {
+                                "key": "whyPositiveBox",
+                                "children": {
+                                    "consistent": {
+                                        "key": "consistent",
+                                        "children": {
+                                            "thromboembolic-events-don-t-appear-higher-in-vaccinated-population-ema-says": {
+                                                "key": "thromboembolic-events-don-t-appear-higher-in-vaccinated-population-ema-says",
+                                                "size": 167
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "GOLD_14": {
+        "reading": {
+            "text": [],
+            "viz": []
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {}
+            },
+            "viz": {
+                "nodes": {}
+            }
+        }
+    },
+    "GOLD_17": {
+        "reading": {
+            "text": [],
+            "viz": []
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {}
+            },
+            "viz": {
+                "nodes": {}
+            }
+        }
+    },
+    "GOLD_12": {
+        "reading": {
+            "text": [
+                "vaccine-companies-shareholders-profits-would-pay-to-vaccinate-africa-say-campaigners",
+                "myfembree-approved-for-heavy-menstrual-bleeding-associated-with-uterine-fibroids"
+            ],
+            "viz": []
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {
+                    "pfizer": {
+                        "key": "pfizer",
+                        "children": {
+                            "vaccine-companies-shareholders-profits-would-pay-to-vaccinate-africa-say-campaigners": {
+                                "key": "vaccine-companies-shareholders-profits-would-pay-to-vaccinate-africa-say-campaigners",
+                                "size": 105
+                            },
+                            "myfembree-approved-for-heavy-menstrual-bleeding-associated-with-uterine-fibroids": {
+                                "key": "myfembree-approved-for-heavy-menstrual-bleeding-associated-with-uterine-fibroids",
+                                "size": 99
+                            }
+                        }
+                    }
+                }
+            },
+            "viz": {
+                "nodes": {}
+            }
+        }
+    },
+    "GOLD_18": {
+        "reading": {
+            "text": [
+                "uk-study-shows-robust-vaccine-effectiveness-against-indian-strain",
+                "sosei-heptares-hits-milestone-in-pfizer-collaboration",
+                "pfizer-biontech-covid-19-vaccine-shelf-life-extended-to-31-days",
+                "ec-signs-up-for-1-8-billion-additional-doses-of-comirnaty",
+                "myfembree-approved-for-heavy-menstrual-bleeding-associated-with-uterine-fibroids"
+            ],
+            "viz": []
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {
+                    "pfizer": {
+                        "key": "pfizer",
+                        "children": {
+                            "uk-study-shows-robust-vaccine-effectiveness-against-indian-strain": {
+                                "key": "uk-study-shows-robust-vaccine-effectiveness-against-indian-strain",
+                                "size": 105
+                            },
+                            "sosei-heptares-hits-milestone-in-pfizer-collaboration": {
+                                "key": "sosei-heptares-hits-milestone-in-pfizer-collaboration",
+                                "size": 92
+                            },
+                            "pfizer-biontech-covid-19-vaccine-shelf-life-extended-to-31-days": {
+                                "key": "pfizer-biontech-covid-19-vaccine-shelf-life-extended-to-31-days",
+                                "size": 84
+                            },
+                            "ec-signs-up-for-1-8-billion-additional-doses-of-comirnaty": {
+                                "key": "ec-signs-up-for-1-8-billion-additional-doses-of-comirnaty",
+                                "size": 48
+                            },
+                            "myfembree-approved-for-heavy-menstrual-bleeding-associated-with-uterine-fibroids": {
+                                "key": "myfembree-approved-for-heavy-menstrual-bleeding-associated-with-uterine-fibroids",
+                                "size": 30
+                            }
+                        }
+                    }
+                }
+            },
+            "viz": {
+                "nodes": {}
+            }
+        }
+    },
+    "GOLD_11": {
+        "reading": {
+            "text": [],
+            "viz": []
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {}
+            },
+            "viz": {
+                "nodes": {}
+            }
+        }
+    },
+    "GOLD_9": {
+        "reading": {
+            "text": [],
+            "viz": []
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {}
+            },
+            "viz": {
+                "nodes": {}
+            }
+        }
+    },
+    "GOLD_2": {
+        "reading": {
+            "text": [
+                "coronavirus-vaccine-approved-for-use-in-children",
+                "pfizer-adds-3-5-billion-in-first-quarter-vaccine-sales",
+                "vaccine-companies-shareholders-profits-would-pay-to-vaccinate-africa-say-campaigners",
+                "us-cdc-recommends-use-of-pfizer-biontech-jab-in-adolescents",
+                "march-april-2021-pharmaceutical-m-a-round-up",
+                "sosei-heptares-hits-milestone-in-pfizer-collaboration"
+            ],
+            "viz": [
+                "eu-sues-vaccine-developer-while-usa-donates-excess-supplies"
+            ]
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {
+                    "pfizer": {
+                        "key": "pfizer",
+                        "children": {
+                            "coronavirus-vaccine-approved-for-use-in-children": {
+                                "key": "coronavirus-vaccine-approved-for-use-in-children",
+                                "size": 83
+                            },
+                            "pfizer-adds-3-5-billion-in-first-quarter-vaccine-sales": {
+                                "key": "pfizer-adds-3-5-billion-in-first-quarter-vaccine-sales",
+                                "size": 36
+                            },
+                            "vaccine-companies-shareholders-profits-would-pay-to-vaccinate-africa-say-campaigners": {
+                                "key": "vaccine-companies-shareholders-profits-would-pay-to-vaccinate-africa-say-campaigners",
+                                "size": 16
+                            },
+                            "us-cdc-recommends-use-of-pfizer-biontech-jab-in-adolescents": {
+                                "key": "us-cdc-recommends-use-of-pfizer-biontech-jab-in-adolescents",
+                                "size": 11
+                            },
+                            "march-april-2021-pharmaceutical-m-a-round-up": {
+                                "key": "march-april-2021-pharmaceutical-m-a-round-up",
+                                "size": 5
+                            },
+                            "sosei-heptares-hits-milestone-in-pfizer-collaboration": {
+                                "key": "sosei-heptares-hits-milestone-in-pfizer-collaboration",
+                                "size": 2
+                            }
+                        }
+                    }
+                }
+            },
+            "viz": {
+                "nodes": {
+                    "astrazeneca": {
+                        "key": "astrazeneca",
+                        "children": {
+                            "whoBox": {
+                                "key": "whoBox",
+                                "children": {
+                                    "consistent": {
+                                        "key": "consistent",
+                                        "children": {
+                                            "eu-sues-vaccine-developer-while-usa-donates-excess-supplies": {
+                                                "key": "eu-sues-vaccine-developer-while-usa-donates-excess-supplies",
+                                                "size": 7
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "GOLD_19": {
+        "reading": {
+            "text": [],
+            "viz": []
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {}
+            },
+            "viz": {
+                "nodes": {}
+            }
+        }
+    },
+    "GOLD_4": {
+        "reading": {
+            "text": [
+                "pfizer-adds-3-5-billion-in-first-quarter-vaccine-sales",
+                "record-breaking-sales-of-24-8bn-by-2021-predicted-for-pfizer-biontech-s-vaccine",
+                "trial-in-children-could-help-increase-vaccine-coverage",
+                "vaccines-seem-effective-against-brazilian-variant"
+            ],
+            "viz": []
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {
+                    "pfizer": {
+                        "key": "pfizer",
+                        "children": {
+                            "pfizer-adds-3-5-billion-in-first-quarter-vaccine-sales": {
+                                "key": "pfizer-adds-3-5-billion-in-first-quarter-vaccine-sales",
+                                "size": 33
+                            },
+                            "record-breaking-sales-of-24-8bn-by-2021-predicted-for-pfizer-biontech-s-vaccine": {
+                                "key": "record-breaking-sales-of-24-8bn-by-2021-predicted-for-pfizer-biontech-s-vaccine",
+                                "size": 4
+                            },
+                            "trial-in-children-could-help-increase-vaccine-coverage": {
+                                "key": "trial-in-children-could-help-increase-vaccine-coverage",
+                                "size": 3
+                            },
+                            "vaccines-seem-effective-against-brazilian-variant": {
+                                "key": "vaccines-seem-effective-against-brazilian-variant",
+                                "size": 3
+                            }
+                        }
+                    }
+                }
+            },
+            "viz": {
+                "nodes": {}
+            }
+        }
+    },
+    "GOLD_3": {
+        "reading": {
+            "text": [],
+            "viz": [
+                "ema-finds-possible-link-of-astrazeneca-s-covid-19-vaccine-with-rare-blood-clots"
+            ]
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {}
+            },
+            "viz": {
+                "nodes": {
+                    "astrazeneca": {
+                        "key": "astrazeneca",
+                        "children": {
+                            "whyNegativeBox": {
+                                "key": "whyNegativeBox",
+                                "children": {
+                                    "consistent": {
+                                        "key": "consistent",
+                                        "children": {
+                                            "ema-finds-possible-link-of-astrazeneca-s-covid-19-vaccine-with-rare-blood-clots": {
+                                                "key": "ema-finds-possible-link-of-astrazeneca-s-covid-19-vaccine-with-rare-blood-clots",
+                                                "size": 58
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "GOLD_24": {
+        "reading": {
+            "text": [
+                "pfizer-biontech-covid-19-vaccine-shelf-life-extended-to-31-days",
+                "uk-study-shows-robust-vaccine-effectiveness-against-indian-strain",
+                "us-cdc-recommends-use-of-pfizer-biontech-jab-in-adolescents"
+            ],
+            "viz": [
+                "full-program-for-astrazeneca-at-asco-2021",
+                "eu-sues-vaccine-developer-while-usa-donates-excess-supplies",
+                "full-program-for-astrazeneca-at-asco-2021",
+                "ema-finds-possible-link-of-astrazeneca-s-covid-19-vaccine-with-rare-blood-clots"
+            ]
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {
+                    "pfizer": {
+                        "key": "pfizer",
+                        "children": {
+                            "pfizer-biontech-covid-19-vaccine-shelf-life-extended-to-31-days": {
+                                "key": "pfizer-biontech-covid-19-vaccine-shelf-life-extended-to-31-days",
+                                "size": 51
+                            },
+                            "uk-study-shows-robust-vaccine-effectiveness-against-indian-strain": {
+                                "key": "uk-study-shows-robust-vaccine-effectiveness-against-indian-strain",
+                                "size": 39
+                            },
+                            "us-cdc-recommends-use-of-pfizer-biontech-jab-in-adolescents": {
+                                "key": "us-cdc-recommends-use-of-pfizer-biontech-jab-in-adolescents",
+                                "size": 39
+                            }
+                        }
+                    }
+                }
+            },
+            "viz": {
+                "nodes": {
+                    "astrazeneca": {
+                        "key": "astrazeneca",
+                        "children": {
+                            "whatTopicBox": {
+                                "key": "whatTopicBox",
+                                "children": {
+                                    "consistent": {
+                                        "key": "consistent",
+                                        "children": {
+                                            "full-program-for-astrazeneca-at-asco-2021": {
+                                                "key": "full-program-for-astrazeneca-at-asco-2021",
+                                                "size": 8
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "whatActionBox": {
+                                "key": "whatActionBox",
+                                "children": {
+                                    "consistent": {
+                                        "key": "consistent",
+                                        "children": {
+                                            "eu-sues-vaccine-developer-while-usa-donates-excess-supplies": {
+                                                "key": "eu-sues-vaccine-developer-while-usa-donates-excess-supplies",
+                                                "size": 5
+                                            },
+                                            "full-program-for-astrazeneca-at-asco-2021": {
+                                                "key": "full-program-for-astrazeneca-at-asco-2021",
+                                                "size": 4
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "whyPositiveBox": {
+                                "key": "whyPositiveBox",
+                                "children": {
+                                    "consistent": {
+                                        "key": "consistent",
+                                        "children": {
+                                            "ema-finds-possible-link-of-astrazeneca-s-covid-19-vaccine-with-rare-blood-clots": {
+                                                "key": "ema-finds-possible-link-of-astrazeneca-s-covid-19-vaccine-with-rare-blood-clots",
+                                                "size": 1
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "GOLD_28": {
+        "reading": {
+            "text": [
+                "pfizer-and-biontech-initiate-fda-rolling-bla-submission-for-their-covid-19-vaccine",
+                "coronavirus-vaccine-approved-for-use-in-children",
+                "pfizer-adds-3-5-billion-in-first-quarter-vaccine-sales",
+                "myfembree-approved-for-heavy-menstrual-bleeding-associated-with-uterine-fibroids",
+                "latest-pfizer-biontech-results-offer-youthful-optimism",
+                "trial-in-children-could-help-increase-vaccine-coverage"
+            ],
+            "viz": []
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {
+                    "pfizer": {
+                        "key": "pfizer",
+                        "children": {
+                            "pfizer-and-biontech-initiate-fda-rolling-bla-submission-for-their-covid-19-vaccine": {
+                                "key": "pfizer-and-biontech-initiate-fda-rolling-bla-submission-for-their-covid-19-vaccine",
+                                "size": 41
+                            },
+                            "coronavirus-vaccine-approved-for-use-in-children": {
+                                "key": "coronavirus-vaccine-approved-for-use-in-children",
+                                "size": 32
+                            },
+                            "pfizer-adds-3-5-billion-in-first-quarter-vaccine-sales": {
+                                "key": "pfizer-adds-3-5-billion-in-first-quarter-vaccine-sales",
+                                "size": 23
+                            },
+                            "myfembree-approved-for-heavy-menstrual-bleeding-associated-with-uterine-fibroids": {
+                                "key": "myfembree-approved-for-heavy-menstrual-bleeding-associated-with-uterine-fibroids",
+                                "size": 21
+                            },
+                            "latest-pfizer-biontech-results-offer-youthful-optimism": {
+                                "key": "latest-pfizer-biontech-results-offer-youthful-optimism",
+                                "size": 19
+                            },
+                            "trial-in-children-could-help-increase-vaccine-coverage": {
+                                "key": "trial-in-children-could-help-increase-vaccine-coverage",
+                                "size": 17
+                            }
+                        }
+                    }
+                }
+            },
+            "viz": {
+                "nodes": {}
+            }
+        }
+    },
+    "GOLD_16": {
+        "reading": {
+            "text": [
+                "uk-study-shows-robust-vaccine-effectiveness-against-indian-strain",
+                "pfizer-biontech-covid-19-vaccine-shelf-life-extended-to-31-days",
+                "pfizer-takes-aim-at-coronavirus-and-vaccines-market",
+                "vaccines-seem-effective-against-brazilian-variant",
+                "myfembree-approved-for-heavy-menstrual-bleeding-associated-with-uterine-fibroids"
+            ],
+            "viz": []
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {
+                    "pfizer": {
+                        "key": "pfizer",
+                        "children": {
+                            "uk-study-shows-robust-vaccine-effectiveness-against-indian-strain": {
+                                "key": "uk-study-shows-robust-vaccine-effectiveness-against-indian-strain",
+                                "size": 33
+                            },
+                            "pfizer-biontech-covid-19-vaccine-shelf-life-extended-to-31-days": {
+                                "key": "pfizer-biontech-covid-19-vaccine-shelf-life-extended-to-31-days",
+                                "size": 29
+                            },
+                            "pfizer-takes-aim-at-coronavirus-and-vaccines-market": {
+                                "key": "pfizer-takes-aim-at-coronavirus-and-vaccines-market",
+                                "size": 20
+                            },
+                            "vaccines-seem-effective-against-brazilian-variant": {
+                                "key": "vaccines-seem-effective-against-brazilian-variant",
+                                "size": 19
+                            },
+                            "myfembree-approved-for-heavy-menstrual-bleeding-associated-with-uterine-fibroids": {
+                                "key": "myfembree-approved-for-heavy-menstrual-bleeding-associated-with-uterine-fibroids",
+                                "size": 11
+                            }
+                        }
+                    }
+                }
+            },
+            "viz": {
+                "nodes": {}
+            }
+        }
+    },
+    "GOLD_20": {
+        "reading": {
+            "text": [
+                "latest-pfizer-biontech-results-offer-youthful-optimism",
+                "pfizer-expands-anti-infectives-pipeline-with-acquisition"
+            ],
+            "viz": []
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {
+                    "pfizer": {
+                        "key": "pfizer",
+                        "children": {
+                            "latest-pfizer-biontech-results-offer-youthful-optimism": {
+                                "key": "latest-pfizer-biontech-results-offer-youthful-optimism",
+                                "size": 17
+                            },
+                            "pfizer-expands-anti-infectives-pipeline-with-acquisition": {
+                                "key": "pfizer-expands-anti-infectives-pipeline-with-acquisition",
+                                "size": 4
+                            }
+                        }
+                    }
+                }
+            },
+            "viz": {
+                "nodes": {}
+            }
+        }
+    },
+    "GOLD_30": {
+        "reading": {
+            "text": [
+                "myfembree-approved-for-heavy-menstrual-bleeding-associated-with-uterine-fibroids",
+                "uk-study-shows-robust-vaccine-effectiveness-against-indian-strain",
+                "pfizer-biontech-covid-19-vaccine-shelf-life-extended-to-31-days",
+                "pfizer-takes-aim-at-coronavirus-and-vaccines-market"
+            ],
+            "viz": []
+        },
+        "mind_map": {
+            "text": {
+                "nodes": {
+                    "pfizer": {
+                        "key": "pfizer",
+                        "children": {
+                            "myfembree-approved-for-heavy-menstrual-bleeding-associated-with-uterine-fibroids": {
+                                "key": "myfembree-approved-for-heavy-menstrual-bleeding-associated-with-uterine-fibroids",
+                                "size": 16
+                            },
+                            "uk-study-shows-robust-vaccine-effectiveness-against-indian-strain": {
+                                "key": "uk-study-shows-robust-vaccine-effectiveness-against-indian-strain",
+                                "size": 13
+                            },
+                            "pfizer-biontech-covid-19-vaccine-shelf-life-extended-to-31-days": {
+                                "key": "pfizer-biontech-covid-19-vaccine-shelf-life-extended-to-31-days",
+                                "size": 12
+                            },
+                            "pfizer-takes-aim-at-coronavirus-and-vaccines-market": {
+                                "key": "pfizer-takes-aim-at-coronavirus-and-vaccines-market",
+                                "size": 7
+                            }
+                        }
+                    }
+                }
+            },
+            "viz": {
+                "nodes": {}
+            }
+        }
+    }
+}
