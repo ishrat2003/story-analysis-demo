@@ -1,13 +1,16 @@
-function displayMindMap() {
+function displayMindMap(userCode, type, divId) {
     var mindMapColor = {
-        "concept": "#43a9a7",
-        "document": "#FFA533",
-        "task": "#1b2bde"
+        "card": "#D68314",
+        "document": "#ADD614",
+        "task": "#D62414",
+        "timeline": '#D6CE14'
       };
 
-    var svg = d3.select("svg"),
+
+    var svg = d3.select("#" + divId + " svg"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
+    svg.selectAll("*").remove();
 
     // svg.call(d3.zoom().on("zoom", function () {
     //     svg.attr("transform", d3.event.transform)
@@ -20,8 +23,10 @@ function displayMindMap() {
       .force("charge", d3.forceManyBody())
       .force("center", d3.forceCenter(width / 2, height / 2));
   
-    d3.json("/data/mind_map/test.json", function(error, graph) {
+    d3.json("/data/mind_map/analytics_graph.json", function(error, sourceGraph) {
         if (error) throw error;
+
+        var graph = sourceGraph[userCode][type];
         
         var node = svg.append("g")
             .attr("class", "nodes")
@@ -30,7 +35,7 @@ function displayMindMap() {
             .enter().append("g")
   
         var circles = node.append("circle")
-            .attr("r", 5)
+            .attr("r", function(d) { return d.size; })
             .attr("fill", function(d) { return mindMapColor[d.group]; });
   
         var link = svg.append("g")

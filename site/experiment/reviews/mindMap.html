@@ -65,8 +65,33 @@
     <div id="lc_viz" class="w3-content w3-center w3-padding-16 explanationBlock">
         <div id="lc_viz_display">
           <div id="midmapVizualizationBox" class="lcContent" style="overflow: scroll;">
-              <h2 id="knowledgegraphTitle" class="lcMainTitle">Mind map</h2>
+              <h1 id="knowledgegraphTitle" class="lcMainTitle">Mind map</h2>
+              <ul>
+                <li data-user_code="GOLD_2" class="userCodeLi">GOLD_2</li>
+                <li data-user_code="GOLD_3" class="userCodeLi">GOLD_3</li>
+                <li data-user_code="GOLD_4" class="userCodeLi">GOLD_4</li>
+                <li data-user_code="GOLD_9" class="userCodeLi">GOLD_9</li>
+                <li data-user_code="GOLD_11" class="userCodeLi">GOLD_11</li>
+                <li data-user_code="GOLD_12" class="userCodeLi">GOLD_12</li>
+                <li data-user_code="GOLD_14" class="userCodeLi">GOLD_14</li>
+                <li data-user_code="GOLD_15" class="userCodeLi">GOLD_15</li>
+                <li data-user_code="GOLD_16" class="userCodeLi">GOLD_16</li>
+                <li data-user_code="GOLD_17" class="userCodeLi">GOLD_17</li>
+                <li data-user_code="GOLD_18" class="userCodeLi">GOLD_18</li>
+                <li data-user_code="GOLD_19" class="userCodeLi">GOLD_19</li>
+                <li data-user_code="GOLD_20" class="userCodeLi">GOLD_20</li>
+                <li data-user_code="GOLD_24" class="userCodeLi">GOLD_24</li>
+                <li data-user_code="GOLD_28" class="userCodeLi">GOLD_28</li>
+                <li data-user_code="GOLD_30" class="userCodeLi">GOLD_30</li>
+                <li data-user_code="GOLD_31" class="userCodeLi">GOLD_31</li>
+              </ul>
+              <h1 id="userCode">GOLD_2</h1>
+              <h2>Viz</h2>
               <div id="midmapVizualization">
+                <svg width="960" height="600"></svg>
+              </div>
+              <h2>Text</h2>
+              <div id="midmapVizualizationText">
                 <svg width="960" height="600"></svg>
               </div>
           </div>
@@ -83,8 +108,20 @@
 <script src="/js/d3-selection-multi.v1.js"></script>
 
 <script>
+    function loadGraphs(userCode){
+      $('#userCode').html(userCode);
+      displayMindMap(userCode, 'viz', 'midmapVizualization');
+      displayMindMap(userCode, 'text', 'midmapVizualizationText');
+      $('html, body').animate({
+        scrollTop: ($('#userCode').offset().top)
+      },500);
+    }
     $(function() {
-        displayMindMap();
+      loadGraphs('GOLD_2');
+      $('.userCodeLi').on('click', function(){
+        var userCode = $(this).data('user_code');
+        loadGraphs(userCode);
+      });
     });
     
 </script>
